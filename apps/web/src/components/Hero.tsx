@@ -21,7 +21,7 @@ export function Hero({
   headline = defaultProps.headline,
   subheadline = defaultProps.subheadline,
   ctaText = defaultProps.ctaText,
-  ctaHref = defaultProps.ctaHref,
+  ctaHref = '#features',
 }: HeroProps) {
   return (
     <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-white via-primary-50/30 to-secondary-50/20">
