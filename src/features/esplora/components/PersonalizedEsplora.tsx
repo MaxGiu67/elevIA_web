@@ -123,7 +123,7 @@ interface PersonalizedEsploraProps {
 
 export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
   // Collect unique areas from recommended use cases for hero badges
-  const areas = [...new Set(plan.useCases.map(uc => UC_AREA_MAP[uc.id]).filter(Boolean))]
+  const areas = Array.from(new Set(plan.useCases.map(uc => UC_AREA_MAP[uc.id]).filter(Boolean)))
   const areaBadges = areas.map(a => AREA_LABELS[a] || { label: a, color: 'bg-gray-500/20 text-gray-300' })
 
   // Merge tech stack: plan's custom + catalog's for each use case
@@ -139,10 +139,10 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
   // Plan overrides take priority, then catalog fills in
   const mergedTech = plan.techStack && plan.techStack.length > 0
     ? plan.techStack
-    : [...catalogTech]
+    : Array.from(catalogTech)
   const mergedIntegrations = plan.integrations && plan.integrations.length > 0
     ? plan.integrations
-    : [...catalogIntegrations]
+    : Array.from(catalogIntegrations)
 
   // Merge KPIs: plan's custom take priority, fallback to catalog
   const mergedKpis = plan.kpis && plan.kpis.length > 0
