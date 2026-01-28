@@ -2,19 +2,35 @@
 
 /**
  * PersonalizedEsplora — Renders a personalized solution page
- * from the AI-generated solution plan.
+ * matching the UseCasePage layout (dark hero + wave + content blocks)
+ * but with merged data from the AI solution plan and use case catalog.
  */
 
 import Link from 'next/link'
-import { ProblemBlock } from '@/features/blocks/components/ProblemBlock'
-import { ComparisonBlock } from '@/features/blocks/components/ComparisonBlock'
-import { KPIBlock } from '@/features/blocks/components/KPIBlock'
-import { TechStackBlock } from '@/features/blocks/components/TechStackBlock'
+import {
+  ProblemBlock,
+  KPIBlock,
+  ComparisonBlock,
+  TechStackBlock,
+  CTABlock,
+} from '@/features/blocks/components'
+import { WaveBottom } from '@/features/landing/components'
 import { WorkflowBlock } from './WorkflowBlock'
+import { useCases, type UseCaseId } from '@/content/use-cases'
 import type { SolutionPlan } from '../stores/solutionPlanStore'
 
 /** Area ID -> readable label + color */
 const AREA_LABELS: Record<string, { label: string; color: string }> = {
+  knowledge: { label: 'Knowledge', color: 'bg-blue-500/20 text-blue-300' },
+  cx: { label: 'Customer Experience', color: 'bg-orange-500/20 text-orange-300' },
+  'customer-experience': { label: 'Customer Experience', color: 'bg-orange-500/20 text-orange-300' },
+  operations: { label: 'Operations', color: 'bg-green-500/20 text-green-300' },
+  workflow: { label: 'Workflow', color: 'bg-purple-500/20 text-purple-300' },
+  hr: { label: 'HR', color: 'bg-pink-500/20 text-pink-300' },
+}
+
+/** Area card colors (light bg for content section) */
+const AREA_CARD_LABELS: Record<string, { label: string; color: string }> = {
   knowledge: { label: 'Knowledge', color: 'bg-blue-100 text-blue-800' },
   cx: { label: 'Customer Experience', color: 'bg-orange-100 text-orange-800' },
   'customer-experience': { label: 'Customer Experience', color: 'bg-orange-100 text-orange-800' },
@@ -23,7 +39,7 @@ const AREA_LABELS: Record<string, { label: string; color: string }> = {
   hr: { label: 'HR', color: 'bg-pink-100 text-pink-800' },
 }
 
-/** Map use case IDs to area for badge display */
+/** Map use case IDs to area */
 const UC_AREA_MAP: Record<string, string> = {
   'rag-knowledge-base': 'knowledge',
   'estrazione-dati': 'knowledge',
@@ -71,60 +87,152 @@ const UC_NAMES: Record<string, string> = {
   'performance-review': 'Performance Review',
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function getUseCaseKpis(uc: any): Array<{ value: string; label: string; icon: string }> {
+  if (uc.components?.kpi?.metrics) return uc.components.kpi.metrics
+  const kpiBlock = uc.mattoncini?.find((m: any) => m.type === 'kpi')
+  if (kpiBlock?.content?.metrics) return kpiBlock.content.metrics
+  return []
+}
+
+function getUseCaseTech(uc: any): string[] {
+  if (uc.components?.tech?.stack) return uc.components.tech.stack
+  const techBlock = uc.mattoncini?.find((m: any) => m.type === 'tech-stack')
+  if (techBlock?.content?.stack) return techBlock.content.stack
+  return []
+}
+
+function getUseCaseIntegrations(uc: any): string[] {
+  if (uc.components?.tech?.integrations) return uc.components.tech.integrations
+  const techBlock = uc.mattoncini?.find((m: any) => m.type === 'tech-stack')
+  if (techBlock?.content?.integrations) return techBlock.content.integrations
+  return []
+}
+
+function getUseCaseComparison(uc: any): { before: string[]; after: string[] } | null {
+  if (uc.components?.comparison) return uc.components.comparison
+  const block = uc.mattoncini?.find((m: any) => m.type === 'comparison')
+  if (block?.content) return block.content
+  return null
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
 interface PersonalizedEsploraProps {
   plan: SolutionPlan
 }
 
 export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
+  // Collect unique areas from recommended use cases for hero badges
+  const areas = [...new Set(plan.useCases.map(uc => UC_AREA_MAP[uc.id]).filter(Boolean))]
+  const areaBadges = areas.map(a => AREA_LABELS[a] || { label: a, color: 'bg-gray-500/20 text-gray-300' })
+
+  // Merge tech stack: plan's custom + catalog's for each use case
+  const catalogTech = new Set<string>()
+  const catalogIntegrations = new Set<string>()
+  for (const planUc of plan.useCases) {
+    if (planUc.id in useCases) {
+      const uc = useCases[planUc.id as UseCaseId]
+      getUseCaseTech(uc).forEach(t => catalogTech.add(t))
+      getUseCaseIntegrations(uc).forEach(t => catalogIntegrations.add(t))
+    }
+  }
+  // Plan overrides take priority, then catalog fills in
+  const mergedTech = plan.techStack && plan.techStack.length > 0
+    ? plan.techStack
+    : [...catalogTech]
+  const mergedIntegrations = plan.integrations && plan.integrations.length > 0
+    ? plan.integrations
+    : [...catalogIntegrations]
+
+  // Merge KPIs: plan's custom take priority, fallback to catalog
+  const mergedKpis = plan.kpis && plan.kpis.length > 0
+    ? plan.kpis
+    : plan.useCases.flatMap(planUc => {
+        if (planUc.id in useCases) {
+          return getUseCaseKpis(useCases[planUc.id as UseCaseId])
+        }
+        return []
+      }).slice(0, 4)
+
+  // Merge comparison: plan's custom takes priority, fallback to first use case with comparison
+  let mergedComparison = plan.comparison
+  if (!mergedComparison || mergedComparison.before.length === 0) {
+    for (const planUc of plan.useCases) {
+      if (planUc.id in useCases) {
+        const comp = getUseCaseComparison(useCases[planUc.id as UseCaseId])
+        if (comp && comp.before.length > 0) {
+          mergedComparison = comp
+          break
+        }
+      }
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <section className="bg-white border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <p className="text-sm font-medium text-primary-500 uppercase tracking-wider mb-2">
-            La tua soluzione personalizzata
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-            {plan.title}
-          </h1>
-          {plan.subtitle && (
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {plan.subtitle}
-            </p>
-          )}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section — Dark style matching UseCasePage */}
+      <div className="relative bg-dark-900 text-white pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+          <div className="max-w-3xl">
+            {/* Area badges */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {areaBadges.map((badge, i) => (
+                <span key={i} className={`inline-block px-3 py-1 rounded-full text-sm ${badge.color}`}>
+                  {badge.label}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+              {plan.title}
+            </h1>
+            {plan.subtitle && (
+              <p className="text-xl text-secondary-400">
+                {plan.subtitle}
+              </p>
+            )}
+          </div>
         </div>
-      </section>
+        <WaveBottom />
+      </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-        {/* Problem Block */}
-        <ProblemBlock
-          statement={plan.problem.statement}
-          painPoints={plan.problem.painPoints}
-        />
-
-        {/* Workflow Block */}
-        {plan.workflow.steps.length > 0 && (
-          <WorkflowBlock
-            overview={plan.workflow.overview}
-            steps={plan.workflow.steps}
+      {/* Content Blocks — same spacing as UseCasePage */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-16 space-y-16">
+        {/* Problem */}
+        <section>
+          <ProblemBlock
+            statement={plan.problem.statement}
+            painPoints={plan.problem.painPoints}
           />
+        </section>
+
+        {/* Workflow (replaces SolutionBlock) */}
+        {plan.workflow.steps.length > 0 && (
+          <section>
+            <WorkflowBlock
+              overview={plan.workflow.overview}
+              steps={plan.workflow.steps}
+            />
+          </section>
         )}
 
-        {/* Use Case Cards */}
+        {/* Use Case Detail Cards */}
         <section>
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">Le soluzioni consigliate</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">Le soluzioni integrate</h3>
           <div className="grid gap-6 md:grid-cols-2">
-            {plan.useCases.map((uc) => {
-              const areaId = UC_AREA_MAP[uc.id] || ''
-              const areaInfo = AREA_LABELS[areaId] || { label: '', color: 'bg-gray-100 text-gray-800' }
-              const displayName = UC_NAMES[uc.id] || uc.id
+            {plan.useCases.map((planUc) => {
+              const areaId = UC_AREA_MAP[planUc.id] || ''
+              const areaInfo = AREA_CARD_LABELS[areaId] || { label: '', color: 'bg-gray-100 text-gray-800' }
+              const displayName = UC_NAMES[planUc.id] || planUc.id
+              const catalogUc = planUc.id in useCases ? useCases[planUc.id as UseCaseId] : null
+              const effort = catalogUc ? ((catalogUc as any).effort || '15 giorni') : '15 giorni'
 
               return (
                 <div
-                  key={uc.id}
-                  className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow"
+                  key={planUc.id}
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
                 >
-                  <div className="bg-gradient-to-r from-primary-500/10 to-secondary-500/10 px-6 py-5">
+                  <div className="px-6 py-5 border-b border-gray-100">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         {areaInfo.label && (
@@ -134,17 +242,20 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
                         )}
                         <h4 className="text-xl font-bold text-gray-900">{displayName}</h4>
                       </div>
+                      <span className="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full whitespace-nowrap">
+                        {effort}
+                      </span>
                     </div>
                   </div>
                   <div className="px-6 py-5">
-                    <p className="text-sm text-gray-700">{uc.customDescription}</p>
+                    <p className="text-gray-700">{planUc.customDescription}</p>
                   </div>
                   <div className="px-6 pb-5">
                     <Link
-                      href={`/use-case/${uc.id}`}
+                      href={`/use-case/${planUc.id}`}
                       className="btn-primary w-full text-center text-sm"
                     >
-                      Scopri di più
+                      Approfondisci
                     </Link>
                   </div>
                 </div>
@@ -153,53 +264,42 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
           </div>
         </section>
 
-        {/* Comparison Block */}
-        {plan.comparison && plan.comparison.before.length > 0 && plan.comparison.after.length > 0 && (
+        {/* Comparison */}
+        {mergedComparison && mergedComparison.before.length > 0 && mergedComparison.after.length > 0 && (
           <section>
-            <h3 className="text-xl font-semibold text-gray-900 mb-6">Prima vs Dopo</h3>
             <ComparisonBlock
-              before={plan.comparison.before}
-              after={plan.comparison.after}
+              before={mergedComparison.before}
+              after={mergedComparison.after}
             />
           </section>
         )}
 
-        {/* KPI Block */}
-        {plan.kpis && plan.kpis.length > 0 && (
+        {/* KPIs */}
+        {mergedKpis.length > 0 && (
           <section>
-            <h3 className="text-xl font-semibold text-gray-900 mb-6">Risultati attesi</h3>
-            <KPIBlock metrics={plan.kpis} />
+            <KPIBlock metrics={mergedKpis} />
           </section>
         )}
 
-        {/* Tech Stack Block */}
-        {((plan.techStack && plan.techStack.length > 0) || (plan.integrations && plan.integrations.length > 0)) && (
-          <TechStackBlock
-            stack={plan.techStack || []}
-            integrations={plan.integrations || []}
-          />
+        {/* Tech Stack */}
+        {(mergedTech.length > 0 || mergedIntegrations.length > 0) && (
+          <section>
+            <TechStackBlock
+              stack={mergedTech}
+              integrations={mergedIntegrations}
+            />
+          </section>
         )}
-      </div>
 
-      {/* CTA Section */}
-      <section className="bg-white border-t border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
-            Pronto a partire?
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Richiedi un assessment gratuito e scopri come implementare queste soluzioni nella tua azienda in soli 15 giorni.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/#contact" className="btn-primary">
-              Richiedi Assessment Gratuito
-            </Link>
-            <Link href="/" className="btn-secondary">
-              Torna alla Home
-            </Link>
-          </div>
-        </div>
-      </section>
+        {/* CTA */}
+        <section>
+          <CTABlock
+            text="Richiedi Assessment Gratuito"
+            urgency="medium"
+            href="/#contact"
+          />
+        </section>
+      </div>
     </div>
   )
 }
