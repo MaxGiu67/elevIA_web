@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 17 24 39;
+    --primary: 99 102 241;
+    --secondary: 139 92 246;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  /* Focus visible for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-primary-500 text-white font-medium rounded-lg
+           hover:bg-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-white text-primary-600 font-medium rounded-lg
+           border-2 border-primary-500
+           hover:bg-primary-50 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           transition-colors duration-200;
+  }
+
+  /* Chat floating glassmorphism */
+  .chat-floating {
+    @apply bg-white/95 backdrop-blur-xl rounded-2xl
+           shadow-[0_8px_32px_rgba(99,102,241,0.15)]
+           border border-primary-100;
+  }
+
+  /* Skeleton shimmer effect */
+  .skeleton {
+    @apply bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200
+           bg-[length:200%_100%] animate-shimmer;
+  }
+}
+
+@layer utilities {
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

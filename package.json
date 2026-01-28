@@ -1,0 +1,27 @@
+{
+  "name": "upgrai",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web & npm run dev:api",
+    "dev:web": "npm run dev -w apps/web",
+    "dev:api": "cd apps/api && uvicorn main:app --reload --port 8000",
+    "build": "npm run build -w apps/web",
+    "build:web": "npm run build -w apps/web",
+    "lint": "npm run lint -w apps/web",
+    "type-check": "npm run type-check -w apps/web",
+    "db:up": "docker-compose up -d postgres redis",
+    "db:down": "docker-compose down",
+    "db:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
