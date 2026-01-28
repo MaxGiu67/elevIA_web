@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, ArrowRight, BookOpen, Users, Cog, GitBranch, UserCheck } from 'lucide-react'
+import { ArrowRight, BookOpen, Users, Cog, GitBranch, UserCheck, MessageCircle, BarChart2 } from 'lucide-react'
 import Link from 'next/link'
 
 interface UseCase {
@@ -17,11 +17,7 @@ interface Area {
   description: string
   icon: string
   color: string
-  stats: {
-    timeToInfo: string
-    accuracy: string
-    coverage: string
-  }
+  stats: Record<string, string>
 }
 
 interface AreaPageProps {
@@ -35,22 +31,37 @@ const iconMap: Record<string, React.ReactNode> = {
   'cog': <Cog className="w-8 h-8 text-primary-500" />,
   'git-branch': <GitBranch className="w-8 h-8 text-primary-500" />,
   'user-check': <UserCheck className="w-8 h-8 text-secondary-500" />,
+  'message-circle': <MessageCircle className="w-8 h-8 text-secondary-500" />,
+  'bar-chart-2': <BarChart2 className="w-8 h-8 text-primary-500" />,
+}
+
+/** Human-readable labels for stat keys */
+const statLabels: Record<string, string> = {
+  timeToInfo: 'Tempo di risposta',
+  accuracy: 'Accuracy',
+  coverage: 'Copertura',
+  responseTime: 'Tempo di risposta',
+  operatorLoad: 'Carico operatori',
+  availability: 'Disponibilità',
+  reportTime: 'Tempo report',
+  alertTime: 'Rilevamento anomalie',
+  prediction: 'Previsione guasti',
+  approvalTime: 'Tempo approvazione',
+  contentTime: 'Generazione contenuti',
+  complianceCheck: 'Verifica compliance',
+  screeningTime: 'Screening CV',
+  onboardingTime: 'Onboarding',
+  hrTickets: 'Ticket HR',
 }
 
 export function AreaPage({ area, useCases }: AreaPageProps) {
+  const statEntries = Object.entries(area.stats)
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Dark style like landing */}
       <div className="relative bg-dark-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Torna alla home
-          </Link>
-
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
           <div className="flex items-start gap-6">
             <div className="p-4 bg-dark-800 rounded-2xl">
               {iconMap[area.icon] || iconMap['book-open']}
@@ -68,20 +79,16 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
             </div>
           </div>
 
-          {/* Stats - Orange numbers like landing */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-dark-800 rounded-xl p-6">
-              <div className="text-2xl font-bold text-primary-500">{area.stats.timeToInfo}</div>
-              <div className="text-gray-500 text-sm mt-1">Tempo di risposta</div>
-            </div>
-            <div className="bg-dark-800 rounded-xl p-6">
-              <div className="text-2xl font-bold text-primary-500">{area.stats.accuracy}</div>
-              <div className="text-gray-500 text-sm mt-1">Accuracy</div>
-            </div>
-            <div className="bg-dark-800 rounded-xl p-6">
-              <div className="text-2xl font-bold text-primary-500">{area.stats.coverage}</div>
-              <div className="text-gray-500 text-sm mt-1">Copertura</div>
-            </div>
+          {/* Stats - Dynamic KPIs from area data */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {statEntries.map(([key, value]) => (
+              <div key={key} className="bg-dark-800 rounded-xl p-6">
+                <div className="text-2xl font-bold text-primary-500">{value}</div>
+                <div className="text-gray-500 text-sm mt-1">
+                  {statLabels[key] || key}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

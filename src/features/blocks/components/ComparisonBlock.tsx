@@ -10,15 +10,15 @@ interface ComparisonBlockProps {
 
 export function ComparisonBlock({ before, after, className = '' }: ComparisonBlockProps) {
   return (
-    <div className={`overflow-hidden rounded-2xl ${className}`}>
-      <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className={`overflow-hidden rounded-2xl border border-gray-200 shadow-sm ${className}`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 relative">
         {/* Before column */}
-        <div className="bg-gray-100 p-8">
+        <div className="bg-gray-50 p-8">
           <h4 className="text-lg font-semibold text-gray-500 mb-6 uppercase tracking-wide">Prima</h4>
           <ul className="space-y-4">
             {before.map((item, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                <span className="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
                   ✕
                 </span>
                 <span className="text-gray-600">{item}</span>
@@ -35,12 +35,12 @@ export function ComparisonBlock({ before, after, className = '' }: ComparisonBlo
         </div>
 
         {/* After column */}
-        <div className="bg-green-50 p-8 relative">
-          <h4 className="text-lg font-semibold text-green-600 mb-6 uppercase tracking-wide">Dopo</h4>
+        <div className="bg-white p-8">
+          <h4 className="text-lg font-semibold text-secondary-600 mb-6 uppercase tracking-wide">Dopo</h4>
           <ul className="space-y-4">
             {after.map((item, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                <span className="w-6 h-6 rounded-full bg-secondary-500 text-white flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
                   ✓
                 </span>
                 <span className="text-gray-900 font-medium">{item}</span>

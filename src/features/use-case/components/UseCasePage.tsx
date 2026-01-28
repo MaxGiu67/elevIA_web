@@ -1,6 +1,5 @@
 'use client'
 
-import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import {
   ProblemBlock,
@@ -12,6 +11,7 @@ import {
   CTABlock,
   RelatedBlock,
 } from '@/features/blocks/components'
+import { WaveBottom } from '@/features/landing/components'
 
 interface UseCase {
   id: string
@@ -81,17 +81,9 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - Dark style like landing */}
-      <div className="relative bg-dark-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Torna alla home
-          </Link>
-
+      {/* Hero Section - Dark style like landing with wave transition */}
+      <div className="relative bg-dark-900 text-white pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
           <div className="max-w-3xl">
             <span className="inline-block px-3 py-1 bg-dark-800 text-primary-500 rounded-full text-sm mb-4">
               {useCase.effort}
@@ -104,10 +96,11 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
             </p>
           </div>
         </div>
+        <WaveBottom />
       </div>
 
       {/* Content Blocks */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-16 space-y-16">
         {/* Problem */}
         <section>
           <ProblemBlock

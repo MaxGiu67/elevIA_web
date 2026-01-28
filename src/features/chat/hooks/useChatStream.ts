@@ -1,12 +1,17 @@
 /**
- * Hook for managing SSE chat streaming connections.
+ * Hook for managing SSE chat streaming connections with session support.
  * FR6: Il Visitatore può digitare domande in linguaggio naturale
  * FR7: Il Visitatore può ricevere risposte testuali basate sulla knowledge base RAG
+ * FR27: Il sistema può condurre conversazioni multi-turn
  */
 
 import { useCallback, useRef, useState } from 'react'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+
+function generateSessionId(): string {
+  return `s_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
+}
 
 export interface ChatSource {
   title: string
@@ -26,8 +31,10 @@ export interface PagePlan {
 
 interface StreamCallbacks {
   onChunk: (content: string) => void
-  onSources: (sources: ChatSource[]) => void
+  onSources?: (sources: ChatSource[]) => void
   onPagePlan?: (plan: PagePlan) => void
+  onRecommendedUseCases?: (useCaseIds: string[]) => void
+  onSolutionPlan?: (plan: unknown) => void
   onError: (error: string) => void
   onComplete: () => void
 }
@@ -36,15 +43,17 @@ interface UseChatStreamReturn {
   sendMessage: (message: string, callbacks: StreamCallbacks) => Promise<void>
   abort: () => void
   isStreaming: boolean
+  sessionId: string
 }
 
 /**
- * Hook for managing SSE chat streaming.
+ * Hook for managing SSE chat streaming with session persistence.
  * Handles connection lifecycle, parsing, and cleanup.
  */
 export function useChatStream(): UseChatStreamReturn {
   const [isStreaming, setIsStreaming] = useState(false)
   const abortControllerRef = useRef<AbortController | null>(null)
+  const sessionIdRef = useRef<string>(generateSessionId())
 
   const abort = useCallback(() => {
     if (abortControllerRef.current) {
@@ -70,7 +79,10 @@ export function useChatStream(): UseChatStreamReturn {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: message }),
+        body: JSON.stringify({
+          query: message,
+          session_id: sessionIdRef.current,
+        }),
         signal: abortController.signal,
       })
 
@@ -120,11 +132,19 @@ export function useChatStream(): UseChatStreamReturn {
                   break
 
                 case 'sources':
-                  callbacks.onSources(data.sources || [])
+                  callbacks.onSources?.(data.sources || [])
                   break
 
                 case 'page_plan':
                   callbacks.onPagePlan?.(data.plan)
+                  break
+
+                case 'recommended_use_cases':
+                  callbacks.onRecommendedUseCases?.(data.use_cases || [])
+                  break
+
+                case 'solution_plan':
+                  callbacks.onSolutionPlan?.(data.plan)
                   break
 
                 case 'error':
@@ -145,9 +165,13 @@ export function useChatStream(): UseChatStreamReturn {
           if (data.type === 'chat_chunk') {
             callbacks.onChunk(data.content || '')
           } else if (data.type === 'sources') {
-            callbacks.onSources(data.sources || [])
+            callbacks.onSources?.(data.sources || [])
           } else if (data.type === 'page_plan') {
             callbacks.onPagePlan?.(data.plan)
+          } else if (data.type === 'recommended_use_cases') {
+            callbacks.onRecommendedUseCases?.(data.use_cases || [])
+          } else if (data.type === 'solution_plan') {
+            callbacks.onSolutionPlan?.(data.plan)
           }
         } catch {
           // Ignore incomplete final chunk
@@ -176,6 +200,7 @@ export function useChatStream(): UseChatStreamReturn {
     sendMessage,
     abort,
     isStreaming,
+    sessionId: sessionIdRef.current,
   }
 }
 

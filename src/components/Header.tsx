@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
 
 const navigation = [
-  { name: 'HOME', href: '#' },
+  { name: 'HOME', href: '/' },
   { name: 'USE CASE', href: '#services' },
   { name: 'PROBLEMI', href: '#problems' },
   { name: 'PERCHÉ NOI', href: '#about' },

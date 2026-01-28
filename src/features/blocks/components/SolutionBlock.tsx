@@ -20,10 +20,10 @@ interface SolutionBlockProps {
 
 export function SolutionBlock({ overview, steps, example, className = '' }: SolutionBlockProps) {
   return (
-    <div className={`bg-green-50 rounded-2xl p-8 ${className}`}>
+    <div className={`bg-white rounded-2xl p-8 border border-gray-200 shadow-sm ${className}`}>
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-          <Lightbulb className="w-5 h-5 text-green-600" />
+        <div className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center">
+          <Lightbulb className="w-5 h-5 text-secondary-600" />
         </div>
         <h3 className="text-xl font-semibold text-gray-900">La soluzione</h3>
       </div>
@@ -34,7 +34,7 @@ export function SolutionBlock({ overview, steps, example, className = '' }: Solu
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           {steps.map((step, index) => (
             <div key={index} className="flex-1 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-secondary-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
                 {index + 1}
               </div>
               <div>
@@ -50,7 +50,7 @@ export function SolutionBlock({ overview, steps, example, className = '' }: Solu
       )}
 
       {example && (
-        <div className="bg-white rounded-xl p-6 border border-green-200">
+        <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-3">Esempio</p>
           {example.question && (
             <p className="text-gray-700 italic mb-2">"{example.question}"</p>
@@ -59,7 +59,7 @@ export function SolutionBlock({ overview, steps, example, className = '' }: Solu
             <p className="text-gray-900 font-medium mb-2">"{example.answer}"</p>
           )}
           {example.source && (
-            <p className="text-sm text-green-600">[Fonte: {example.source}]</p>
+            <p className="text-sm text-secondary-600">[Fonte: {example.source}]</p>
           )}
         </div>
       )}

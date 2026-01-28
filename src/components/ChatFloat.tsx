@@ -1,34 +1,188 @@
 'use client'
 
-import { useState, useRef, KeyboardEvent } from 'react'
+import { useState, useRef, useCallback, useEffect, KeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, Send, X } from 'lucide-react'
+import { Sparkles, Send, X, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { useChatStream } from '@/features/chat/hooks/useChatStream'
+import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
 
 const suggestions = [
-  'Soluzioni per PMI',
-  'Use case retail',
-  'Come funziona?',
+  'Ho un problema in azienda',
+  'Come funziona UPGRAI?',
+  'UPGRAI come soluzione per le PMI',
 ]
+
+/** Map of known page names → internal routes */
+const PAGE_LINKS: Record<string, string> = {
+  // Areas
+  'Knowledge': '/area/knowledge',
+  'Customer Experience': '/area/customer-experience',
+  'Operations': '/area/operations',
+  'Workflow': '/area/workflow',
+  'HR': '/area/hr',
+  // Use Cases
+  'RAG Knowledge Base': '/use-case/rag-knowledge-base',
+  'Estrazione Dati': '/use-case/estrazione-dati',
+  'Ricerca Semantica': '/use-case/ricerca-semantica',
+  'Chatbot FAQ': '/use-case/chatbot-faq',
+  'Sintesi Riunioni': '/use-case/sintesi-riunioni',
+  'Due Diligence': '/use-case/due-diligence',
+  'Classificazione Ticket': '/use-case/classificazione-ticket',
+  'Copilot Operatore': '/use-case/copilot-operatore',
+  'Analisi Sentiment': '/use-case/analisi-sentiment',
+  'Predictive Maintenance': '/use-case/predictive-maintenance',
+  'Report Automatici': '/use-case/report-automatici',
+  'Anomaly Detection': '/use-case/anomaly-detection',
+  'Lead Scoring': '/use-case/lead-scoring',
+  'Workflow Approval': '/use-case/workflow-approval',
+  'Compliance Checker': '/use-case/compliance-checker',
+  'Content Generation': '/use-case/content-generation',
+  'Screening CV': '/use-case/screening-cv',
+  'Onboarding Assistant': '/use-case/onboarding-assistant',
+  'Performance Review': '/use-case/performance-review',
+  'Employee Self-Service': '/use-case/employee-self-service',
+}
+
+/** Regex to match and strip [USE_CASE:id] markers from displayed text */
+const USE_CASE_MARKER_RE = /\[USE_CASE:[a-z0-9-]+\]/g
+
+/** Strip all source/font references, USE_CASE markers, and SOLUTION_PLAN blocks from text */
+function stripSourceRefs(text: string): string {
+  return text
+    // "(Fonte 1)", "(Fonte 2 e Fonte 5)", "(Fonte 1, Fonte 3 e Fonte 5)" etc.
+    .replace(/\s*\(Fonte\s*\d+(?:\s*(?:,|e)\s*Fonte\s*\d+)*\)/gi, '')
+    // Standalone "Fonte 1" not in parentheses
+    .replace(/\bFonte\s*\d+(?:\s*(?:,|e)\s*Fonte\s*\d+)*/gi, '')
+    // [USE_CASE:id] markers
+    .replace(USE_CASE_MARKER_RE, '')
+    // Complete [SOLUTION_PLAN]...[/SOLUTION_PLAN] blocks
+    .replace(/\[SOLUTION_PLAN\][\s\S]*?\[\/SOLUTION_PLAN\]/g, '')
+    // Partial/incomplete [SOLUTION_PLAN] blocks (during streaming)
+    .replace(/\[SOLUTION_PLAN\][\s\S]*$/g, '')
+    // Clean up empty lines left by marker removal
+    .replace(/\n\s*\n\s*\n/g, '\n\n')
+    .trim()
+}
+
+/**
+ * Render **bold** markdown as <strong> elements.
+ */
+function renderBold(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>
+    }
+    return part
+  })
+}
+
+/**
+ * Parse response text: strip sources, convert page names to links, render bold.
+ */
+function renderResponse(text: string): React.ReactNode[] {
+  const cleaned = stripSourceRefs(text)
+
+  // Build regex for known page names (longest first)
+  const names = Object.keys(PAGE_LINKS).sort((a, b) => b.length - a.length)
+  if (names.length === 0) return renderBold(cleaned)
+
+  const escaped = names.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'gi')
+
+  const parts = cleaned.split(pattern)
+  const result: React.ReactNode[] = []
+
+  parts.forEach((part, i) => {
+    const match = names.find(n => n.toLowerCase() === part.toLowerCase())
+    if (match) {
+      result.push(
+        <Link
+          key={`link-${i}`}
+          href={PAGE_LINKS[match]}
+          className="text-primary-500 hover:text-primary-700 underline underline-offset-2 font-medium transition-colors"
+        >
+          {part}
+        </Link>
+      )
+    } else {
+      // Render bold within non-link text segments
+      renderBold(part).forEach((node, j) => {
+        result.push(
+          typeof node === 'string' ? node : <span key={`bold-${i}-${j}`}>{node}</span>
+        )
+      })
+    }
+  })
+
+  return result
+}
 
 export function ChatFloat() {
   const [query, setQuery] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const [response, setResponse] = useState('')
+  const [showResponse, setShowResponse] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [recommendedUseCases, setRecommendedUseCases] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+  const responseRef = useRef('')
+  const { sendMessage, abort, isStreaming } = useChatStream()
+  const pathname = usePathname()
+  const router = useRouter()
+  const setPlan = useSolutionPlanStore((s) => s.setPlan)
+  const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
 
-  const handleSubmit = async () => {
-    if (!query.trim() || isLoading) return
+  // Close response panel when the user navigates to a different page
+  useEffect(() => {
+    if (showResponse) {
+      if (isStreaming) abort()
+      setShowResponse(false)
+      setResponse('')
+      setError(null)
+      setRecommendedUseCases([])
+    }
+    // Clear solution plan when navigating away from /esplora
+    if (pathname !== '/esplora') {
+      clearPlan()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
-    setIsLoading(true)
-    // TODO: Implement actual chat submission in Epic 3
-    console.log('Query submitted:', query)
+  const handleSubmit = useCallback(async () => {
+    const trimmed = query.trim()
+    if (!trimmed || isStreaming) return
 
-    // Simulate loading for now
-    setTimeout(() => {
-      setIsLoading(false)
-      // Page remodulation will happen here in Epic 4
-    }, 1000)
-  }
+    setResponse('')
+    setError(null)
+    setShowResponse(true)
+    setRecommendedUseCases([])
+    responseRef.current = ''
+
+    // Clear input immediately after sending
+    setQuery('')
+
+    await sendMessage(trimmed, {
+      onChunk: (chunk) => {
+        responseRef.current += chunk
+        setResponse(responseRef.current)
+      },
+      onRecommendedUseCases: (useCaseIds) => {
+        setRecommendedUseCases(useCaseIds)
+      },
+      onSolutionPlan: (plan) => {
+        setPlan(plan as SolutionPlan)
+      },
+      onError: (errorMsg) => {
+        setError(errorMsg)
+      },
+      onComplete: () => {
+        // streaming done
+      },
+    })
+  }, [query, isStreaming, sendMessage])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -47,12 +201,99 @@ export function ChatFloat() {
     inputRef.current?.focus()
   }
 
+  const closeResponse = () => {
+    if (isStreaming) abort()
+    setShowResponse(false)
+    setResponse('')
+    setError(null)
+    setRecommendedUseCases([])
+  }
+
+  const handleEsplora = () => {
+    if (recommendedUseCases.length > 0) {
+      const ucParam = recommendedUseCases.join(',')
+      closeResponse()
+      router.push(`/esplora?uc=${ucParam}`)
+    }
+  }
+
   return (
     <div
       className="fixed bottom-[15%] left-1/2 -translate-x-1/2 z-50 w-[min(600px,90vw)]"
       role="search"
       aria-label="Chat con UPGRAI AI"
     >
+      {/* Response Panel */}
+      <AnimatePresence>
+        {showResponse && (response || isStreaming || error) && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: 10, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mb-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden"
+          >
+            {/* Response Header */}
+            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary-500" />
+                <span className="text-sm font-medium text-gray-700">UPGRAI AI</span>
+                {isStreaming && (
+                  <motion.span
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="text-xs text-primary-500"
+                  >
+                    sta scrivendo...
+                  </motion.span>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={closeResponse}
+                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Chiudi risposta"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Response Body */}
+            <div className="px-4 py-3 max-h-[300px] overflow-y-auto">
+              {error ? (
+                <p className="text-sm text-red-600">{error}</p>
+              ) : (
+                <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {isStreaming ? stripSourceRefs(response) : renderResponse(response)}
+                  {isStreaming && (
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.5, repeat: Infinity }}
+                      className="inline-block w-1.5 h-4 bg-primary-500 ml-0.5 align-text-bottom"
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Esplora Button */}
+            {!isStreaming && recommendedUseCases.length > 0 && (
+              <div className="px-4 pb-3 pt-1 border-t border-gray-100">
+                <button
+                  type="button"
+                  onClick={handleEsplora}
+                  className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium"
+                >
+                  Esplora le soluzioni per te
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Input Bar */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,18 +316,18 @@ export function ChatFloat() {
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-              placeholder="Cosa vuoi sapere su UPGRAI?"
+              placeholder="Descrivi il tuo problema aziendale..."
               aria-label="Scrivi la tua domanda"
               className="w-full bg-gray-50 rounded-lg px-4 py-3 pr-10
                          text-gray-900 placeholder-gray-400
                          focus:outline-none focus:ring-2 focus:ring-primary-500/50
                          transition-shadow"
-              disabled={isLoading}
+              disabled={isStreaming}
             />
 
             {/* Clear button */}
             <AnimatePresence>
-              {query && (
+              {query && !isStreaming && (
                 <motion.button
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -105,19 +346,17 @@ export function ChatFloat() {
           {/* Submit button */}
           <button
             type="button"
-            onClick={handleSubmit}
-            disabled={!query.trim() || isLoading}
-            className="p-3 bg-primary-500 text-white rounded-lg
-                       hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed
-                       transition-colors"
-            aria-label="Invia domanda"
+            onClick={isStreaming ? abort : handleSubmit}
+            disabled={!isStreaming && !query.trim()}
+            className={`p-3 rounded-lg transition-colors ${
+              isStreaming
+                ? 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-primary-500 text-white hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed'
+            }`}
+            aria-label={isStreaming ? 'Ferma risposta' : 'Invia domanda'}
           >
-            {isLoading ? (
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                className="h-5 w-5 border-2 border-white border-t-transparent rounded-full"
-              />
+            {isStreaming ? (
+              <X className="h-5 w-5" />
             ) : (
               <Send className="h-5 w-5" />
             )}
@@ -126,7 +365,7 @@ export function ChatFloat() {
 
         {/* Suggestions */}
         <AnimatePresence>
-          {isFocused && !query && (
+          {isFocused && !query && !showResponse && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -149,20 +388,6 @@ export function ChatFloat() {
                 ))}
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Loading state message */}
-        <AnimatePresence>
-          {isLoading && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-sm text-gray-500 mt-3 text-center"
-            >
-              Rimodulando la pagina...
-            </motion.p>
           )}
         </AnimatePresence>
       </motion.div>
