@@ -106,10 +106,10 @@ const stats = [
   { value: '99%', label: 'Disponibilità' },
 ]
 
-// Wave component for section transitions
+// Wave component for section transitions - Dark wave going DOWN into light section
 function WaveBottom() {
   return (
-    <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+    <div className="absolute -bottom-1 left-0 w-full overflow-hidden leading-none z-10">
       <svg
         className="relative block w-full h-[80px]"
         xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +117,27 @@ function WaveBottom() {
         preserveAspectRatio="none"
       >
         <path
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-          fill="#ffffff"
+          d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+          fill="#0a0a0a"
+        />
+      </svg>
+    </div>
+  )
+}
+
+// Wave component for transition from light to dark section
+function WaveTop() {
+  return (
+    <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none z-10">
+      <svg
+        className="relative block w-full h-[80px] rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+          fill="#0a0a0a"
         />
       </svg>
     </div>
@@ -168,7 +187,7 @@ export default function Home() {
         </section>
 
         {/* White Section - Stats */}
-        <section className="py-16 bg-white">
+        <section className="pt-24 pb-16 bg-white">
           <div className="container-main">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
@@ -184,7 +203,7 @@ export default function Home() {
         </section>
 
         {/* Problems Section */}
-        <section id="problems" className="py-20 bg-gray-50">
+        <section id="problems" className="pt-20 pb-28 bg-gray-50">
           <div className="container-main">
             <div className="text-center mb-12">
               <p className="text-primary-500 uppercase tracking-wider text-sm font-medium mb-2">
@@ -222,7 +241,8 @@ export default function Home() {
         </section>
 
         {/* Why UPGRAI Section */}
-        <section id="about" className="relative bg-dark-900 text-white py-20 pb-32">
+        <section id="about" className="relative bg-dark-900 text-white pt-28 pb-32">
+          <WaveTop />
           <div className="container-main">
             <div className="text-center mb-12">
               <p className="text-gray-400 uppercase tracking-wider text-sm mb-2">PERCHÉ SCEGLIERE</p>
@@ -280,7 +300,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-white">
+        <section id="contact" className="pt-28 pb-20 bg-white">
           <div className="container-main">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-dark-900 mb-4">

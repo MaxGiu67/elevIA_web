@@ -1,0 +1,64 @@
+{
+  "id": "customer-service-sovraccarico",
+  "name": "Customer service sovraccarico",
+  "area": "cx",
+
+  "hero": {
+    "image": "support-overload.jpg",
+    "tagline": "Il problema",
+    "title": "Customer Service Sovraccarico",
+    "subtitle": "Operatori impegnati su domande ripetitive invece che su casi complessi"
+  },
+
+  "mattoncini": [
+    {
+      "type": "problem",
+      "title": "Sintomi comuni",
+      "content": {
+        "pain_points": [
+          "Tempi di risposta oltre 24h",
+          "Operatori frustrati e turnover elevato",
+          "Clienti insoddisfatti che abbandonano",
+          "Costi del supporto in crescita costante",
+          "60% delle richieste sono domande ripetitive"
+        ]
+      }
+    },
+    {
+      "type": "solution",
+      "title": "Le nostre soluzioni",
+      "content": {
+        "use_cases": ["chatbot-faq", "classificazione-ticket"]
+      }
+    },
+    {
+      "type": "kpi",
+      "title": "Risultati ottenibili",
+      "content": {
+        "metrics": [
+          { "value": "-60%", "label": "carico operatori", "icon": "📉" },
+          { "value": "-50%", "label": "tempo risposta", "icon": "⏱️" },
+          { "value": "+30%", "label": "soddisfazione clienti", "icon": "⭐" }
+        ]
+      }
+    },
+    {
+      "type": "cta",
+      "title": "Risolvi questo problema",
+      "content": {
+        "text": "Vuoi ridurre il carico del tuo customer service?",
+        "button": "Richiedi Assessment Gratuito",
+        "link": "#contact"
+      }
+    }
+  ],
+
+  "solved_by": ["chatbot-faq", "classificazione-ticket"],
+
+  "seo": {
+    "meta_title": "Problema: Customer Service Sovraccarico | UPGRAI",
+    "meta_description": "Risolvi il sovraccarico del customer service con AI. Riduci del 60% il carico operatori con Chatbot FAQ e Classificazione Ticket automatica.",
+    "keywords": ["customer service", "sovraccarico", "supporto clienti", "automazione", "chatbot"],
+    "canonical": "/problema/customer-service-sovraccarico"
+  }
+}

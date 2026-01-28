@@ -1,0 +1,102 @@
+{
+  "id": "chatbot-faq",
+  "name": "Chatbot FAQ",
+  "area": "cx",
+
+  "hero": {
+    "image": "chatbot-faq.jpg",
+    "tagline": "Customer Experience",
+    "title": "Chatbot FAQ",
+    "subtitle": "Risposte automatiche 24/7 alle domande frequenti"
+  },
+
+  "mattoncini": [
+    {
+      "type": "problem",
+      "title": "Il problema",
+      "content": {
+        "statement": "Il customer service è sovraccarico di domande ripetitive",
+        "pain_points": [
+          "60% delle richieste sono FAQ già documentate",
+          "Tempi di attesa elevati per i clienti",
+          "Operatori frustrati su task ripetitivi",
+          "Costi in crescita per gestire i volumi"
+        ]
+      }
+    },
+    {
+      "type": "solution",
+      "title": "La soluzione",
+      "content": {
+        "overview": "AI che risponde automaticamente alle FAQ, liberando gli operatori per i casi complessi",
+        "steps": [
+          {
+            "title": "Analisi",
+            "description": "Il chatbot analizza la domanda dell'utente usando NLP avanzato"
+          },
+          {
+            "title": "Ricerca",
+            "description": "Cerca la risposta migliore nella tua knowledge base esistente"
+          },
+          {
+            "title": "Risposta",
+            "description": "Genera una risposta naturale e contestualizzata"
+          }
+        ]
+      }
+    },
+    {
+      "type": "kpi",
+      "title": "Risultati garantiti",
+      "content": {
+        "metrics": [
+          { "value": "-60%", "label": "carico operatori", "icon": "📉" },
+          { "value": "<5s", "label": "tempo risposta", "icon": "⚡" },
+          { "value": "≥85%", "label": "accuracy", "icon": "🎯" }
+        ]
+      }
+    },
+    {
+      "type": "how-it-works",
+      "title": "Come funziona",
+      "content": {
+        "description": "Il chatbot utilizza RAG (Retrieval Augmented Generation) per cercare risposte nella tua knowledge base esistente. Non inventa mai risposte: se non trova informazioni, scala a un operatore umano.",
+        "diagram": "chatbot-architecture.svg"
+      }
+    },
+    {
+      "type": "tech-stack",
+      "title": "Tecnologie",
+      "content": {
+        "stack": ["LLM", "RAG", "Vector DB", "NLP"],
+        "integrations": ["Zendesk", "Freshdesk", "Intercom", "WhatsApp", "Telegram", "Website Widget"]
+      }
+    },
+    {
+      "type": "related",
+      "title": "Use Case correlati",
+      "content": {
+        "use_cases": ["classificazione-ticket", "copilot-operatore"]
+      }
+    },
+    {
+      "type": "cta",
+      "title": "Inizia ora",
+      "content": {
+        "text": "Vuoi implementare Chatbot FAQ nella tua azienda?",
+        "button": "Richiedi Assessment Gratuito",
+        "link": "#contact"
+      }
+    }
+  ],
+
+  "solves_problems": ["customer-service-sovraccarico"],
+  "related_use_cases": ["classificazione-ticket", "copilot-operatore"],
+
+  "seo": {
+    "meta_title": "Chatbot FAQ AI per Customer Service | UPGRAI",
+    "meta_description": "Riduci del 60% il carico del customer service con un chatbot AI. Risposte automatiche 24/7, accuracy ≥85%, setup in 15 giorni.",
+    "keywords": ["chatbot", "FAQ", "customer service", "AI", "automazione", "supporto clienti"],
+    "canonical": "/use-case/chatbot-faq"
+  }
+}
