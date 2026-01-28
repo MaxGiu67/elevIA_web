@@ -157,8 +157,9 @@ UPGRAI/
 ### Decision Priority Analysis
 
 **Critical Decisions (Block Implementation):**
-- Lead Storage: PostgreSQL (via Railway)
-- Conversation Memory: Redis (via Railway)
+- Content Storage: JSON files in Git (`content/`)
+- Lead Storage: JSON file (append-only) + email notification
+- Session/Cache: Redis (via Railway)
 - State Management: Zustand
 - Hosting: Vercel (frontend) + Railway (backend)
 
@@ -175,9 +176,12 @@ UPGRAI/
 
 | Decision | Choice | Version | Rationale |
 |----------|--------|---------|-----------|
-| Lead Storage | PostgreSQL | 15+ | Production-ready, incluso in Railway PRO |
-| Conversation Memory | Redis | 7+ | TTL automatico, veloce, incluso in Railway PRO |
+| Content Storage | JSON files | - | Git versioned, SSG friendly, LLM crawlable |
+| Lead Storage | JSON file + email | - | Append-only, no DB dependency, simple backup |
+| Session/Cache | Redis | 7+ | TTL automatico, veloce, incluso in Railway PRO |
 | Vector Store | ChromaDB | 0.4+ | Già definito in guida tecnica |
+
+> **Architecture Decision (2026-01-28):** PostgreSQL rimosso. JSON files come source of truth per contenuti e lead. Vedi `docs/brainstorming-page-remodulation.md` sezione 13.
 
 ### Authentication & Security
 
@@ -208,23 +212,25 @@ UPGRAI/
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
 | Frontend Hosting | Vercel | Ottimizzato per Next.js, preview deploys |
-| Backend Hosting | Railway (PRO) | PostgreSQL + Redis inclusi, account esistente |
+| Backend Hosting | Railway (PRO) | Redis incluso, account esistente |
 | CI/CD | Vercel + Railway auto-deploy | Push to main → deploy automatico |
 | Environment | Platform secrets | .env.example per dev locale |
 
 ### Decision Impact Analysis
 
 **Implementation Sequence:**
-1. Setup Railway: PostgreSQL + Redis databases
+1. Setup Railway: Redis service
 2. Setup Vercel: Connect repo, configure env vars
 3. Initialize Next.js con Zustand + Framer Motion
-4. Initialize FastAPI con connessioni DB
-5. Configure CORS e API integration
+4. Initialize FastAPI con Redis connection
+5. Create content/ directory structure (JSON files)
+6. Configure CORS e API integration
 
 **Cross-Component Dependencies:**
 - Frontend ↔ Backend: CORS config deve matchare domini Vercel
-- Backend → PostgreSQL: Connection string da Railway
 - Backend → Redis: Connection string da Railway
+- Backend → JSON files: content/ directory for Use Cases, Areas, Problems
+- Backend → data/leads.json: Append-only lead storage
 - LLM Providers: API keys in Railway secrets
 
 ## Implementation Patterns & Consistency Rules
@@ -235,10 +241,11 @@ UPGRAI/
 
 ### Naming Patterns
 
-**Database (PostgreSQL):**
-- Tabelle: `snake_case` plurale → `users`, `leads`, `chat_sessions`
-- Colonne: `snake_case` → `created_at`, `user_id`, `message_content`
-- Foreign keys: `{table}_id` → `user_id`, `session_id`
+**JSON Data Files:**
+- File names: `kebab-case.json` → `chatbot-faq.json`, `customer-service-sovraccarico.json`
+- Keys: `snake_case` → `created_at`, `use_case_id`, `meta_description`
+- IDs: `kebab-case` → `chatbot-faq`, `rag-knowledge-base`
+- Arrays: plurale → `use_cases`, `pain_points`, `keywords`
 
 **API Endpoints:**
 - REST resources: plurale → `/api/leads`, `/api/chat`
@@ -341,7 +348,7 @@ UPGRAI/
 ├── README.md
 ├── .gitignore
 ├── .env.example
-├── docker-compose.yml                    # Dev environment (PostgreSQL, Redis)
+├── docker-compose.yml                    # Dev environment (Redis only)
 │
 ├── apps/
 │   ├── web/                              # Next.js Frontend
@@ -488,15 +495,14 @@ UPGRAI/
 │       │   ├── services/
 │       │   │   ├── __init__.py
 │       │   │   ├── vector_store.py       # ChromaDB/FAISS
-│       │   │   ├── lead_service.py       # PostgreSQL
+│       │   │   ├── lead_service.py       # JSON file storage
 │       │   │   ├── session_service.py    # Redis
-│       │   │   └── content_service.py
+│       │   │   └── content_service.py    # JSON content loader
 │       │   │
-│       │   └── db/
+│       │   └── infra/
 │       │       ├── __init__.py
-│       │       ├── database.py           # PostgreSQL connection
 │       │       ├── redis.py              # Redis connection
-│       │       └── models.py             # SQLAlchemy models
+│       │       └── json_storage.py       # JSON file operations
 │       │
 │       ├── scripts/
 │       │   ├── ingest.py                 # RAG ingestion CLI
@@ -525,19 +531,19 @@ UPGRAI/
 |----------|-------|--------|----------|
 | `POST /api/chat` | `{message: string}` | SSE stream | Frontend → Agent |
 | `POST /api/page-plan` | `{intent: string}` | `{variant_id, blocks[]}` | Agent → Frontend |
-| `POST /api/lead` | `{name, email, ...}` | `{success, id}` | Frontend → PostgreSQL |
-| `GET /api/health` | - | `{status, rag, db}` | Monitoring |
+| `POST /api/lead` | `{name, email, ...}` | `{success, id}` | Frontend → JSON file |
+| `GET /api/health` | - | `{status, rag, redis}` | Monitoring |
 
 **Component Boundaries:**
 - **Frontend ↔ Backend**: REST API + SSE, CORS restricted
 - **Backend ↔ LLM**: LangChain abstraction, provider-agnostic
 - **Backend ↔ Vector Store**: ChromaDB service layer
-- **Backend ↔ PostgreSQL**: SQLAlchemy async, lead_service
+- **Backend ↔ JSON files**: Content service (Use Cases, Areas, Problems)
 - **Backend ↔ Redis**: Session service, conversation memory
 
 **Data Boundaries:**
-- **RAG Source**: `Build.003/CatalogoUseCase/` + `Build.003/Governance/` → ChromaDB
-- **Lead Data**: PostgreSQL `leads` table
+- **RAG Source**: `content/use-cases/`, `content/areas/`, `content/problems/` → ChromaDB
+- **Lead Data**: `data/leads.json` (append-only file)
 - **Session Data**: Redis with TTL (conversation memory)
 
 ### Requirements to Structure Mapping
@@ -574,7 +580,7 @@ PagePlanRenderer + Framer Motion → UI Remodulation
 Tutte le tecnologie selezionate lavorano insieme senza conflitti:
 - Next.js 14+ + Zustand + Framer Motion: combinazione leggera e performante
 - FastAPI + LangChain + LangGraph: async-native stack
-- PostgreSQL + Redis via Railway PRO: managed services con monitoring
+- JSON files + Redis via Railway PRO: simple storage + managed cache
 - ChromaDB integrato nativamente con LangChain
 
 **Pattern Consistency:**
@@ -596,7 +602,7 @@ Tutte le tecnologie selezionate lavorano insieme senza conflitti:
 | Content Presentation (4) | ✅ `features/landing/` |
 | Chatbot Interaction (5) | ✅ `features/chat/` + `core/agent/` |
 | Page Remodulation (5) | ✅ `features/page-plan/` + Framer Motion |
-| Lead Generation (4) | ✅ `features/lead/` + PostgreSQL |
+| Lead Generation (4) | ✅ `features/lead/` + JSON storage |
 | System Resilience (4) | ✅ `ErrorBoundary` + middleware |
 | Content Intelligence (4) | ✅ `core/rag/` + ChromaDB |
 

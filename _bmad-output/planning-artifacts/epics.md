@@ -100,15 +100,18 @@ This document provides the complete epic and story breakdown for UPGRAI, decompo
 - **Starter Template (EPIC 1 STORY 1)**:
   - Frontend: `npx create-next-app@latest apps/web --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"`
   - Backend: Custom structure from guida tecnica con FastAPI + LangChain + LangGraph
-- **Database Setup**: PostgreSQL 15+ via Railway PRO per lead storage
-- **Cache Setup**: Redis 7+ via Railway PRO per conversation memory
+- **Content Storage**: JSON files in Git (`content/use-cases/`, `content/areas/`, `content/problems/`)
+- **Lead Storage**: JSON file append-only (`data/leads.json`) + email notification
+- **Cache Setup**: Redis 7+ via Railway PRO per session/conversation memory
 - **Vector Store**: ChromaDB 0.4+ per RAG embeddings
 - **State Management**: Zustand 4.x per Page Plan state
 - **Animations**: Framer Motion 11.x per layout transitions durante remodulation
 - **File Size Rule**: 800-1000 righe per file, split obbligatorio se supera
-- **RAG Knowledge Base**: Build.003/CatalogoUseCase/ + Build.003/Governance/
+- **RAG Knowledge Base**: `content/` JSON files (Use Cases, Areas, Problems)
 - **API Communication**: REST + SSE (Server-Sent Events) per chat streaming
-- **Deployment**: Vercel (frontend) + Railway PRO (backend + PostgreSQL + Redis)
+- **Deployment**: Vercel (frontend) + Railway PRO (backend + Redis)
+
+> **Architecture Decision (2026-01-28):** PostgreSQL rimosso. JSON files come source of truth, versionati in Git. Vedi `docs/brainstorming-page-remodulation.md` sezione 13.
 
 **From PRD - MVP Features (P0):**
 - MVP-01: Landing page statica completa
@@ -212,7 +215,7 @@ This document provides the complete epic and story breakdown for UPGRAI, decompo
 ---
 
 ### Epic 5: Lead Generation
-**Goal:** Il Visitatore può contattare l'azienda compilando un form sempre funzionante, con i dati salvati in modo persistente per il follow-up commerciale.
+**Goal:** Il Visitatore può contattare l'azienda compilando un form sempre funzionante, con i dati salvati in JSON file + notifica email per il follow-up commerciale.
 
 **FRs covered:** FR15, FR16, FR17, FR18
 **NFRs addressed:** NFR-R3, NFR-A3
@@ -220,7 +223,8 @@ This document provides the complete epic and story breakdown for UPGRAI, decompo
 **Stories previste:**
 - LeadForm component
 - API endpoint /api/lead
-- PostgreSQL persistence
+- JSON file persistence (append-only)
+- Email notification
 - Conferma invio
 
 ---
@@ -261,21 +265,22 @@ So that I have a solid foundation for building the UPGRAI application.
 
 ---
 
-### Story 1.2: Setup Railway Databases
+### Story 1.2: Setup Railway Redis
 
 As a Developer,
-I want to configure PostgreSQL and Redis on Railway PRO,
-So that the application has production-ready data persistence.
+I want to configure Redis on Railway PRO,
+So that the application has session management and caching capabilities.
 
 **Acceptance Criteria:**
 
 **Given** a Railway PRO account is available
-**When** I create PostgreSQL 15+ and Redis 7+ services
-**Then** connection strings are available in Railway dashboard
-**And** apps/api can connect to both databases using environment variables
-**And** database.py establishes async PostgreSQL connection with SQLAlchemy
+**When** I create Redis 7+ service
+**Then** connection string is available in Railway dashboard
+**And** apps/api can connect to Redis using environment variables
 **And** redis.py establishes Redis connection with TTL support
-**And** Health check confirms both connections work
+**And** Health check confirms Redis connection works
+
+> **Note:** PostgreSQL removed from architecture. Content is managed via JSON files in Git, leads via JSON file + email notification.
 
 ---
 
@@ -611,21 +616,24 @@ So that valid leads are processed correctly.
 
 ---
 
-### Story 5.3: PostgreSQL Lead Storage
+### Story 5.3: JSON Lead Storage
 
 As a Sistema,
-I want to persist lead data in PostgreSQL,
-So that leads are available for follow-up.
+I want to persist lead data in JSON file,
+So that leads are available for follow-up without database dependency.
 
 **Acceptance Criteria:**
 
 **Given** a valid lead is submitted
 **When** the API processes the submission
-**Then** Lead is saved to PostgreSQL leads table (FR18)
-**And** Table schema: id, name, email, company, message, created_at
-**And** services/lead_service.py handles database operations
-**And** Lead ID is returned in the API response
-**And** Database errors are handled gracefully (500 with user-friendly message)
+**Then** Lead is appended to data/leads.json file (FR18)
+**And** Entry schema: {id: UUID, name, email, company, message, created_at, source_page}
+**And** services/lead_service.py handles JSON file operations (append-only)
+**And** Lead ID (UUID) is returned in the API response
+**And** Optional: Email notification sent to admin on new lead
+**And** File errors are handled gracefully (fallback to email-only notification)
+
+> **Note:** JSON file is append-only for data integrity. Git versioning provides automatic backup.
 
 ---
 
@@ -661,12 +669,14 @@ So that I can ensure all services are running correctly.
 
 **Given** the backend is deployed
 **When** GET /api/health is called
-**Then** Response includes {status: "ok", rag: "ok/error", db: "ok/error"} (FR22)
+**Then** Response includes {status: "ok", rag: "ok/error", redis: "ok/error"} (FR22)
 **And** Response time is < 200ms (NFR-P5)
-**And** Endpoint checks ChromaDB, PostgreSQL, Redis connections
+**And** Endpoint checks ChromaDB and Redis connections
 **And** If any service is down, status reflects the issue
 **And** api/routes/health.py implements the endpoint
 **And** Health endpoint is always available (NFR-R5)
+
+> **Note:** PostgreSQL check removed - no database in architecture.
 
 ---
 
