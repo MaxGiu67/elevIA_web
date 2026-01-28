@@ -3,28 +3,9 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-// Wave SVG component for transitions
-function WaveDivider({ flip = false }: { flip?: boolean }) {
-  return (
-    <div className={`absolute left-0 w-full overflow-hidden leading-none ${flip ? 'bottom-0' : 'top-0'}`}>
-      <svg
-        className={`relative block w-full h-[80px] ${flip ? '' : 'rotate-180'}`}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-          fill="#0a0a0a"
-        />
-      </svg>
-    </div>
-  )
-}
-
 export function Hero() {
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-white pb-20">
       {/* Main Hero Content */}
       <div className="container-main py-20 lg:py-28">
         <div className="max-w-4xl mx-auto text-center">
@@ -89,11 +70,6 @@ export function Hero() {
             </Link>
           </motion.div>
         </div>
-      </div>
-
-      {/* Wave transition to dark section */}
-      <div className="relative h-20">
-        <WaveDivider flip />
       </div>
     </section>
   )

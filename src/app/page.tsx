@@ -106,18 +106,18 @@ const stats = [
   { value: '99%', label: 'Disponibilità' },
 ]
 
-// Wave component for section transitions - Dark wave going DOWN into light section
+// Wave component - Dark section extends DOWN into white section below (150px height)
 function WaveBottom() {
   return (
-    <div className="absolute -bottom-1 left-0 w-full overflow-hidden leading-none z-10">
+    <div className="absolute -bottom-[149px] left-0 w-full overflow-hidden leading-none z-10">
       <svg
-        className="relative block w-full h-[80px]"
+        className="relative block w-full h-[150px]"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
+        viewBox="0 0 1440 320"
         preserveAspectRatio="none"
       >
         <path
-          d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+          d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,128C672,117,768,139,864,165.3C960,192,1056,224,1152,218.7C1248,213,1344,171,1392,149.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
           fill="#0a0a0a"
         />
       </svg>
@@ -125,18 +125,18 @@ function WaveBottom() {
   )
 }
 
-// Wave component for transition from light to dark section
+// Wave component - Dark section extends UP into white section above (150px height)
 function WaveTop() {
   return (
-    <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none z-10">
+    <div className="absolute -top-[149px] left-0 w-full overflow-hidden leading-none z-10">
       <svg
-        className="relative block w-full h-[80px] rotate-180"
+        className="relative block w-full h-[150px]"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
+        viewBox="0 0 1440 320"
         preserveAspectRatio="none"
       >
         <path
-          d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+          d="M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,192C672,203,768,181,864,154.7C960,128,1056,96,1152,101.3C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           fill="#0a0a0a"
         />
       </svg>
@@ -154,7 +154,8 @@ export default function Home() {
         <Hero />
 
         {/* Dark Section - 5 Areas */}
-        <section id="services" className="relative bg-dark-900 text-white py-20 pb-32">
+        <section id="services" className="relative bg-dark-900 text-white pt-40 pb-48">
+          <WaveTop />
           <div className="container-main">
             <div className="text-center mb-12">
               <p className="text-secondary-500 uppercase tracking-wider text-sm font-medium mb-2">
@@ -187,7 +188,7 @@ export default function Home() {
         </section>
 
         {/* White Section - Stats */}
-        <section className="pt-24 pb-16 bg-white">
+        <section className="pt-40 pb-16 bg-white">
           <div className="container-main">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
@@ -241,7 +242,7 @@ export default function Home() {
         </section>
 
         {/* Why UPGRAI Section */}
-        <section id="about" className="relative bg-dark-900 text-white pt-28 pb-32">
+        <section id="about" className="relative bg-dark-900 text-white pt-40 pb-48">
           <WaveTop />
           <div className="container-main">
             <div className="text-center mb-12">
@@ -300,7 +301,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="pt-28 pb-20 bg-white">
+        <section id="contact" className="pt-40 pb-20 bg-white">
           <div className="container-main">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-dark-900 mb-4">
