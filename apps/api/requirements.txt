@@ -25,6 +25,7 @@ openai==1.30.0
 # Utilities
 python-dotenv==1.0.1
 httpx==0.26.0
+email-validator==2.1.0
 
 # Development
 pytest==7.4.4
