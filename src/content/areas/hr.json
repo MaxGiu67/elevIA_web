@@ -1,0 +1,19 @@
+{
+  "id": "hr",
+  "name": "HR",
+  "tagline": "Supporto intelligente alle risorse umane",
+  "description": "Screening CV automatico, onboarding guidato, self-service per i dipendenti e preparazione performance review.",
+  "icon": "users",
+  "color": "primary",
+  "hero": {
+    "image": "/images/heroes/hr.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "stats": {
+    "screeningTime": "Minuti vs giorni",
+    "onboardingTime": "Giorni vs settimane",
+    "hrTickets": "-70%"
+  },
+  "useCases": ["screening-cv", "onboarding-assistant", "employee-self-service", "performance-review"],
+  "problems": ["hr-sovraccarico", "onboarding-frammentato"]
+}

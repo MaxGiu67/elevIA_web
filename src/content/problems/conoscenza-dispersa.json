@@ -1,0 +1,25 @@
+{
+  "id": "conoscenza-dispersa",
+  "title": "Conoscenza dispersa",
+  "description": "Informazioni sparse tra email, documenti e sistemi diversi. I dipendenti perdono tempo a cercare.",
+  "painPoints": [
+    "15-30 minuti per trovare un'informazione",
+    "Disturbo ai colleghi per domande ricorrenti",
+    "Settimane di affiancamento per i nuovi assunti",
+    "Conoscenza persa quando qualcuno se ne va"
+  ],
+  "checklist": [
+    "Documenti in più posti (SharePoint, cartelle, email)",
+    "Persone che chiedono sempre le stesse cose",
+    "Nuovi assunti che ci mettono mesi a essere autonomi",
+    "Informazioni obsolete o duplicate"
+  ],
+  "impact": {
+    "cost": "Ore perse in ricerche",
+    "satisfaction": "Frustrazione dipendenti",
+    "opportunity": "Inefficienza operativa",
+    "scalability": "Knowledge silos"
+  },
+  "solvedBy": ["rag-knowledge-base", "sintesi-riunioni"],
+  "area": "knowledge"
+}

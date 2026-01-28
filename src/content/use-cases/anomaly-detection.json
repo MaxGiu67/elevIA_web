@@ -1,0 +1,84 @@
+{
+  "id": "anomaly-detection",
+  "name": "Anomaly Detection",
+  "area": "operations",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/anomaly.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Scopri i problemi prima che esplodano",
+      "tagline": "Alert in tempo reale, non a fine mese",
+      "icon": "alert-triangle"
+    },
+    "problem": {
+      "statement": "I numeri della tua azienda cambiano ogni giorno. Vendite, produzione, consumi, resi. Quando qualcosa va storto, spesso te ne accorgi tardi: il cliente si è già lamentato, il magazzino è già in crisi, la produzione ha già perso un turno. Guardare tutti i report ogni giorno è impossibile.",
+      "painPoints": [
+        "Problemi scoperti a consuntivo",
+        "Analisi manuale dei report",
+        "Reazione a danno fatto",
+        "\"Come mai nessuno se n'è accorto?\""
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che monitora i tuoi dati e ti avvisa quando qualcosa esce dalla normalità. Impara i pattern delle tue operazioni e rileva gli scostamenti significativi. L'alert arriva quando c'è ancora tempo per intervenire.",
+      "example": {
+        "anomaly": "Le vendite del prodotto X crollano del 40% in una settimana",
+        "alertDay": "Giorno 2 (non a fine mese)",
+        "discovery": "Competitor ha lanciato una promozione aggressiva",
+        "action": "Controproposta prima che sia troppo tardi"
+      },
+      "steps": [
+        { "title": "Connessione", "description": "Integrazione fonti dati" },
+        { "title": "Training", "description": "AI impara i pattern normali" },
+        { "title": "Monitoring", "description": "Alert automatici su anomalie" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Problemi scoperti a consuntivo",
+        "Analisi manuale dei report",
+        "Reazione a danno fatto",
+        "\"Come mai nessuno se n'è accorto?\""
+      ],
+      "after": [
+        "Alert in tempo reale",
+        "Monitoraggio automatico",
+        "Intervento preventivo",
+        "Visibilità continua"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "Real-time", "label": "Monitoraggio", "icon": "activity" },
+        { "value": "Giorni", "label": "Anticipo", "icon": "clock" },
+        { "value": "24/7", "label": "Vigilanza", "icon": "eye" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso ai dati da monitorare (database, ERP, file)",
+        "Definizione delle metriche critiche (max 10 iniziali)",
+        "Storico dati (almeno 6 mesi per training)",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Installare software",
+        "Modificare i sistemi",
+        "Competenze data science"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure Machine Learning", "Time Series Analysis", "Alerting"],
+      "integrations": ["Database", "ERP", "BI Tools"]
+    },
+    "cta": {
+      "text": "Anticipa i problemi",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["anomalie-scoperte-tardi"],
+  "relatedUseCases": ["predictive-maintenance", "report-automatici"]
+}

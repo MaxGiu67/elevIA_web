@@ -1,0 +1,83 @@
+{
+  "id": "predictive-maintenance",
+  "name": "Predictive Maintenance",
+  "area": "operations",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/maintenance.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Sai quando la macchina si guasterà",
+      "tagline": "Prevedi i guasti con giorni di anticipo",
+      "icon": "tool"
+    },
+    "problem": {
+      "statement": "Le tue macchine si guastano senza preavviso. Produzione ferma, clienti in attesa, costi di emergenza. La manutenzione programmata non basta: fai interventi su macchine sane e ti perdi guasti imprevisti. Vorresti sapere prima, ma i dati ci sono e non sai leggerli.",
+      "painPoints": [
+        "Guasti a sorpresa",
+        "Fermo produzione non pianificato",
+        "Interventi di emergenza costosi",
+        "Ricambi in urgenza"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che analizza i dati delle tue macchine e prevede i guasti con giorni di anticipo. L'alert arriva quando c'è ancora tempo per pianificare l'intervento, ordinare i ricambi, organizzare la squadra.",
+      "example": {
+        "alert": "Giovedì mattina: Compressore linea 2 - probabilità guasto 85% entro 5 giorni",
+        "cause": "Cuscinetto motore",
+        "action": "Ordini ricambio (consegna venerdì), pianifichi intervento sabato",
+        "result": "Lunedì la produzione riparte senza interruzioni"
+      },
+      "steps": [
+        { "title": "Connessione", "description": "Integrazione dati macchine" },
+        { "title": "Training", "description": "AI impara pattern pre-guasto" },
+        { "title": "Prediction", "description": "Alert con giorni di anticipo" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Guasti a sorpresa",
+        "Fermo produzione non pianificato",
+        "Interventi di emergenza costosi",
+        "Ricambi in urgenza"
+      ],
+      "after": [
+        "Alert con giorni di anticipo",
+        "Manutenzione nel weekend",
+        "Interventi programmati",
+        "Ricambi ordinati in tempo"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "5 giorni", "label": "Anticipo medio", "icon": "calendar" },
+        { "value": "85%", "label": "Accuratezza", "icon": "target" },
+        { "value": "-70%", "label": "Fermi imprevisti", "icon": "trending-down" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Macchine con sensori o dati disponibili (PLC, SCADA, log)",
+        "Storico dati (almeno 6 mesi, ideale 12)",
+        "Storico guasti (date, tipo, macchina)",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Installare nuovi sensori",
+        "Competenze data science"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure Machine Learning", "IoT Hub", "Predictive Models"],
+      "integrations": ["PLC", "SCADA", "MES", "CMMS"]
+    },
+    "cta": {
+      "text": "Prevedi i guasti prima che accadano",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["anomalie-scoperte-tardi"],
+  "relatedUseCases": ["anomaly-detection", "report-automatici"]
+}

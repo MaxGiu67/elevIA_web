@@ -1,0 +1,25 @@
+{
+  "id": "anomalie-scoperte-tardi",
+  "title": "Anomalie scoperte tardi",
+  "description": "Problemi rilevati solo quando causano fermi o danni.",
+  "painPoints": [
+    "Problemi scoperti a consuntivo",
+    "Analisi manuale impossibile",
+    "Reazione quando il danno è fatto",
+    "\"Come mai nessuno se n'è accorto?\""
+  ],
+  "checklist": [
+    "Cali vendite scoperti a fine mese",
+    "Guasti macchine senza preavviso",
+    "Trend negativi non intercettati",
+    "Report guardati troppo tardi"
+  ],
+  "impact": {
+    "cost": "Danni evitabili con alert tempestivi",
+    "satisfaction": "Clienti impattati da problemi",
+    "opportunity": "Reazione invece di prevenzione",
+    "scalability": "Impossibile monitorare tutto a mano"
+  },
+  "solvedBy": ["anomaly-detection", "predictive-maintenance"],
+  "area": "operations"
+}

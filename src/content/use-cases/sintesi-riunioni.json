@@ -1,0 +1,83 @@
+{
+  "id": "sintesi-riunioni",
+  "name": "Sintesi Riunioni",
+  "area": "knowledge",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/meeting-summary.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Verbali Automatici",
+      "tagline": "Mai più decisioni perse dopo una riunione",
+      "icon": "mic"
+    },
+    "problem": {
+      "statement": "Finite le riunioni, nessuno scrive il verbale. Le decisioni restano in testa a chi c'era. Gli action item si perdono. Chi era assente non sa cosa si è deciso. Dopo un mese, nessuno ricorda cosa si era detto.",
+      "painPoints": [
+        "Verbali mai scritti",
+        "\"Cosa avevamo deciso?\"",
+        "Action item dimenticati",
+        "Chi manca non sa nulla"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che ascolta le tue riunioni e produce automaticamente un verbale strutturato con decisioni, action item e assegnazioni.",
+      "example": {
+        "meeting": "Review progetto Alpha — 15 gennaio 2025",
+        "participants": "Marco (PM), Laura (Dev), Paolo (QA)",
+        "decisions": ["Rinviato go-live al 28 febbraio", "Budget test approvato"],
+        "actionItems": [
+          "Marco: aggiornare timeline entro 17/01",
+          "Laura: completare modulo pagamenti entro 24/01",
+          "Paolo: preparare test plan entro 20/01"
+        ]
+      },
+      "steps": [
+        { "title": "Registrazione", "description": "Teams/Zoom registra la riunione" },
+        { "title": "Trascrizione", "description": "AI trascrive e identifica speaker" },
+        { "title": "Sintesi", "description": "Verbale con decisioni e action item" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Verbali mai scritti",
+        "\"Cosa avevamo deciso?\"",
+        "Action item dimenticati",
+        "Chi manca non sa nulla"
+      ],
+      "after": [
+        "Verbale in 5 minuti",
+        "Decisioni tracciate",
+        "Task assegnati",
+        "Sintesi in 2 minuti"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "5min", "label": "Per verbale", "icon": "clock" },
+        { "value": "100%", "label": "Riunioni documentate", "icon": "check-circle" },
+        { "value": "0", "label": "Decisioni perse", "icon": "target" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Microsoft Teams o Zoom (o registrazioni audio)",
+        "Consenso partecipanti alla registrazione",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": []
+    },
+    "tech": {
+      "stack": ["Azure Speech", "Azure OpenAI", "Teams Integration"],
+      "integrations": ["Microsoft Teams", "Zoom", "Calendar"]
+    },
+    "cta": {
+      "text": "Non perdere mai più una decisione",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["conoscenza-dispersa"],
+  "relatedUseCases": ["rag-knowledge-base", "report-automatici"]
+}

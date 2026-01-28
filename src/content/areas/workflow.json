@@ -1,0 +1,19 @@
+{
+  "id": "workflow",
+  "name": "Workflow",
+  "tagline": "Automatizza i flussi di lavoro",
+  "description": "Velocizza le approvazioni, genera contenuti marketing, qualifica i lead e verifica la compliance automaticamente.",
+  "icon": "git-branch",
+  "color": "secondary",
+  "hero": {
+    "image": "/images/heroes/workflow.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "stats": {
+    "approvalTime": "10 secondi vs 5-10 minuti",
+    "contentTime": "5 minuti vs 2 ore",
+    "complianceCheck": "30 secondi"
+  },
+  "useCases": ["workflow-approval", "content-generation", "lead-scoring", "compliance-checker"],
+  "problems": ["approvazioni-lente", "contenuti-in-ritardo", "lead-non-qualificati"]
+}

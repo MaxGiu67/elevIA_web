@@ -1,0 +1,90 @@
+{
+  "id": "employee-self-service",
+  "name": "Employee Self-Service",
+  "area": "hr",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/self-service.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "HR Self-Service Intelligente",
+      "tagline": "Risposte in secondi invece di giorni",
+      "icon": "help-circle"
+    },
+    "problem": {
+      "statement": "I tuoi dipendenti hanno domande: \"Quante ferie ho?\", \"Come chiedo un permesso?\", \"Posso lavorare da remoto il venerdì?\". Aprono ticket, mandano email, chiamano HR. La risposta arriva dopo giorni. HR passa metà del tempo a rispondere sempre alle stesse cose. Le informazioni esistono da qualche parte, ma nessuno le trova.",
+      "painPoints": [
+        "Giorni per una risposta",
+        "HR sommerso di ticket",
+        "\"Non so dove cercare\"",
+        "Informazioni obsolete"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che risponde subito a tutte le domande HR. Sempre disponibile, sempre aggiornato.",
+      "example": {
+        "questions": [
+          {
+            "q": "Quante ferie mi restano quest'anno?",
+            "a": "Ciao Marco, hai 12 giorni di ferie residue per il 2025.\n\nDettaglio:\n- Maturate: 22 giorni\n- Godute: 8 giorni\n- Pianificate: 2 giorni (ponte 25 aprile)\n\nVuoi richiedere ferie? Usa questo link: [Richiesta Ferie]"
+          },
+          {
+            "q": "Qual è la policy sul remote working?",
+            "a": "La policy aziendale prevede fino a 2 giorni di smart working a settimana, concordati con il manager. Serve comunicazione con almeno 24h di anticipo. Trovi tutti i dettagli qui: [Policy Smart Working]"
+          }
+        ]
+      },
+      "steps": [
+        { "title": "Setup", "description": "Integrazione sistemi HR" },
+        { "title": "Training", "description": "AI impara policy e dati" },
+        { "title": "Deploy", "description": "Chatbot disponibile a tutti" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Giorni per una risposta",
+        "HR sommerso di ticket",
+        "\"Non so dove cercare\"",
+        "Informazioni obsolete"
+      ],
+      "after": [
+        "Secondi",
+        "-70% richieste",
+        "Tutto in un posto",
+        "Sempre aggiornate"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "Secondi", "label": "Tempo risposta", "icon": "zap" },
+        { "value": "-70%", "label": "Ticket HR", "icon": "trending-down" },
+        { "value": "24/7", "label": "Disponibilità", "icon": "sun" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Documentazione policy HR",
+        "Accesso sistemi HR (per dati personali)",
+        "FAQ raccolte dal team HR",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare sistemi",
+        "Creare nuova documentazione",
+        "Formare i dipendenti"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "RAG Pattern", "HR Integration"],
+      "integrations": ["Workday", "SAP SuccessFactors", "Zucchetti"]
+    },
+    "cta": {
+      "text": "Libera HR dalle domande ripetitive",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["hr-sovraccarico"],
+  "relatedUseCases": ["onboarding-assistant", "rag-knowledge-base"]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "performance-review",
+  "name": "Performance Review",
+  "area": "hr",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/performance.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Performance Review Intelligenti",
+      "tagline": "Da ore a minuti per preparare ogni review",
+      "icon": "award"
+    },
+    "problem": {
+      "statement": "Arriva il periodo delle review. I manager non sanno da dove cominciare: non ricordano cosa ha fatto il collaboratore 6 mesi fa, non hanno tempo di raccogliere feedback, scrivono valutazioni generiche all'ultimo minuto. I dipendenti percepiscono le review come ingiuste o inutili. HR riceve documenti incompleti e inconsistenti.",
+      "painPoints": [
+        "Ore a preparare ogni review",
+        "\"Non ricordo cosa ha fatto\"",
+        "Feedback generico",
+        "Valutazioni inconsistenti"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che prepara tutto prima del colloquio. Il manager rivede, personalizza e conduce una review di valore.",
+      "example": {
+        "request": "Prepara la review di Laura Bianchi",
+        "output": {
+          "highlights": [
+            "Ha guidato il rilascio della nuova piattaforma (3 mesi anticipo)",
+            "Mentorship a 2 junior del team",
+            "Feedback clienti: 4.8/5 su 12 ticket gestiti"
+          ],
+          "feedback360": {
+            "responses": 5,
+            "strengths": ["leadership tecnica", "disponibilità", "problem solving"],
+            "development": ["delega", "documentazione"]
+          },
+          "suggestions": [
+            "Riconoscere il successo del rilascio",
+            "Esplorare interesse per ruolo di tech lead",
+            "Concordare piano di miglioramento sulla documentazione"
+          ]
+        }
+      },
+      "steps": [
+        { "title": "Integration", "description": "Connessione sistemi HR e progetti" },
+        { "title": "Collection", "description": "Raccolta dati e feedback 360" },
+        { "title": "Preparation", "description": "AI prepara bozza review" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Ore a preparare ogni review",
+        "\"Non ricordo cosa ha fatto\"",
+        "Feedback generico",
+        "Valutazioni inconsistenti"
+      ],
+      "after": [
+        "Minuti",
+        "Dati aggregati",
+        "Specifico e documentato",
+        "Standard uniforme"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "Minuti", "label": "Per review", "icon": "clock" },
+        { "value": "100%", "label": "Dati raccolti", "icon": "database" },
+        { "value": "Uniforme", "label": "Standard", "icon": "check-circle" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso a sistemi performance (se esistenti)",
+        "Template valutazione aziendale",
+        "Criteri di valutazione",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare il processo di review",
+        "Comprare sistemi nuovi",
+        "Formare i manager"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "HR Integration", "Analytics"],
+      "integrations": ["HRIS", "Project Management", "Feedback Tools"]
+    },
+    "cta": {
+      "text": "Rendi le review utili",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["hr-sovraccarico"],
+  "relatedUseCases": ["screening-cv", "employee-self-service"]
+}

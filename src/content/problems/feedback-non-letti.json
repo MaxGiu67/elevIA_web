@@ -1,0 +1,25 @@
+{
+  "id": "feedback-non-letti",
+  "title": "Feedback clienti non letti",
+  "description": "Survey, recensioni ed email troppo numerose per essere lette. Problemi scoperti tardi.",
+  "painPoints": [
+    "Feedback letti solo a campione",
+    "Report mensili già obsoleti",
+    "Problemi scoperti quando escalano",
+    "Intuizioni invece di dati"
+  ],
+  "checklist": [
+    "Survey con basso tasso di analisi",
+    "Recensioni negative scoperte per caso",
+    "Nessun alert su trend negativi",
+    "Decisioni basate su sensazioni"
+  ],
+  "impact": {
+    "cost": "Clienti persi per problemi non visti",
+    "satisfaction": "NPS in calo senza sapere perché",
+    "opportunity": "Insight non utilizzati",
+    "scalability": "Impossibile leggere tutto manualmente"
+  },
+  "solvedBy": ["analisi-sentiment"],
+  "area": "customer-experience"
+}

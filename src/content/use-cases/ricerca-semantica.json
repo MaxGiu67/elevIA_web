@@ -1,0 +1,82 @@
+{
+  "id": "ricerca-semantica",
+  "name": "Ricerca Semantica",
+  "area": "operations",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/search.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Trova il prodotto giusto, sempre",
+      "tagline": "Ricerca che capisce cosa vuoi",
+      "icon": "search"
+    },
+    "problem": {
+      "statement": "Il tuo catalogo ha migliaia di articoli. I clienti cercano \"filtro per compressore\" e non trovano nulla perché nel sistema si chiama \"elemento filtrante aria\". I commerciali perdono tempo a sfogliare listini. I clienti rinunciano e comprano altrove.",
+      "painPoints": [
+        "\"Nessun risultato trovato\"",
+        "Clienti che chiamano per chiedere",
+        "Commerciali che sfogliano PDF",
+        "Prodotti \"nascosti\" mai venduti"
+      ]
+    },
+    "solution": {
+      "overview": "Una ricerca che capisce cosa vuoi, non solo cosa scrivi. Descrivi il prodotto che ti serve e il sistema trova gli articoli giusti, anche se usi parole diverse da quelle del catalogo.",
+      "example": {
+        "query": "Cerco una pompa per liquidi viscosi, portata circa 100 litri/ora, budget sotto i 500 euro",
+        "results": "3 pompe compatibili, ordinate per rilevanza, con specifiche e prezzo"
+      },
+      "steps": [
+        { "title": "Ingestion", "description": "Indicizzazione catalogo prodotti" },
+        { "title": "Enrichment", "description": "AI arricchisce con sinonimi e specifiche" },
+        { "title": "Search", "description": "Ricerca semantica in linguaggio naturale" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "\"Nessun risultato trovato\"",
+        "Clienti che chiamano per chiedere",
+        "Commerciali che sfogliano PDF",
+        "Prodotti \"nascosti\" mai venduti"
+      ],
+      "after": [
+        "Sempre risultati rilevanti",
+        "Self-service",
+        "Ricerca in 5 secondi",
+        "Visibilità completa del catalogo"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "5s", "label": "Tempo ricerca", "icon": "zap" },
+        { "value": "100%", "label": "Copertura catalogo", "icon": "package" },
+        { "value": "≥90%", "label": "Risultati rilevanti", "icon": "target" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Export del catalogo prodotti (Excel, CSV o database)",
+        "Schede tecniche prodotti (se disponibili)",
+        "Eventuali sinonimi o gergo di settore",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Rifare il catalogo",
+        "Cambiare l'e-commerce",
+        "Installare software"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure AI Search", "Azure OpenAI", "Semantic Search"],
+      "integrations": ["E-commerce", "PIM", "ERP"]
+    },
+    "cta": {
+      "text": "Fai trovare tutti i tuoi prodotti",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["prodotti-non-trovati"],
+  "relatedUseCases": ["rag-knowledge-base", "chatbot-faq"]
+}

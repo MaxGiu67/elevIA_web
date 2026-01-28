@@ -1,0 +1,25 @@
+{
+  "id": "hr-sovraccarico",
+  "title": "HR sovraccarico",
+  "description": "Screening CV manuale, domande ricorrenti, onboarding frammentato.",
+  "painPoints": [
+    "Giorni per fare screening di 200 CV",
+    "Stesse domande da ogni dipendente",
+    "Onboarding diverso per ogni nuovo assunto",
+    "Tempo sottratto ad attività strategiche"
+  ],
+  "checklist": [
+    "CV letti uno per uno",
+    "Ticket HR con domande ripetitive",
+    "Nuovi assunti che chiedono tutto a HR",
+    "Review preparate all'ultimo minuto"
+  ],
+  "impact": {
+    "cost": "Team HR dimensionato per picchi",
+    "satisfaction": "HR frustrato da lavoro ripetitivo",
+    "opportunity": "Niente tempo per progetti HR",
+    "scalability": "Non scala con la crescita"
+  },
+  "solvedBy": ["screening-cv", "employee-self-service", "performance-review"],
+  "area": "hr"
+}

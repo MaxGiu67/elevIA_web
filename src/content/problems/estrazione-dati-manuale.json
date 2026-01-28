@@ -1,0 +1,25 @@
+{
+  "id": "estrazione-dati-manuale",
+  "title": "Estrazione dati manuale",
+  "description": "Fatture, contratti e ordini richiedono data entry manuale con errori e colli di bottiglia.",
+  "painPoints": [
+    "5 minuti per registrare una fattura",
+    "Errori di trascrizione frequenti",
+    "Collo di bottiglia su poche persone",
+    "Arretrati nei periodi di picco"
+  ],
+  "checklist": [
+    "Documenti copiati a mano nel gestionale",
+    "Errori scoperti dopo la contabilità",
+    "Code di documenti da processare",
+    "Straordinari per smaltire arretrati"
+  ],
+  "impact": {
+    "cost": "Costo per documento elevato",
+    "satisfaction": "Lavoro ripetitivo demotivante",
+    "opportunity": "Tempo sottratto ad attività a valore",
+    "scalability": "Non scala con i volumi"
+  },
+  "solvedBy": ["estrazione-dati", "due-diligence"],
+  "area": "knowledge"
+}

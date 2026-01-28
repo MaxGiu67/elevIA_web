@@ -1,0 +1,25 @@
+{
+  "id": "report-manuali",
+  "title": "Report manuali",
+  "description": "Ore ogni settimana a compilare report da fonti diverse.",
+  "painPoints": [
+    "4-6 ore/settimana per compilare report",
+    "Report in ritardo con dati già vecchi",
+    "Errori di copia-incolla",
+    "Commenti generici senza insight"
+  ],
+  "checklist": [
+    "Excel che aggregano dati da 5 sistemi",
+    "Copia-incolla ripetitivo",
+    "Report consegnati venerdì con dati di lunedì",
+    "Nessuno legge i commenti"
+  ],
+  "impact": {
+    "cost": "Ore di lavoro a basso valore",
+    "satisfaction": "Lavoro noioso e frustrante",
+    "opportunity": "Tempo sottratto ad analisi",
+    "scalability": "Non scala con la complessità"
+  },
+  "solvedBy": ["report-automatici", "sintesi-riunioni"],
+  "area": "operations"
+}

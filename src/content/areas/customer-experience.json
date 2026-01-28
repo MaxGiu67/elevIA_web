@@ -1,0 +1,19 @@
+{
+  "id": "customer-experience",
+  "name": "Customer Experience",
+  "tagline": "Migliora l'esperienza dei tuoi clienti",
+  "description": "Automatizza il supporto clienti, classifica i ticket, assisti gli operatori e ascolta la voce dei clienti in tempo reale.",
+  "icon": "message-circle",
+  "color": "secondary",
+  "hero": {
+    "image": "/images/heroes/cx.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "stats": {
+    "responseTime": "< 30 secondi",
+    "operatorLoad": "-40/60%",
+    "availability": "24/7"
+  },
+  "useCases": ["chatbot-faq", "classificazione-ticket", "copilot-operatore", "analisi-sentiment"],
+  "problems": ["customer-service-sovraccarico", "feedback-non-letti"]
+}

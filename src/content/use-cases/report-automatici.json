@@ -1,0 +1,84 @@
+{
+  "id": "report-automatici",
+  "name": "Report Automatici",
+  "area": "operations",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/reports.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Report che si scrivono da soli",
+      "tagline": "Da 4-6 ore a 0 ore per settimana",
+      "icon": "file-text"
+    },
+    "problem": {
+      "statement": "Ogni settimana qualcuno nel nostro team passa ore a preparare report. Apre cinque sistemi diversi, copia numeri in Excel, crea grafici, scrive commenti. Il report arriva venerdì pomeriggio quando i dati sono già vecchi. E se c'è un errore di copia-incolla, nessuno se ne accorge.",
+      "painPoints": [
+        "4-6 ore/settimana per compilare report",
+        "Report in ritardo, dati vecchi",
+        "Errori di copia-incolla",
+        "Commenti generici"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che genera i report automaticamente. Estrae i dati dalle tue fonti, li aggrega, li formatta e li invia. Ogni lunedì mattina il report è nella casella email, puntuale e senza errori.",
+      "example": {
+        "report": "Report vendite settimanale",
+        "sources": ["CRM", "ERP", "e-commerce"],
+        "aggregation": "Per area, prodotto, venditore",
+        "output": "Grafici trend + confronto periodo precedente",
+        "insight": "Vendite Nord +12% vs settimana precedente, trainato da prodotto X"
+      },
+      "steps": [
+        { "title": "Connessione", "description": "Integrazione fonti dati" },
+        { "title": "Template", "description": "Definizione formato report" },
+        { "title": "Scheduling", "description": "Invio automatico programmato" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "4-6 ore/settimana per compilare report",
+        "Report in ritardo, dati vecchi",
+        "Errori di copia-incolla",
+        "Commenti generici"
+      ],
+      "after": [
+        "Zero",
+        "Puntuale, dati freschi",
+        "Zero errori",
+        "Insight automatici su trend e anomalie"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "0h", "label": "Effort manuale", "icon": "clock" },
+        { "value": "100%", "label": "Puntualità", "icon": "check-circle" },
+        { "value": "0", "label": "Errori", "icon": "shield" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso in lettura alle fonti dati (ERP, CRM, database)",
+        "Template del report attuale",
+        "Lista destinatari e frequenza",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Modificare i sistemi esistenti",
+        "Installare software sui PC"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Data Integration", "Scheduled Jobs"],
+      "integrations": ["ERP", "CRM", "Database", "Excel", "Email"]
+    },
+    "cta": {
+      "text": "Libera il tuo team dai report manuali",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["report-manuali"],
+  "relatedUseCases": ["anomaly-detection", "sintesi-riunioni"]
+}

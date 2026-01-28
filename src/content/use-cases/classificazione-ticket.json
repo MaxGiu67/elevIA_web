@@ -1,0 +1,85 @@
+{
+  "id": "classificazione-ticket",
+  "name": "Classificazione Ticket",
+  "area": "customer-experience",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/ticket-classification.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Smistamento Automatico dei Ticket",
+      "tagline": "Classificazione in meno di 2 secondi",
+      "icon": "inbox"
+    },
+    "problem": {
+      "statement": "Ogni ticket che arriva deve essere letto, capito, classificato e assegnato al team giusto. Qualcuno lo fa a mano. Se sbaglia, il ticket rimbalza. Se ci mette troppo, gli SLA saltano. E quando il volume aumenta, tutto rallenta.",
+      "painPoints": [
+        "Smistamento manuale",
+        "Errori di routing",
+        "Collo di bottiglia su picchi",
+        "Operatori fanno triage"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che legge il ticket appena arriva, lo classifica automaticamente e lo assegna al team corretto. In meno di due secondi, senza intervento umano.",
+      "example": {
+        "ticket": "Non riesco ad accedere al portale, dice password errata ma l'ho appena cambiata",
+        "classification": {
+          "category": "Accesso/Login",
+          "priority": "Alta",
+          "team": "Supporto IT"
+        }
+      },
+      "steps": [
+        { "title": "Ricezione", "description": "Ticket arriva via qualsiasi canale" },
+        { "title": "Classificazione", "description": "AI analizza e classifica" },
+        { "title": "Routing", "description": "Assegnazione automatica al team" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Smistamento manuale",
+        "Errori di routing",
+        "Collo di bottiglia su picchi",
+        "Operatori fanno triage"
+      ],
+      "after": [
+        "Automatico, istantaneo",
+        "Accuratezza > 90%",
+        "Scalabilità illimitata",
+        "Operatori risolvono"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "<2s", "label": "Tempo classificazione", "icon": "zap" },
+        { "value": ">90%", "label": "Accuratezza", "icon": "target" },
+        { "value": "∞", "label": "Scalabilità", "icon": "trending-up" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Storico ticket (6-12 mesi, anche anonimizzato)",
+        "Elenco categorie e team attuali",
+        "Accesso API al sistema ticketing",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare il sistema di ticketing",
+        "Modificare i processi"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Classification Models", "API Integration"],
+      "integrations": ["Zendesk", "ServiceNow", "Freshdesk", "Jira"]
+    },
+    "cta": {
+      "text": "Automatizza lo smistamento ticket",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["customer-service-sovraccarico"],
+  "relatedUseCases": ["chatbot-faq", "copilot-operatore"]
+}

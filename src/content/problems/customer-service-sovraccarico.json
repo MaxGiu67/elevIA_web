@@ -1,0 +1,26 @@
+{
+  "id": "customer-service-sovraccarico",
+  "title": "Customer service sovraccarico",
+  "description": "Operatori impegnati su domande ripetitive invece che su casi complessi.",
+  "painPoints": [
+    "Code di ticket che crescono nei picchi",
+    "Operatori che copiano le stesse risposte",
+    "Clienti frustrati dai tempi di attesa",
+    "Turnover alto nel team support"
+  ],
+  "checklist": [
+    "SLA non rispettati",
+    "FAQ ignorate, tutti chiamano",
+    "Risposte diverse da operatori diversi",
+    "Nuovi operatori impiegano mesi per essere autonomi"
+  ],
+  "impact": {
+    "cost": "Ogni interazione umana costa",
+    "satisfaction": "Tempi lunghi = NPS basso, churn alto",
+    "opportunity": "Operatori occupati, niente upselling",
+    "scalability": "Picchi = assunzioni temporanee"
+  },
+  "solvedBy": ["chatbot-faq", "classificazione-ticket", "copilot-operatore"],
+  "area": "customer-experience",
+  "expectedResult": "Carico operatori -40/60%. Risposta FAQ < 30 secondi. Operatori sui casi a valore."
+}

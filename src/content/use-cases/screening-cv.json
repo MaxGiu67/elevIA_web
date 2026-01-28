@@ -1,0 +1,91 @@
+{
+  "id": "screening-cv",
+  "name": "Screening CV",
+  "area": "hr",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/cv-screening.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Screening CV Intelligente",
+      "tagline": "Da giorni a minuti per la shortlist",
+      "icon": "users"
+    },
+    "problem": {
+      "statement": "Apri una posizione e arrivano 200 CV. Il tuo recruiter deve leggerli tutti, uno per uno. Ci mette giorni. Nel frattempo i candidati migliori accettano altre offerte. Alla fine la shortlist è soggettiva: dipende da chi ha letto cosa, quando, con quanta attenzione.",
+      "painPoints": [
+        "Giorni per screening",
+        "Valutazione soggettiva",
+        "Candidati buoni persi",
+        "\"Perché questo no?\""
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che legge tutti i CV e ti dice quali sono i più adatti alla posizione. In minuti invece che in giorni.",
+      "example": {
+        "position": "Senior Backend Developer",
+        "shortlist": [
+          { "name": "Laura B.", "fit": "94%", "strengths": "7 anni Java, esperienza fintech, lead team 5 persone" },
+          { "name": "Marco R.", "fit": "91%", "strengths": "5 anni microservizi, certificazione AWS, open source contributor" },
+          { "name": "Anna T.", "fit": "88%", "strengths": "6 anni backend, Python + Java, esperienza scaling" }
+        ],
+        "excluded": [
+          "45 CV: esperienza < 3 anni (requisito minimo)",
+          "28 CV: no esperienza backend (front-end only)",
+          "12 CV: lingua inglese non dichiarata"
+        ]
+      },
+      "steps": [
+        { "title": "Setup", "description": "Definizione requisiti posizione" },
+        { "title": "Ingestion", "description": "Caricamento CV" },
+        { "title": "Matching", "description": "AI genera shortlist con score" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Giorni per screening",
+        "Valutazione soggettiva",
+        "Candidati buoni persi",
+        "\"Perché questo no?\""
+      ],
+      "after": [
+        "Minuti",
+        "Score oggettivo",
+        "Nessuno sfugge",
+        "Motivazione tracciata"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "Minuti", "label": "Per 200 CV", "icon": "zap" },
+        { "value": "100%", "label": "CV analizzati", "icon": "check-circle" },
+        { "value": "Oggettivo", "label": "Scoring", "icon": "target" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Requisiti posizione (job description)",
+        "CV candidati (PDF, Word, o link ATS)",
+        "Criteri must-have vs nice-to-have",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare ATS",
+        "Modificare il processo",
+        "Formare i recruiter"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Document Intelligence", "Matching Algorithms"],
+      "integrations": ["ATS", "LinkedIn", "Email"]
+    },
+    "cta": {
+      "text": "Non perdere più candidati validi",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["hr-sovraccarico"],
+  "relatedUseCases": ["onboarding-assistant", "performance-review"]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "estrazione-dati",
+  "name": "Estrazione Dati",
+  "area": "knowledge",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/data-extraction.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Estrazione Dati Automatica",
+      "tagline": "Da 5 minuti a 10 secondi per documento",
+      "icon": "file-text"
+    },
+    "problem": {
+      "statement": "Ogni giorno ricevi documenti: fatture, ordini, DDT, contratti. Qualcuno li apre, legge i dati, li copia nel gestionale. È un lavoro ripetitivo, lento, e basta una distrazione per sbagliare un importo o un codice.",
+      "painPoints": [
+        "5 minuti per registrare una fattura",
+        "Errori di trascrizione",
+        "Collo di bottiglia su poche persone",
+        "Arretrati nei picchi"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che legge i documenti al posto tuo. Estrae automaticamente i dati rilevanti e li passa al gestionale. Tu verifichi solo i casi dubbi.",
+      "example": {
+        "input": "Fattura fornitore via email",
+        "output": "Fornitore, data, numero, righe con descrizione/quantità/importo, totale, IVA",
+        "action": "Dati in bozza nel gestionale, operatore verifica in 10 secondi e conferma"
+      },
+      "steps": [
+        { "title": "Ricezione", "description": "Il documento arriva via email o upload" },
+        { "title": "Estrazione", "description": "AI identifica e estrae i campi" },
+        { "title": "Validazione", "description": "Operatore conferma in 10 secondi" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "5 minuti per registrare una fattura",
+        "Errori di trascrizione",
+        "Collo di bottiglia su poche persone",
+        "Arretrati nei picchi"
+      ],
+      "after": [
+        "10 secondi per confermare",
+        "Precisione ≥95%",
+        "Scalabilità illimitata",
+        "Elaborazione in tempo reale"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "10s", "label": "Per documento", "icon": "clock" },
+        { "value": "≥95%", "label": "Precisione", "icon": "target" },
+        { "value": "∞", "label": "Scalabilità", "icon": "trending-up" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Esempi dei documenti da processare (20-30 per tipo)",
+        "Accesso al gestionale per l'integrazione",
+        "Mappatura campi: cosa estrarre e dove salvarlo",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": []
+    },
+    "tech": {
+      "stack": ["Azure Document Intelligence", "Azure OpenAI", "Custom Models"],
+      "integrations": ["ERP", "Gestionale", "Email"]
+    },
+    "cta": {
+      "text": "Automatizza l'estrazione dati",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["estrazione-dati-manuale"],
+  "relatedUseCases": ["rag-knowledge-base", "due-diligence"]
+}

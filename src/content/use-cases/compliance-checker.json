@@ -1,0 +1,88 @@
+{
+  "id": "compliance-checker",
+  "name": "Compliance Checker",
+  "area": "workflow",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/compliance.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Verifica Compliance Automatica",
+      "tagline": "30 secondi invece di ore di revisione",
+      "icon": "shield"
+    },
+    "problem": {
+      "statement": "Ogni documento che esce dalla tua azienda deve rispettare regole: GDPR, normative di settore, policy interne. La revisione manuale non scala. Qualcuno si dimentica una clausola, usa un linguaggio non approvato, omette un disclaimer. Ti accorgi del problema quando è troppo tardi.",
+      "painPoints": [
+        "Revisione manuale lenta",
+        "Errori scoperti dopo la firma",
+        "Regole interpretate diversamente",
+        "Audit stressanti"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che legge i tuoi documenti e verifica che siano conformi. Evidenzia i problemi prima che il documento esca.",
+      "example": {
+        "document": "Contratto di fornitura servizi IT",
+        "result": "⚠️ 3 NON-CONFORMITÀ RILEVATE",
+        "issues": [
+          "Clausola GDPR mancante — Il contratto non include la nomina a responsabile del trattamento (Art. 28)",
+          "Limite di responsabilità — Assente il cap al danno indiretto (policy interna richiede max 1x valore contratto)",
+          "Termine pagamento — 90 giorni non conforme a policy (max 60 giorni)"
+        ],
+        "suggestion": "Integrare clausole standard da template approvato"
+      },
+      "steps": [
+        { "title": "Setup", "description": "Caricamento policy e template" },
+        { "title": "Training", "description": "AI impara le regole" },
+        { "title": "Check", "description": "Verifica automatica in 30 secondi" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Revisione manuale lenta",
+        "Errori scoperti dopo la firma",
+        "Regole interpretate diversamente",
+        "Audit stressanti"
+      ],
+      "after": [
+        "Verifica in 30 secondi",
+        "Bloccati prima",
+        "Standard uniforme",
+        "Sempre pronti"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "30s", "label": "Per documento", "icon": "zap" },
+        { "value": "100%", "label": "Copertura regole", "icon": "shield" },
+        { "value": "0", "label": "Errori post-firma", "icon": "check-circle" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Documentazione policy/regole da rispettare",
+        "Template documenti approvati",
+        "10-20 documenti esempio",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare i processi",
+        "Installare software",
+        "Formare il team"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Document Intelligence", "Rules Engine"],
+      "integrations": ["DMS", "SharePoint", "Contract Management"]
+    },
+    "cta": {
+      "text": "Elimina i rischi di non-compliance",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["compliance-rischi"],
+  "relatedUseCases": ["due-diligence", "workflow-approval"]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "knowledge",
+  "name": "Knowledge",
+  "tagline": "Gestione intelligente della conoscenza aziendale",
+  "description": "Trasforma la conoscenza dispersa in un asset strategico. Interroga documenti, estrai dati, sintetizza riunioni e analizza contratti con l'AI.",
+  "icon": "book-open",
+  "color": "primary",
+  "hero": {
+    "image": "/images/heroes/knowledge.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "stats": {
+    "timeToInfo": "30 secondi vs 15-30 minuti",
+    "accuracy": "≥85%",
+    "coverage": "100% documenti"
+  },
+  "useCases": ["rag-knowledge-base", "estrazione-dati", "sintesi-riunioni", "due-diligence"],
+  "problems": ["conoscenza-dispersa", "estrazione-dati-manuale"]
+}

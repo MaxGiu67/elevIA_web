@@ -1,0 +1,86 @@
+{
+  "id": "copilot-operatore",
+  "name": "Copilot Operatore",
+  "area": "customer-experience",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/copilot.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Un Assistente per i Tuoi Operatori",
+      "tagline": "Risposte suggerite in tempo reale",
+      "icon": "user-check"
+    },
+    "problem": {
+      "statement": "I tuoi operatori gestiscono decine di richieste al giorno. Per ognuna devono capire il problema, cercare la procedura giusta, controllare lo storico del cliente, formulare una risposta. I tempi si allungano. Le risposte variano da operatore a operatore. I nuovi assunti impiegano mesi per essere autonomi.",
+      "painPoints": [
+        "Operatore cerca nelle procedure",
+        "Storico cliente da cercare a mano",
+        "Risposte diverse per lo stesso caso",
+        "Mesi di training per i nuovi"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente AI che lavora fianco a fianco con l'operatore. Mentre il cliente espone il problema, il copilot suggerisce: risposte pronte da adattare, procedure da seguire, storico delle interazioni precedenti. L'operatore sceglie cosa usare.",
+      "example": {
+        "customerMessage": "Ho fatto un ordine tre giorni fa e non è ancora arrivato",
+        "copilotSuggests": [
+          "Cronologia ordini del cliente",
+          "Stato spedizione",
+          "Risposta tipo per ritardo",
+          "Procedura rimborso se applicabile"
+        ]
+      },
+      "steps": [
+        { "title": "Integrazione", "description": "Connessione al sistema ticketing/CRM" },
+        { "title": "Context", "description": "AI raccoglie contesto in tempo reale" },
+        { "title": "Suggerimenti", "description": "Risposte e procedure suggerite" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Operatore cerca nelle procedure",
+        "Storico cliente da cercare a mano",
+        "Risposte diverse per lo stesso caso",
+        "Mesi di training per i nuovi"
+      ],
+      "after": [
+        "Procedura suggerita in automatico",
+        "Visibile in un click",
+        "Consistenza garantita",
+        "Autonomia immediata"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "-50%", "label": "Tempo gestione", "icon": "clock" },
+        { "value": "100%", "label": "Consistenza", "icon": "check-circle" },
+        { "value": "1 giorno", "label": "Training nuovi", "icon": "user-plus" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Knowledge base procedure e FAQ",
+        "Accesso al CRM/ticketing",
+        "5 operatori per il pilota",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare i processi",
+        "Sostituire il software attuale"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "RAG Pattern", "Real-time Integration"],
+      "integrations": ["CRM", "Ticketing", "Knowledge Base"]
+    },
+    "cta": {
+      "text": "Potenzia i tuoi operatori",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["customer-service-sovraccarico"],
+  "relatedUseCases": ["chatbot-faq", "classificazione-ticket"]
+}

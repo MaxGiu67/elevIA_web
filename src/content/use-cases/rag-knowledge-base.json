@@ -1,0 +1,82 @@
+{
+  "id": "rag-knowledge-base",
+  "name": "RAG Knowledge Base",
+  "area": "knowledge",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/knowledge-base.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Knowledge Base Intelligente",
+      "tagline": "Trova qualsiasi informazione in 30 secondi",
+      "icon": "search"
+    },
+    "problem": {
+      "statement": "I tuoi dipendenti cercano informazioni in posti diversi: cartelle di rete, SharePoint, email, wiki. Spesso non trovano quello che serve, o trovano versioni vecchie. Chiedono ai colleghi, che interrompono il loro lavoro per rispondere.",
+      "painPoints": [
+        "15-30 minuti per trovare un'informazione",
+        "Disturbo ai colleghi per domande ricorrenti",
+        "Settimane di affiancamento per i nuovi",
+        "Conoscenza persa quando qualcuno se ne va"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che conosce tutti i tuoi documenti. Fai una domanda, ricevi una risposta con il riferimento al documento originale.",
+      "example": {
+        "question": "Qual è la procedura per richiedere un rimborso spese superiore a 500 euro?",
+        "answer": "Le richieste superiori a 500€ richiedono approvazione del responsabile di funzione e vanno inserite nel portale HR entro 30 giorni.",
+        "source": "Procedura Rimborsi v.3, pag. 4"
+      },
+      "steps": [
+        { "title": "Setup", "description": "Connessione ai repository documentali" },
+        { "title": "Ingestion", "description": "Indicizzazione automatica dei documenti" },
+        { "title": "Query", "description": "Interfaccia in linguaggio naturale" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "15-30 minuti per trovare un'informazione",
+        "Disturbo ai colleghi per domande ricorrenti",
+        "Settimane di affiancamento per i nuovi",
+        "Conoscenza persa quando qualcuno se ne va"
+      ],
+      "after": [
+        "30 secondi",
+        "Self-service",
+        "Autonomia immediata",
+        "Preservata"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "30s", "label": "Tempo risposta", "icon": "clock" },
+        { "value": "≥85%", "label": "Accuracy", "icon": "target" },
+        { "value": "99%", "label": "Disponibilità", "icon": "check-circle" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso in lettura ai repository documentali",
+        "5-10 utenti per il test pilota",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Spostare documenti",
+        "Installare software",
+        "Modificare i sistemi"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Azure AI Search", "RAG Pattern"],
+      "integrations": ["SharePoint", "File Server", "Confluence", "Azure AD"]
+    },
+    "cta": {
+      "text": "Scopri come trovare informazioni in 30 secondi",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["conoscenza-dispersa"],
+  "relatedUseCases": ["sintesi-riunioni", "due-diligence"]
+}

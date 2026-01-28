@@ -1,0 +1,19 @@
+{
+  "id": "operations",
+  "name": "Operations",
+  "tagline": "Ottimizza le operazioni aziendali",
+  "description": "Automatizza report, trova prodotti con ricerca semantica, rileva anomalie in tempo reale e prevedi i guasti prima che accadano.",
+  "icon": "bar-chart-2",
+  "color": "primary",
+  "hero": {
+    "image": "/images/heroes/operations.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "stats": {
+    "reportTime": "0 ore vs 4-6 ore/settimana",
+    "alertTime": "Tempo reale vs fine mese",
+    "prediction": "Giorni di anticipo"
+  },
+  "useCases": ["report-automatici", "ricerca-semantica", "anomaly-detection", "predictive-maintenance"],
+  "problems": ["report-manuali", "anomalie-scoperte-tardi"]
+}

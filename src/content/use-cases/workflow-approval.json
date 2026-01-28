@@ -1,0 +1,87 @@
+{
+  "id": "workflow-approval",
+  "name": "Workflow Approval",
+  "area": "workflow",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/approval.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Approvazioni Intelligenti",
+      "tagline": "Da 5-10 minuti a 10 secondi per richiesta",
+      "icon": "check-square"
+    },
+    "problem": {
+      "statement": "Hai manager che ricevono decine di richieste di approvazione: ferie, acquisti, rimborsi, trasferte. Le email si accumulano. Alcune richieste aspettano settimane. Altre vengono approvate senza verificare nulla. Le policy esistono, ma nessuno le controlla davvero.",
+      "painPoints": [
+        "5-10 minuti per richiesta",
+        "Richieste dimenticate per giorni",
+        "Policy ignorate",
+        "Nessuna tracciabilità"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che analizza ogni richiesta e prepara la decisione. Il manager vede la raccomandazione, la motivazione, e approva con un click.",
+      "example": {
+        "request": "Rimborso spese €1.200 — Marco Bianchi",
+        "recommendation": "⚠️ VERIFICA",
+        "motivation": [
+          "Importo superiore alla soglia standard (€500)",
+          "3 voci senza ricevuta allegata",
+          "Budget team residuo: €2.100"
+        ],
+        "suggestedAction": "Richiedere documentazione mancante"
+      },
+      "steps": [
+        { "title": "Integrazione", "description": "Connessione al sistema workflow" },
+        { "title": "Policy", "description": "AI impara le regole approvative" },
+        { "title": "Advisory", "description": "Raccomandazioni automatiche" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "5-10 minuti per richiesta",
+        "Richieste dimenticate per giorni",
+        "Policy ignorate",
+        "Nessuna tracciabilità"
+      ],
+      "after": [
+        "10 secondi",
+        "Processate in tempo reale",
+        "Sempre verificate",
+        "Audit trail completo"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "10s", "label": "Per approvazione", "icon": "zap" },
+        { "value": "100%", "label": "Policy check", "icon": "shield" },
+        { "value": "Full", "label": "Audit trail", "icon": "file-text" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Documentazione policy approvative",
+        "Accesso al sistema di workflow esistente",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare i processi",
+        "Formare le persone",
+        "Modificare le policy"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Rules Engine", "Workflow Integration"],
+      "integrations": ["SAP", "ServiceNow", "Power Automate"]
+    },
+    "cta": {
+      "text": "Velocizza le approvazioni",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["approvazioni-lente"],
+  "relatedUseCases": ["compliance-checker", "report-automatici"]
+}

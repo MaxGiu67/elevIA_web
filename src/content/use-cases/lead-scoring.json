@@ -1,0 +1,90 @@
+{
+  "id": "lead-scoring",
+  "name": "Lead Scoring",
+  "area": "workflow",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/lead-scoring.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Lead Scoring Intelligente",
+      "tagline": "Focus sui lead caldi, non sui freddi",
+      "icon": "target"
+    },
+    "problem": {
+      "statement": "Hai lead che arrivano da campagne, sito, eventi. I commerciali li chiamano tutti allo stesso modo, partendo dal primo della lista. Alcuni lead caldi aspettano mentre si perde tempo con chi non comprerà mai. Non sai quali opportunità sono vere e quali illusorie.",
+      "painPoints": [
+        "Lead chiamati a caso",
+        "Tempo perso su lead freddi",
+        "\"Quanto chiudiamo questo mese?\"",
+        "Approccio generico"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che analizza ogni lead e ti dice quanto è pronto a comprare. I commerciali vedono una lista ordinata per priorità, con insight su ogni contatto.",
+      "example": {
+        "lead": "Mario Rossi — TechCorp Srl",
+        "score": "87/100 🔥",
+        "qualification": "SQL (Sales Qualified)",
+        "signals": [
+          "Ha visitato la pagina pricing 3 volte questa settimana",
+          "Ha scaricato il case study del settore manufacturing",
+          "Azienda in target (50-200 dipendenti, Nord Italia)",
+          "Ha aperto tutte le email degli ultimi 30 giorni"
+        ],
+        "suggestedAction": "Chiamare entro 24h, proporre demo"
+      },
+      "steps": [
+        { "title": "Integrazione", "description": "Connessione al CRM" },
+        { "title": "Training", "description": "AI impara i pattern di conversione" },
+        { "title": "Scoring", "description": "Score e insight in tempo reale" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Lead chiamati a caso",
+        "Tempo perso su lead freddi",
+        "\"Quanto chiudiamo questo mese?\"",
+        "Approccio generico"
+      ],
+      "after": [
+        "Priorità chiara",
+        "Focus sui caldi",
+        "Pipeline prevedibile",
+        "Personalizzato per lead"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "+30%", "label": "Conversion rate", "icon": "trending-up" },
+        { "value": "-50%", "label": "Tempo su lead freddi", "icon": "clock" },
+        { "value": "Real-time", "label": "Scoring", "icon": "zap" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso al CRM (Salesforce, HubSpot, Dynamics)",
+        "Storico lead degli ultimi 12 mesi",
+        "Definizione ICP (Ideal Customer Profile)",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare CRM",
+        "Modificare i processi",
+        "Formare il team"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure Machine Learning", "CRM Integration", "Scoring Models"],
+      "integrations": ["Salesforce", "HubSpot", "Dynamics", "Pipedrive"]
+    },
+    "cta": {
+      "text": "Prioritizza i lead che convertono",
+      "urgency": "high"
+    }
+  },
+  "solvesProblems": ["lead-non-qualificati"],
+  "relatedUseCases": ["content-generation", "analisi-sentiment"]
+}

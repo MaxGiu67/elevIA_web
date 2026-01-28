@@ -1,0 +1,90 @@
+{
+  "id": "onboarding-assistant",
+  "name": "Onboarding Assistant",
+  "area": "hr",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/onboarding.jpg",
+    "overlay": { "color": "blue", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Onboarding Intelligente",
+      "tagline": "Autonomia in giorni invece di settimane",
+      "icon": "user-plus"
+    },
+    "problem": {
+      "statement": "Il nuovo dipendente arriva e non sa nulla: come si richiede un badge, dove si prenota la sala riunioni, chi è il referente IT, qual è la policy per le trasferte. Chiede a HR, che risponde alle stesse domande per ogni nuovo assunto. Il buddy aiuta quando può. Passano settimane prima che il nuovo sia autonomo.",
+      "painPoints": [
+        "Settimane per essere autonomi",
+        "HR sommerso di domande",
+        "Onboarding diverso per ognuno",
+        "Buddy impegnato a rispondere"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente personale che accompagna il nuovo dipendente dal giorno zero. Risponde a tutto, guida passo-passo, è sempre disponibile.",
+      "example": {
+        "questions": [
+          {
+            "q": "Come configuro l'email sul telefono?",
+            "a": "Per configurare l'email sul telefono:\n1. Apri l'app Mail\n2. Aggiungi account → Microsoft 365\n3. Inserisci la tua email aziendale\n4. Usa l'autenticazione con l'app Microsoft Authenticator\n\nSe hai problemi con l'autenticazione, contatta IT al interno 555."
+          },
+          {
+            "q": "Chi è il mio referente per i rimborsi spese?",
+            "a": "Per il team Marketing, il referente amministrativo è Laura Bianchi (laura.bianchi@azienda.it). Trovi la procedura rimborsi nel portale HR > Documenti > Policy Amministrative."
+          }
+        ]
+      },
+      "steps": [
+        { "title": "Setup", "description": "Caricamento documentazione onboarding" },
+        { "title": "Training", "description": "AI impara procedure e contatti" },
+        { "title": "Deploy", "description": "Assistente disponibile dal giorno 1" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Settimane per essere autonomi",
+        "HR sommerso di domande",
+        "Onboarding diverso per ognuno",
+        "Buddy impegnato a rispondere"
+      ],
+      "after": [
+        "Giorni",
+        "Self-service",
+        "Consistente",
+        "Libero per mentoring"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "Giorni", "label": "Time to productivity", "icon": "clock" },
+        { "value": "-80%", "label": "Domande a HR", "icon": "trending-down" },
+        { "value": "24/7", "label": "Disponibilità", "icon": "sun" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Documentazione onboarding esistente",
+        "Procedure e policy principali",
+        "Organigramma e contatti chiave",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Creare nuova documentazione",
+        "Cambiare processi",
+        "Formare le persone"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "RAG Pattern", "Chat Interface"],
+      "integrations": ["HR Portal", "Teams", "Intranet"]
+    },
+    "cta": {
+      "text": "Accelera l'onboarding",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["onboarding-frammentato"],
+  "relatedUseCases": ["employee-self-service", "rag-knowledge-base"]
+}

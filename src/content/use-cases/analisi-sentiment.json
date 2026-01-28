@@ -1,0 +1,86 @@
+{
+  "id": "analisi-sentiment",
+  "name": "Analisi Sentiment",
+  "area": "customer-experience",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/sentiment.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Ascolta la Voce dei Tuoi Clienti",
+      "tagline": "100% feedback analizzati in tempo reale",
+      "icon": "heart"
+    },
+    "problem": {
+      "statement": "I clienti ti dicono cosa pensano: nelle survey, nelle recensioni, nelle email. Ma sono troppi. Non riesci a leggerli tutti. Quando ti accorgi di un problema, è già escalato. La voce del cliente finisce in report che nessuno legge.",
+      "painPoints": [
+        "Feedback letti a campione",
+        "Report mensile statico",
+        "Problemi scoperti tardi",
+        "Intuizioni invece di dati"
+      ]
+    },
+    "solution": {
+      "overview": "Un sistema che legge tutti i feedback in tempo reale e ti dice cosa pensano i clienti. Positivo, negativo, neutro. Di cosa parlano. Cosa li preoccupa. Con alert quando qualcosa non va.",
+      "example": {
+        "input": "1.200 feedback raccolti nel mese",
+        "output": {
+          "sentiment": { "positive": "72%", "negative": "18%", "neutral": "10%" },
+          "criticalTopics": [
+            "Tempi consegna: -23% vs mese precedente",
+            "Assistenza post-vendita: -15%"
+          ],
+          "alert": "Alert attivo su 'consegna'"
+        }
+      },
+      "steps": [
+        { "title": "Connessione", "description": "Integrazione fonti feedback" },
+        { "title": "Analisi", "description": "AI classifica sentiment e topic" },
+        { "title": "Alert", "description": "Notifiche su trend negativi" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "Feedback letti a campione",
+        "Report mensile statico",
+        "Problemi scoperti tardi",
+        "Intuizioni"
+      ],
+      "after": [
+        "100% analizzati",
+        "Dashboard real-time",
+        "Alert immediato",
+        "Dati"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "100%", "label": "Copertura", "icon": "check-circle" },
+        { "value": "Real-time", "label": "Aggiornamento", "icon": "activity" },
+        { "value": "Immediato", "label": "Alert", "icon": "bell" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Accesso alle fonti di feedback (survey, CRM, recensioni)",
+        "Definizione topic di interesse",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Cambiare come raccogli i feedback"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "Sentiment Analysis", "Real-time Processing"],
+      "integrations": ["Survey Tools", "CRM", "Review Platforms"]
+    },
+    "cta": {
+      "text": "Ascolta i tuoi clienti in tempo reale",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["feedback-non-letti"],
+  "relatedUseCases": ["chatbot-faq", "classificazione-ticket"]
+}

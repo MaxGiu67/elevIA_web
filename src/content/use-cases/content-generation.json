@@ -1,0 +1,83 @@
+{
+  "id": "content-generation",
+  "name": "Content Generation",
+  "area": "workflow",
+  "effort": "15 giorni",
+  "hero": {
+    "image": "/images/heroes/content.jpg",
+    "overlay": { "color": "orange", "opacity": 0.5 }
+  },
+  "components": {
+    "header": {
+      "title": "Contenuti Marketing Automatici",
+      "tagline": "Da 2 ore a 5 minuti per contenuto",
+      "icon": "edit-3"
+    },
+    "problem": {
+      "statement": "Devi pubblicare sui social, mandare newsletter, aggiornare il sito, scrivere email commerciali. Ogni contenuto richiede ore. Il team è sovraccarico. I contenuti escono in ritardo o con tono inconsistente. Quando lanci un prodotto nuovo, non riesci a stare dietro a tutto.",
+      "painPoints": [
+        "2 ore per un post curato",
+        "Tone of voice variabile",
+        "Contenuti in ritardo",
+        "Team sovraccarico"
+      ]
+    },
+    "solution": {
+      "overview": "Un assistente che conosce il tuo brand e i tuoi prodotti. Gli dai un brief, lui produce il contenuto. Tu rivedi e pubblichi.",
+      "example": {
+        "brief": "Post LinkedIn lancio nuovo servizio cloud backup",
+        "output": "La perdita dati non è un'opzione. Con CloudBackup Pro, i tuoi file sono al sicuro in tempo reale. Backup automatico, recovery in un click, crittografia enterprise.\n\nScopri come proteggere il tuo business → [link]\n\n#DataProtection #CloudBackup #BusinessContinuity",
+        "time": "8 secondi"
+      },
+      "steps": [
+        { "title": "Setup", "description": "Caricamento brand guidelines" },
+        { "title": "Training", "description": "AI impara il tuo tono" },
+        { "title": "Generation", "description": "Brief → contenuto in secondi" }
+      ]
+    },
+    "comparison": {
+      "before": [
+        "2 ore per un post curato",
+        "Tone of voice variabile",
+        "Contenuti in ritardo",
+        "Team sovraccarico"
+      ],
+      "after": [
+        "5 minuti (inclusa review)",
+        "Sempre on-brand",
+        "Pubblicazione puntuale",
+        "Focus su strategia"
+      ]
+    },
+    "kpi": {
+      "metrics": [
+        { "value": "5min", "label": "Per contenuto", "icon": "clock" },
+        { "value": "100%", "label": "On-brand", "icon": "check-circle" },
+        { "value": "10x", "label": "Produttività", "icon": "trending-up" }
+      ]
+    },
+    "requirements": {
+      "fromClient": [
+        "Brand guidelines (tone of voice, do/don't)",
+        "Esempi di contenuti approvati",
+        "Catalogo prodotti/servizi",
+        "2 ore per il kickoff"
+      ],
+      "notNeeded": [
+        "Assumere copywriter",
+        "Comprare tool esterni",
+        "Formare il team"
+      ]
+    },
+    "tech": {
+      "stack": ["Azure OpenAI", "GPT-4", "Brand Training"],
+      "integrations": ["CMS", "Social Media", "Email Marketing"]
+    },
+    "cta": {
+      "text": "Moltiplica i tuoi contenuti",
+      "urgency": "medium"
+    }
+  },
+  "solvesProblems": ["contenuti-in-ritardo"],
+  "relatedUseCases": ["lead-scoring", "analisi-sentiment"]
+}
