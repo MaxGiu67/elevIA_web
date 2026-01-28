@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 17 24 39;
+    --primary: 245 146 27;
+    --secondary: 47 167 230;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  /* Focus visible for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Orange primary button (Nexa Data style) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-primary-500 text-white font-medium rounded-md
+           hover:bg-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           transition-colors duration-200;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-white text-gray-700 font-medium rounded-md
+           border border-gray-300
+           hover:bg-gray-50 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           transition-colors duration-200;
+  }
+
+  /* Blue text link (Nexa Data style) */
+  .link-blue {
+    @apply text-secondary-500 hover:text-secondary-600 font-medium transition-colors;
+  }
+
+  /* Orange text link (Nexa Data style) */
+  .link-orange {
+    @apply text-primary-500 hover:text-primary-600 font-medium transition-colors;
+  }
+
+  /* Chat floating glassmorphism */
+  .chat-floating {
+    @apply bg-white/95 backdrop-blur-xl rounded-2xl
+           shadow-[0_8px_32px_rgba(245,146,27,0.15)]
+           border border-primary-100;
+  }
+
+  /* Card style (Nexa Data inspired) */
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-100 p-6
+           hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Dark section */
+  .section-dark {
+    @apply bg-dark-900 text-white;
+  }
+
+  /* Wave transition SVG */
+  .wave-top {
+    @apply absolute top-0 left-0 w-full overflow-hidden leading-none;
+  }
+
+  .wave-bottom {
+    @apply absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180;
+  }
+
+  /* Skeleton shimmer effect */
+  .skeleton {
+    @apply bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200
+           bg-[length:200%_100%] animate-shimmer;
+  }
+}
+
+@layer utilities {
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

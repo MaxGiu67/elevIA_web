@@ -1,0 +1,28 @@
+{
+  "id": "cx",
+  "name": "Customer Experience",
+  "description": "Migliora l'esperienza dei tuoi clienti con soluzioni AI",
+  "icon": "💬",
+  "color": "orange",
+
+  "hero": {
+    "image": "customer-experience.jpg",
+    "tagline": "Area di intervento",
+    "title": "Customer Experience",
+    "subtitle": "4 Use Case AI per migliorare l'esperienza cliente e ridurre i costi del supporto"
+  },
+
+  "use_cases": [
+    "chatbot-faq",
+    "classificazione-ticket",
+    "copilot-operatore",
+    "analisi-sentiment"
+  ],
+
+  "seo": {
+    "meta_title": "Customer Experience AI | UPGRAI",
+    "meta_description": "4 Use Case AI per migliorare la customer experience: Chatbot FAQ, Classificazione Ticket, Copilot Operatore, Analisi Sentiment.",
+    "keywords": ["customer experience", "AI", "customer service", "chatbot", "supporto clienti"],
+    "canonical": "/area/customer-experience"
+  }
+}
