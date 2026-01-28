@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
 const navigation = [
-  { name: 'Features', href: '#features' },
-  { name: 'Use Cases', href: '#use-cases' },
-  { name: 'Contatti', href: '#contact' },
+  { name: 'HOME', href: '#' },
+  { name: 'CHI SIAMO', href: '#about' },
+  { name: 'SERVIZI', href: '#services' },
+  { name: 'USE CASES', href: '#use-cases' },
 ]
 
 export function Header() {
@@ -18,22 +19,29 @@ export function Header() {
       <nav className="container-main flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-primary-600">UPGRAI</span>
+          <span className="text-2xl font-bold">
+            <span className="text-dark-900">UP</span>
+            <span className="text-primary-500">GRAI</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-gray-600 hover:text-primary-600 font-medium transition-colors"
+              className="text-gray-700 hover:text-primary-500 text-sm font-medium transition-colors"
             >
               {item.name}
             </Link>
           ))}
-          <Link href="#contact" className="btn-primary text-sm py-2 px-4">
-            Contattaci
+          <Link
+            href="#contact"
+            className="btn-primary text-sm py-2 px-5 flex items-center gap-1"
+          >
+            CONTATTACI
+            <ChevronDown className="h-4 w-4" />
           </Link>
         </div>
 
@@ -60,7 +68,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-gray-600 hover:text-primary-600 font-medium"
+                className="block text-gray-700 hover:text-primary-500 font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -71,7 +79,7 @@ export function Header() {
               className="btn-primary w-full text-center"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Contattaci
+              CONTATTACI
             </Link>
           </div>
         </div>
