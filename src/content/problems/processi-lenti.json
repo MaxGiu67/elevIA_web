@@ -1,0 +1,7 @@
+{
+  "id": "processi-lenti",
+  "title": "Processi decisionali lenti",
+  "description": "Approvazioni che richiedono giorni, workflow bloccati da colli di bottiglia. Le decisioni rallentano l'intero business.",
+  "impact": "Ritardi e opportunità perse",
+  "solvedBy": ["workflow-approval", "compliance-checker"]
+}

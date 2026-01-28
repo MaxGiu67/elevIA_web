@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { LandingPageJsonLd } from '@/components/JsonLd'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { ChatFloat } from '@/components/ChatFloat'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -72,7 +75,12 @@ export default function RootLayout({
         <LandingPageJsonLd />
       </head>
       <body className={inter.className}>
-        {children}
+        <Header />
+        <main className="pt-16">
+          {children}
+        </main>
+        <ChatFloat />
+        <Footer />
       </body>
     </html>
   )

@@ -1,0 +1,7 @@
+{
+  "id": "compliance-rischio",
+  "title": "Rischio compliance elevato",
+  "description": "Documenti e processi non conformi alle normative. Controlli manuali insufficienti e rischio sanzioni.",
+  "impact": "Sanzioni e danni reputazionali",
+  "solvedBy": ["compliance-checker", "due-diligence"]
+}

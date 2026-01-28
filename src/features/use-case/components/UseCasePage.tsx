@@ -81,26 +81,25 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      {/* Hero Section - Dark style like landing */}
+      <div className="relative bg-dark-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Torna alla home
           </Link>
 
           <div className="max-w-3xl">
-            <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm mb-4">
+            <span className="inline-block px-3 py-1 bg-dark-800 text-primary-500 rounded-full text-sm mb-4">
               {useCase.effort}
             </span>
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">
               {components.header.title}
             </h1>
-            <p className="text-xl text-white/90">
+            <p className="text-xl text-secondary-400">
               {components.header.tagline}
             </p>
           </div>

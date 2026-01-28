@@ -1,0 +1,7 @@
+{
+  "id": "lead-non-qualificati",
+  "title": "Lead non qualificati",
+  "description": "Il sales team perde tempo con prospect non in target. Manca un sistema di prioritizzazione efficace.",
+  "impact": "Conversioni basse e inefficienza",
+  "solvedBy": ["lead-scoring", "chatbot-faq"]
+}

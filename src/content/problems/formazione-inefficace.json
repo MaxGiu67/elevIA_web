@@ -1,0 +1,7 @@
+{
+  "id": "formazione-inefficace",
+  "title": "Onboarding e formazione inefficaci",
+  "description": "Nuovi dipendenti impiegano settimane per essere produttivi. Mancano risorse self-service e supporto immediato.",
+  "impact": "Produttività ritardata",
+  "solvedBy": ["onboarding-assistant", "employee-self-service", "rag-knowledge-base"]
+}
