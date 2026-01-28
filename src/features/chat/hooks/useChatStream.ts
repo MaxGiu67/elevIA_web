@@ -7,7 +7,7 @@
 
 import { useCallback, useRef, useState } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
 
 function generateSessionId(): string {
   return `s_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
