@@ -14,6 +14,13 @@ class Settings(BaseSettings):
     app_name: str = "UPGRAI API"
     debug: bool = False
 
+    @property
+    def chroma_endpoint(self) -> str:
+        """Get ChromaDB endpoint URL."""
+        if self.chroma_url:
+            return self.chroma_url
+        return f"http://{self.chroma_host}:{self.chroma_port}"
+
     # Server
     api_host: str = "0.0.0.0"
     api_port: int = 8000
@@ -27,9 +34,19 @@ class Settings(BaseSettings):
     # Vector Store
     chroma_host: str = "localhost"
     chroma_port: int = 8001
+    chroma_url: str | None = None  # If set, overrides host/port (for Azure Container Apps)
 
     # AI / LLM
+    anthropic_api_key: str = ""
     openai_api_key: str = ""
+    deepseek_api_key: str = ""
+    llama_cloud_api_key: str = ""
+
+    # JWT
+    jwt_secret_key: str = "change-me-in-production-min-32-chars"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 15
+    refresh_token_expire_days: int = 7
 
     # Security
     cors_origins: List[str] = ["http://localhost:3000"]
