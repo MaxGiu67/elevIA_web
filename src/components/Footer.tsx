@@ -29,58 +29,62 @@ export function Footer() {
         <div className="text-center mb-16">
           <p className="text-primary-500 uppercase tracking-wider text-sm mb-2">UPGRAI</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Innoviamo il presente, costruiamo il futuro.
+            Trasforma i tuoi problemi in soluzioni AI
           </h2>
           <p className="text-gray-400 mb-6 max-w-xl mx-auto">
-            Se cerchi un partner di fiducia e la soluzione giusta per te.
+            Assessment gratuito per identificare gli Use Case più adatti alla tua azienda.
           </p>
           <Link href="#contact" className="link-orange text-lg inline-flex items-center gap-2">
-            CONTATTACI ORA
+            RICHIEDI ASSESSMENT
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
         </div>
 
-        {/* Footer Info */}
+        {/* Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-12 border-t border-gray-800">
-          {/* Location 1 */}
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-white uppercase text-sm mb-3">Milano</h3>
-            <p className="text-gray-400 text-sm">
-              Via Example, 123<br />
-              20100 Milano MI
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <Link href="/" className="inline-block mb-4">
+              <span className="text-2xl font-bold">
+                <span className="text-white">UP</span>
+                <span className="text-primary-500">GRAI</span>
+              </span>
+            </Link>
+            <p className="text-gray-400 text-sm max-w-md">
+              Framework AI con 20 Use Case standardizzati per risolvere i problemi aziendali più comuni.
+              Soluzioni pronte all'uso in 5 aree: Knowledge, Customer Experience, Operations, Workflow e HR.
             </p>
           </div>
 
-          {/* Location 2 */}
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-white uppercase text-sm mb-3">Roma</h3>
-            <p className="text-gray-400 text-sm">
-              Via Example, 456<br />
-              00100 Roma RM
-            </p>
+          {/* Use Cases */}
+          <div>
+            <h3 className="font-semibold text-white uppercase text-sm mb-3">Use Case</h3>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li><Link href="#services" className="hover:text-primary-500 transition-colors">RAG Knowledge Base</Link></li>
+              <li><Link href="#services" className="hover:text-primary-500 transition-colors">Chatbot FAQ</Link></li>
+              <li><Link href="#services" className="hover:text-primary-500 transition-colors">Report Automatici</Link></li>
+              <li><Link href="#services" className="hover:text-primary-500 transition-colors">Lead Scoring</Link></li>
+              <li><Link href="#services" className="hover:text-primary-500 transition-colors">Screening CV</Link></li>
+            </ul>
           </div>
 
-          {/* Location 3 */}
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-white uppercase text-sm mb-3">Napoli</h3>
-            <p className="text-gray-400 text-sm">
-              Via Example, 789<br />
-              80100 Napoli NA
-            </p>
-          </div>
-
-          {/* Company Info */}
-          <div className="text-center md:text-left">
-            <h3 className="font-semibold text-white uppercase text-sm mb-3">UPGRAI</h3>
-            <p className="text-gray-400 text-sm">
-              P.Iva 12345678901<br />
-              Numero Rea: RM - 1234567<br />
-              <Link href="mailto:info@upgrai.it" className="text-primary-500 hover:text-primary-400">
-                info@upgrai.it
-              </Link>
-            </p>
+          {/* Contact */}
+          <div>
+            <h3 className="font-semibold text-white uppercase text-sm mb-3">Contatti</h3>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li>
+                <Link href="mailto:info@upgrai.it" className="hover:text-primary-500 transition-colors">
+                  info@upgrai.it
+                </Link>
+              </li>
+              <li>
+                <Link href="tel:+390212345678" className="hover:text-primary-500 transition-colors">
+                  +39 02 1234567
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 

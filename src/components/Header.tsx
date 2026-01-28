@@ -6,9 +6,9 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 
 const navigation = [
   { name: 'HOME', href: '#' },
-  { name: 'CHI SIAMO', href: '#about' },
-  { name: 'SERVIZI', href: '#services' },
-  { name: 'USE CASES', href: '#use-cases' },
+  { name: 'USE CASE', href: '#services' },
+  { name: 'PROBLEMI', href: '#problems' },
+  { name: 'PERCHÉ NOI', href: '#about' },
 ]
 
 export function Header() {
@@ -40,7 +40,7 @@ export function Header() {
             href="#contact"
             className="btn-primary text-sm py-2 px-5 flex items-center gap-1"
           >
-            CONTATTACI
+            ASSESSMENT
             <ChevronDown className="h-4 w-4" />
           </Link>
         </div>
@@ -79,7 +79,7 @@ export function Header() {
               className="btn-primary w-full text-center"
               onClick={() => setMobileMenuOpen(false)}
             >
-              CONTATTACI
+              RICHIEDI ASSESSMENT
             </Link>
           </div>
         </div>
