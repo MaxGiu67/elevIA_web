@@ -9,6 +9,20 @@ import { useCallback, useRef, useState } from 'react'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
 
+const MAX_RETRIES = 2
+const RETRY_BASE_DELAY_MS = 1500
+
+/** Check if an error is a network-level failure (cold-start, DNS, connection refused). */
+function isNetworkError(error: unknown): boolean {
+  if (error instanceof TypeError) return true // "Failed to fetch"
+  if (error instanceof Error && /failed to fetch|network|ECONNREFUSED/i.test(error.message)) return true
+  return false
+}
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 function generateSessionId(): string {
   return `s_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
 }
@@ -75,17 +89,33 @@ export function useChatStream(): UseChatStreamReturn {
     setIsStreaming(true)
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query: message,
-          session_id: sessionIdRef.current,
-        }),
-        signal: abortController.signal,
-      })
+      // Retry loop for cold-start / network errors
+      let response: Response | undefined
+      for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          response = await fetch(`${API_URL}/api/chat`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              query: message,
+              session_id: sessionIdRef.current,
+            }),
+            signal: abortController.signal,
+          })
+          break // success — exit retry loop
+        } catch (fetchError) {
+          if (abortController.signal.aborted) throw fetchError
+          if (!isNetworkError(fetchError) || attempt === MAX_RETRIES) throw fetchError
+          // Wait with exponential backoff before retrying
+          await wait(RETRY_BASE_DELAY_MS * (attempt + 1))
+        }
+      }
+
+      if (!response) {
+        throw new Error('Connessione al server non riuscita. Riprova tra qualche secondo.')
+      }
 
       if (!response.ok) {
         if (response.status === 429) {

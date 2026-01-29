@@ -8,6 +8,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useChatStream } from '@/features/chat/hooks/useChatStream'
 import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
+
 const suggestions = [
   'Ho un problema in azienda',
   'Come funziona UPGRAI?',
@@ -167,6 +169,11 @@ export function ChatFloat() {
       vv.removeEventListener('scroll', onResize)
       document.documentElement.style.setProperty('--keyboard-offset', '0px')
     }
+  }, [])
+
+  // Warm-up ping: wake the backend on mount so it's ready when the user types
+  useEffect(() => {
+    fetch(`${API_URL}/api/health`, { method: 'GET' }).catch(() => {})
   }, [])
 
   // Close response panel when the user navigates to a different page
