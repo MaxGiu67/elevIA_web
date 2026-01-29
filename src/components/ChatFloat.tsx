@@ -48,7 +48,12 @@ const PAGE_LINKS: Record<string, string> = {
 /** Regex to match and strip [USE_CASE:id] markers from displayed text */
 const USE_CASE_MARKER_RE = /\[USE_CASE:[a-z0-9-]+\]/g
 
-/** Strip all source/font references, USE_CASE markers, and SOLUTION_PLAN blocks from text */
+/** Regex to match [NEXT_INPUT:...] markers */
+const NEXT_INPUT_MARKER_RE = /\[NEXT_INPUT:[^\]]{0,50}\]/g
+/** Regex to match partial/incomplete [NEXT_INPUT:... during streaming */
+const NEXT_INPUT_PARTIAL_RE = /\[NEXT_INPUT:[^\]]*$/g
+
+/** Strip all source/font references, USE_CASE markers, SOLUTION_PLAN blocks, and NEXT_INPUT markers from text */
 function stripSourceRefs(text: string): string {
   return text
     // "(Fonte 1)", "(Fonte 2 e Fonte 5)", "(Fonte 1, Fonte 3 e Fonte 5)" etc.
@@ -61,6 +66,10 @@ function stripSourceRefs(text: string): string {
     .replace(/\[SOLUTION_PLAN\][\s\S]*?\[\/SOLUTION_PLAN\]/g, '')
     // Partial/incomplete [SOLUTION_PLAN] blocks (during streaming)
     .replace(/\[SOLUTION_PLAN\][\s\S]*$/g, '')
+    // Complete [NEXT_INPUT:...] markers
+    .replace(NEXT_INPUT_MARKER_RE, '')
+    // Partial/incomplete [NEXT_INPUT:... during streaming
+    .replace(NEXT_INPUT_PARTIAL_RE, '')
     // Clean up empty lines left by marker removal
     .replace(/\n\s*\n\s*\n/g, '\n\n')
     .trim()
@@ -120,6 +129,8 @@ function renderResponse(text: string): React.ReactNode[] {
   return result
 }
 
+const DEFAULT_PLACEHOLDER = 'Descrivi il tuo problema aziendale...'
+
 export function ChatFloat() {
   const [query, setQuery] = useState('')
   const [isFocused, setIsFocused] = useState(false)
@@ -127,6 +138,7 @@ export function ChatFloat() {
   const [showResponse, setShowResponse] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [recommendedUseCases, setRecommendedUseCases] = useState<string[]>([])
+  const [placeholder, setPlaceholder] = useState(DEFAULT_PLACEHOLDER)
   const inputRef = useRef<HTMLInputElement>(null)
   const responseRef = useRef('')
   const { sendMessage, abort, isStreaming } = useChatStream()
@@ -134,6 +146,28 @@ export function ChatFloat() {
   const router = useRouter()
   const setPlan = useSolutionPlanStore((s) => s.setPlan)
   const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
+
+  // Keyboard-aware positioning for mobile (visualViewport API)
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+
+    const onResize = () => {
+      const offsetBottom = window.innerHeight - vv.height - vv.offsetTop
+      document.documentElement.style.setProperty(
+        '--keyboard-offset',
+        `${Math.max(0, offsetBottom)}px`
+      )
+    }
+
+    vv.addEventListener('resize', onResize)
+    vv.addEventListener('scroll', onResize)
+    return () => {
+      vv.removeEventListener('resize', onResize)
+      vv.removeEventListener('scroll', onResize)
+      document.documentElement.style.setProperty('--keyboard-offset', '0px')
+    }
+  }, [])
 
   // Close response panel when the user navigates to a different page
   useEffect(() => {
@@ -144,6 +178,7 @@ export function ChatFloat() {
       setError(null)
       setRecommendedUseCases([])
     }
+    setPlaceholder(DEFAULT_PLACEHOLDER)
     // Clear solution plan when navigating away from /esplora
     if (pathname !== '/esplora') {
       clearPlan()
@@ -175,6 +210,9 @@ export function ChatFloat() {
       onSolutionPlan: (plan) => {
         setPlan(plan as SolutionPlan)
       },
+      onNextInput: (suggestion) => {
+        if (suggestion) setPlaceholder(suggestion)
+      },
       onError: (errorMsg) => {
         setError(errorMsg)
       },
@@ -182,7 +220,7 @@ export function ChatFloat() {
         // streaming done
       },
     })
-  }, [query, isStreaming, sendMessage])
+  }, [query, isStreaming, sendMessage, setPlan])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -207,6 +245,7 @@ export function ChatFloat() {
     setResponse('')
     setError(null)
     setRecommendedUseCases([])
+    setPlaceholder(DEFAULT_PLACEHOLDER)
   }
 
   const handleEsplora = () => {
@@ -219,7 +258,9 @@ export function ChatFloat() {
 
   return (
     <div
-      className="fixed bottom-[15%] left-1/2 -translate-x-1/2 z-50 w-[min(600px,90vw)]"
+      className="chat-wrapper fixed z-50
+        bottom-4 left-4 right-4
+        md:bottom-[15%] md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[min(600px,90vw)]"
       role="search"
       aria-label="Chat con UPGRAI AI"
     >
@@ -259,7 +300,7 @@ export function ChatFloat() {
             </div>
 
             {/* Response Body */}
-            <div className="px-4 py-3 max-h-[300px] overflow-y-auto">
+            <div className="px-4 py-3 max-h-[40vh] md:max-h-[300px] overflow-y-auto">
               {error ? (
                 <p className="text-sm text-red-600">{error}</p>
               ) : (
@@ -316,7 +357,7 @@ export function ChatFloat() {
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-              placeholder="Descrivi il tuo problema aziendale..."
+              placeholder={placeholder}
               aria-label="Scrivi la tua domanda"
               className="w-full bg-gray-50 rounded-lg px-4 py-3 pr-10
                          text-gray-900 placeholder-gray-400

@@ -35,6 +35,7 @@ interface StreamCallbacks {
   onPagePlan?: (plan: PagePlan) => void
   onRecommendedUseCases?: (useCaseIds: string[]) => void
   onSolutionPlan?: (plan: unknown) => void
+  onNextInput?: (suggestion: string) => void
   onError: (error: string) => void
   onComplete: () => void
 }
@@ -147,6 +148,10 @@ export function useChatStream(): UseChatStreamReturn {
                   callbacks.onSolutionPlan?.(data.plan)
                   break
 
+                case 'next_input':
+                  callbacks.onNextInput?.(data.suggestion || '')
+                  break
+
                 case 'error':
                   callbacks.onError(data.message || 'Errore sconosciuto')
                   break
@@ -172,6 +177,8 @@ export function useChatStream(): UseChatStreamReturn {
             callbacks.onRecommendedUseCases?.(data.use_cases || [])
           } else if (data.type === 'solution_plan') {
             callbacks.onSolutionPlan?.(data.plan)
+          } else if (data.type === 'next_input') {
+            callbacks.onNextInput?.(data.suggestion || '')
           }
         } catch {
           // Ignore incomplete final chunk

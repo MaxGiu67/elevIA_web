@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { LandingPageJsonLd } from '@/components/JsonLd'
@@ -9,6 +9,12 @@ import { ChatFloat } from '@/components/ChatFloat'
 const inter = Inter({ subsets: ['latin'] })
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://upgrai.com'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
