@@ -19,6 +19,11 @@ function isNetworkError(error: unknown): boolean {
   return false
 }
 
+/** Server errors worth retrying (cold-start crashes, gateway errors). */
+function isRetryableStatus(status: number): boolean {
+  return status === 500 || status === 502 || status === 503 || status === 504
+}
+
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
@@ -89,7 +94,7 @@ export function useChatStream(): UseChatStreamReturn {
     setIsStreaming(true)
 
     try {
-      // Retry loop for cold-start / network errors
+      // Retry loop for cold-start / network / server errors
       let response: Response | undefined
       for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
         try {
@@ -104,7 +109,14 @@ export function useChatStream(): UseChatStreamReturn {
             }),
             signal: abortController.signal,
           })
-          break // success — exit retry loop
+
+          // Retry on server errors (500, 502, 503, 504)
+          if (isRetryableStatus(response.status) && attempt < MAX_RETRIES) {
+            await wait(RETRY_BASE_DELAY_MS * (attempt + 1))
+            continue
+          }
+
+          break // success or non-retryable error — exit retry loop
         } catch (fetchError) {
           if (abortController.signal.aborted) throw fetchError
           if (!isNetworkError(fetchError) || attempt === MAX_RETRIES) throw fetchError
@@ -121,7 +133,10 @@ export function useChatStream(): UseChatStreamReturn {
         if (response.status === 429) {
           throw new Error('Troppe richieste. Attendi un momento prima di riprovare.')
         }
-        throw new Error(`Errore del server: ${response.status}`)
+        if (response.status === 500) {
+          throw new Error('Il server ha avuto un problema. Riprova tra qualche secondo.')
+        }
+        throw new Error('Si è verificato un errore. Riprova.')
       }
 
       const reader = response.body?.getReader()
