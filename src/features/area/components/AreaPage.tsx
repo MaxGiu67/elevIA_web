@@ -2,6 +2,7 @@
 
 import { ArrowRight, BookOpen, Users, Cog, GitBranch, UserCheck, MessageCircle, BarChart2 } from 'lucide-react'
 import Link from 'next/link'
+import { WaveBottom } from '@/features/landing/components/Wave'
 
 interface UseCase {
   id: string
@@ -60,7 +61,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Dark style like landing */}
-      <div className="relative bg-dark-900 text-white">
+      <div className="relative bg-dark-900 text-white pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
           <div className="flex items-start gap-6">
             <div className="p-4 bg-dark-800 rounded-2xl">
@@ -91,6 +92,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
             ))}
           </div>
         </div>
+        <WaveBottom />
       </div>
 
       {/* Use Cases Grid */}
