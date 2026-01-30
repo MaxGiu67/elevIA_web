@@ -2,7 +2,7 @@
 
 /**
  * Stats section showing key metrics.
- * Displays UPGRAI's core value propositions in numbers.
+ * Displays elevIA's core value propositions in numbers.
  */
 
 const stats = [
@@ -18,7 +18,7 @@ export function Stats() {
       className="pt-40 pb-16 bg-white"
       aria-labelledby="stats-title"
     >
-      <h2 id="stats-title" className="sr-only">Statistiche UPGRAI</h2>
+      <h2 id="stats-title" className="sr-only">Statistiche elevIA</h2>
       <div className="container-main">
         <div
           className="grid grid-cols-2 md:grid-cols-4 gap-8"

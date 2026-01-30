@@ -3,7 +3,7 @@
 import { WaveTop, WaveBottom } from './Wave'
 
 /**
- * Features section showing why to choose UPGRAI.
+ * Features section showing why to choose elevIA.
  * Displays key benefits and value propositions.
  */
 
@@ -57,13 +57,13 @@ export function Features() {
       <div className="container-main">
         <div className="text-center mb-12">
           <p className="text-gray-400 uppercase tracking-wider text-sm mb-2">PERCHÉ SCEGLIERE</p>
-          <h2 id="features-title" className="text-3xl md:text-4xl font-bold text-white">UPGRAI</h2>
+          <h2 id="features-title" className="text-3xl md:text-4xl font-bold text-white">elevIA</h2>
         </div>
 
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
           role="list"
-          aria-label="Vantaggi di UPGRAI"
+          aria-label="Vantaggi di elevIA"
         >
           {features.map((feature, index) => (
             <article
@@ -82,7 +82,7 @@ export function Features() {
         </div>
 
         <p className="text-center text-gray-400 mt-12 max-w-2xl mx-auto">
-          UPGRAI è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete e misurabili.
+          elevIA è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete e misurabili.
         </p>
       </div>
       <WaveBottom />

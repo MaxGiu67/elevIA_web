@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
 const HEALTH_CHECK_INTERVAL = 30000 // 30 seconds
 const HEALTH_CHECK_TIMEOUT = 15000 // 15 seconds (FR19)
 const MAX_CONSECUTIVE_FAILURES = 3

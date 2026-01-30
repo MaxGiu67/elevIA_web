@@ -21,22 +21,22 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
   if (!area) {
     return {
-      title: 'Area non trovata | UPGRAI',
+      title: 'Area non trovata | elevIA',
     }
   }
 
   return {
-    title: `${area.name} - ${area.tagline} | UPGRAI`,
+    title: `${area.name} - ${area.tagline} | elevIA`,
     description: area.description,
     openGraph: {
-      title: `${area.name} | UPGRAI`,
+      title: `${area.name} | elevIA`,
       description: area.description,
       type: 'website',
-      url: `https://upgrai.com/area/${area.id}`,
+      url: `https://elevia.nexadata.it/area/${area.id}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${area.name} | UPGRAI`,
+      title: `${area.name} | elevIA`,
       description: area.description,
     },
   }

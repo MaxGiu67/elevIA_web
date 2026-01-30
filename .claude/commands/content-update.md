@@ -1,6 +1,6 @@
 ---
 name: content-update
-description: Aggiorna massivamente i contenuti UPGRAI
+description: Aggiorna massivamente i contenuti elevIA
 ---
 
 # Skill: Aggiornamento Massivo Contenuti

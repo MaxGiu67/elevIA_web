@@ -7,7 +7,7 @@ import { problemList } from '@/content/problems'
 import { useCases, type UseCaseId } from '@/content/use-cases'
 
 /**
- * Problems section showing business challenges UPGRAI solves.
+ * Problems section showing business challenges elevIA solves.
  * Responsive horizontal carousel with navigation arrows.
  * - Mobile: 1 card visible
  * - Tablet: 2 cards visible
@@ -104,7 +104,7 @@ export function Problems() {
                 transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
               }}
               role="list"
-              aria-label="Problemi aziendali risolti da UPGRAI"
+              aria-label="Problemi aziendali risolti da elevIA"
             >
               {problemList.map((problem) => {
                 // Get solution use cases

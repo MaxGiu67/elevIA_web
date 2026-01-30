@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next'
 
 /**
- * Sitemap configuration for UPGRAI.
+ * Sitemap configuration for elevIA.
  * Lists all public pages for search engine indexing.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://upgrai.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
   return [
     {

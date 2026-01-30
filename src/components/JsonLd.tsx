@@ -8,18 +8,18 @@ interface JsonLdProps {
 }
 
 export function JsonLd({ type }: JsonLdProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://upgrai.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'UPGRAI',
+    name: 'elevIA',
     description: 'AI-Powered Solutions for Your Business. 20 Use Case AI pronti all\'uso per PMI e enterprise.',
     url: baseUrl,
     logo: `${baseUrl}/logo.png`,
     sameAs: [
-      'https://www.linkedin.com/company/upgrai',
-      'https://twitter.com/upgrai',
+      'https://www.linkedin.com/company/elevia',
+      'https://twitter.com/elevia',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
@@ -36,7 +36,7 @@ export function JsonLd({ type }: JsonLdProps) {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'UPGRAI',
+    name: 'elevIA',
     url: baseUrl,
     description: 'AI-Powered Solutions for Your Business',
     potentialAction: {
@@ -49,12 +49,12 @@ export function JsonLd({ type }: JsonLdProps) {
   const webPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'UPGRAI - AI-Powered Solutions for Your Business',
-    description: 'Scopri come l\'intelligenza artificiale può trasformare il tuo business con UPGRAI.',
+    name: 'elevIA - AI-Powered Solutions for Your Business',
+    description: 'Scopri come l\'intelligenza artificiale può trasformare il tuo business con elevIA.',
     url: baseUrl,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'UPGRAI',
+      name: 'elevIA',
       url: baseUrl,
     },
     about: {
@@ -63,7 +63,7 @@ export function JsonLd({ type }: JsonLdProps) {
     },
     mainEntity: {
       '@type': 'Organization',
-      name: 'UPGRAI',
+      name: 'elevIA',
     },
   }
 

@@ -80,12 +80,12 @@ export function ChatWindow({ onSendMessage }: ChatWindowProps) {
             border border-gray-100
           `}
           role="dialog"
-          aria-label="Chat con UPGRAI AI"
+          aria-label="Chat con elevIA AI"
           aria-modal="true"
         >
           {/* Header */}
           <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-3 flex-shrink-0">
-            <h2 className="text-white font-semibold">UPGRAI AI Assistant</h2>
+            <h2 className="text-white font-semibold">elevIA AI Assistant</h2>
             <p className="text-primary-100 text-sm">
               {aiStatus === 'available'
                 ? 'Online - Pronto ad aiutarti'
@@ -107,7 +107,7 @@ export function ChatWindow({ onSendMessage }: ChatWindowProps) {
               <div className="text-center text-gray-500 mt-8">
                 <p className="text-lg mb-2">Ciao! 👋</p>
                 <p className="text-sm">
-                  Sono l'assistente AI di UPGRAI. Chiedimi dei nostri Use Case AI!
+                  Sono l'assistente AI di elevIA. Chiedimi dei nostri Use Case AI!
                 </p>
               </div>
             )}

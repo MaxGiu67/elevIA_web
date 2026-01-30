@@ -87,7 +87,7 @@ export function FormError({
         )}
 
         <a
-          href="mailto:info@upgrai.com"
+          href="mailto:info@nexadata.it"
           className="
             inline-flex items-center justify-center gap-2
             px-6 py-2.5 rounded-lg
@@ -110,8 +110,8 @@ export function FormError({
         className="mt-6 text-sm text-red-500"
       >
         Se il problema persiste, scrivici a{' '}
-        <a href="mailto:info@upgrai.com" className="underline hover:text-red-700">
-          info@upgrai.com
+        <a href="mailto:info@nexadata.it" className="underline hover:text-red-700">
+          info@nexadata.it
         </a>
       </motion.p>
     </motion.div>

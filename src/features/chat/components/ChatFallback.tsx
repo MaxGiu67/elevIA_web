@@ -57,7 +57,7 @@ export function ChatFallback({ onContactClick, className = '' }: ChatFallbackPro
         {/* Direct contact options */}
         <div className="flex gap-2">
           <a
-            href="mailto:info@upgrai.com"
+            href="mailto:info@nexadata.it"
             className="
               flex-1 flex items-center justify-center gap-2
               px-4 py-2 rounded-lg

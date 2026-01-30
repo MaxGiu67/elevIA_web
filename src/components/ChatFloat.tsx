@@ -8,12 +8,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useChatStream } from '@/features/chat/hooks/useChatStream'
 import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
 
 const suggestions = [
   'Ho un problema in azienda',
-  'Come funziona UPGRAI?',
-  'UPGRAI come soluzione per le PMI',
+  'Come funziona elevIA?',
+  'elevIA come soluzione per le PMI',
 ]
 
 /** Map of known page names → internal routes */
@@ -269,7 +269,7 @@ export function ChatFloat() {
         bottom-4 left-4 right-4
         md:bottom-[15%] md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[min(600px,90vw)]"
       role="search"
-      aria-label="Chat con UPGRAI AI"
+      aria-label="Chat con elevIA AI"
     >
       {/* Response Panel */}
       <AnimatePresence>
@@ -285,7 +285,7 @@ export function ChatFloat() {
             <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-primary-500" />
-                <span className="text-sm font-medium text-gray-700">UPGRAI AI</span>
+                <span className="text-sm font-medium text-gray-700">elevIA AI</span>
                 {isStreaming && (
                   <motion.span
                     animate={{ opacity: [1, 0.4, 1] }}

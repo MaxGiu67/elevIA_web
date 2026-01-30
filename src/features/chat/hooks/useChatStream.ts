@@ -7,7 +7,7 @@
 
 import { useCallback, useRef, useState } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://upgrai-api-production.up.railway.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
 
 const MAX_RETRIES = 2
 const RETRY_BASE_DELAY_MS = 1500

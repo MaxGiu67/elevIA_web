@@ -27,7 +27,7 @@ export function Footer() {
       <div className="container-main">
         {/* CTA Section */}
         <div className="text-center mb-16">
-          <p className="text-primary-500 uppercase tracking-wider text-sm mb-2">UPGRAI</p>
+          <p className="text-primary-500 uppercase tracking-wider text-sm mb-2">elevIA</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Trasforma i tuoi problemi in soluzioni AI
           </h2>
@@ -75,8 +75,8 @@ export function Footer() {
             <h3 className="font-semibold text-white uppercase text-sm mb-3">Contatti</h3>
             <ul className="text-gray-400 text-sm space-y-2">
               <li>
-                <Link href="mailto:info@upgrai.it" className="hover:text-primary-500 transition-colors">
-                  info@upgrai.it
+                <Link href="mailto:info@nexadata.it" className="hover:text-primary-500 transition-colors">
+                  info@nexadata.it
                 </Link>
               </li>
               <li>
@@ -91,7 +91,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} UPGRAI. Tutti i diritti riservati.
+            © {new Date().getFullYear()} elevIA. Tutti i diritti riservati.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/privacy" className="text-gray-500 hover:text-white transition-colors">

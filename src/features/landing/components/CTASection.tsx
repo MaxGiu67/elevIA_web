@@ -28,7 +28,7 @@ export function CTASection() {
             aria-label="Opzioni di contatto"
           >
             <Link
-              href="mailto:info@upgrai.it"
+              href="mailto:info@nexadata.it"
               className="btn-primary"
               aria-label="Richiedi un assessment gratuito via email"
             >

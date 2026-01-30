@@ -173,7 +173,7 @@ export function PagePlanRenderer({ className = '' }: PagePlanRendererProps) {
 
 /**
  * Area Highlight component placeholder.
- * Used when a specific UPGRAI area is highlighted.
+ * Used when a specific elevIA area is highlighted.
  */
 function AreaHighlight({ highlightAreas }: BlockProps) {
   if (!highlightAreas || highlightAreas.length === 0) return null

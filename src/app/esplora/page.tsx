@@ -12,7 +12,7 @@ import { redirect } from 'next/navigation'
 import { EsploraContent } from '@/features/esplora/components/EsploraContent'
 
 export const metadata: Metadata = {
-  title: 'Le soluzioni UPGRAI per te | UPGRAI',
+  title: 'Le soluzioni elevIA per te | elevIA',
   description: 'Scopri le soluzioni AI personalizzate per i tuoi problemi aziendali.',
   robots: 'noindex', // personalized page, no SEO
 }

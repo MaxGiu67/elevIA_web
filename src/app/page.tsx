@@ -8,7 +8,7 @@ import {
 } from '@/features/landing/components'
 
 /**
- * UPGRAI Landing Page
+ * elevIA Landing Page
  *
  * Structure:
  * - Header (in root layout)
@@ -16,7 +16,7 @@ import {
  * - UseCases (5 Areas with 20 Use Cases)
  * - Stats (key metrics)
  * - Problems (business challenges we solve)
- * - Features (why choose UPGRAI)
+ * - Features (why choose elevIA)
  * - CTASection (contact/lead generation)
  * - Footer (in root layout)
  * - ChatFloat (in root layout)

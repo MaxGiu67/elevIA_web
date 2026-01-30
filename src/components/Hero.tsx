@@ -25,7 +25,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
           >
-            UPGRAI è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete.
+            elevIA è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete.
             Soluzioni standardizzate, documentate e pronte per essere implementate in 15 giorni.
           </motion.p>
 

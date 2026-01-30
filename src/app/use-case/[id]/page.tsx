@@ -20,18 +20,18 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
   if (!useCase) {
     return {
-      title: 'Use Case non trovato | UPGRAI',
+      title: 'Use Case non trovato | elevIA',
     }
   }
 
   return {
-    title: `${useCase.components.header.title} | UPGRAI`,
+    title: `${useCase.components.header.title} | elevIA`,
     description: useCase.components.header.tagline,
     openGraph: {
       title: useCase.components.header.title,
       description: useCase.components.header.tagline,
       type: 'article',
-      url: `https://upgrai.com/use-case/${useCase.id}`,
+      url: `https://elevia.nexadata.it/use-case/${useCase.id}`,
     },
     twitter: {
       card: 'summary_large_image',

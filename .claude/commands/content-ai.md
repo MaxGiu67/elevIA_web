@@ -1,11 +1,11 @@
 ---
 name: content-ai
-description: Genera contenuti UPGRAI con AI
+description: Genera contenuti elevIA con AI
 ---
 
 # Skill: Generazione Contenuti AI
 
-Genera automaticamente contenuti per nuovi Use Case basandosi sul contesto UPGRAI.
+Genera automaticamente contenuti per nuovi Use Case basandosi sul contesto elevIA.
 
 ## Comandi Disponibili
 
@@ -34,7 +34,7 @@ Arricchisce un mattoncino specifico con più dettagli.
 
 Esempio: "espandi mattoncino how-it-works di screening-cv"
 
-## Stile UPGRAI
+## Stile elevIA
 
 Quando generi contenuti, rispetta queste linee guida:
 
@@ -68,7 +68,7 @@ Usa questi pattern per generare pain points efficaci:
 
 ## Template Solution Steps
 
-Per generare step soluzione coerenti con UPGRAI:
+Per generare step soluzione coerenti con elevIA:
 
 ```
 1. **Acquisizione**: Come raccogliamo i dati
@@ -89,7 +89,7 @@ Per generare step soluzione coerenti con UPGRAI:
 
 ## Template KPI
 
-KPI standard UPGRAI (adatta i valori al caso specifico):
+KPI standard elevIA (adatta i valori al caso specifico):
 
 | Tipo | Valore | Label | Quando usare |
 |------|--------|-------|--------------|

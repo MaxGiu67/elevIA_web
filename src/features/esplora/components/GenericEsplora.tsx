@@ -178,7 +178,7 @@ export function GenericEsplora({ requestedIds }: GenericEsploraProps) {
             Personalizzato per te
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-            Le soluzioni UPGRAI per te
+            Le soluzioni elevIA per te
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             In base alla nostra conversazione, ecco gli use case AI che possono

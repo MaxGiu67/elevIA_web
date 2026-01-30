@@ -1,11 +1,11 @@
 ---
 name: content
-description: Gestisci contenuti UPGRAI (Use Cases, Problems, Areas)
+description: Gestisci contenuti elevIA (Use Cases, Problems, Areas)
 ---
 
-# Skill: Gestione Contenuti UPGRAI
+# Skill: Gestione Contenuti elevIA
 
-Sei un assistente per la gestione dei contenuti del framework UPGRAI.
+Sei un assistente per la gestione dei contenuti del framework elevIA.
 I contenuti sono file JSON in `content/` e devono essere indicizzabili da Google e LLM.
 
 ## Struttura Directory
@@ -117,7 +117,7 @@ Quando crei o modifichi un Use Case, usa questo schema:
   "related_use_cases": ["altro-use-case"],
 
   "seo": {
-    "meta_title": "Nome Use Case | UPGRAI",
+    "meta_title": "Nome Use Case | elevIA",
     "meta_description": "Descrizione per Google (max 160 caratteri)",
     "keywords": ["keyword1", "keyword2", "AI"],
     "canonical": "/use-case/slug-identificativo"
@@ -160,7 +160,7 @@ Quando crei o modifichi un Use Case, usa questo schema:
   "solved_by": ["use-case-1", "use-case-2"],
 
   "seo": {
-    "meta_title": "Problema: Nome | UPGRAI",
+    "meta_title": "Problema: Nome | elevIA",
     "meta_description": "Descrizione SEO",
     "canonical": "/problema/slug-problema"
   }
@@ -187,7 +187,7 @@ Quando crei o modifichi un Use Case, usa questo schema:
   "use_cases": ["use-case-1", "use-case-2", "use-case-3", "use-case-4"],
 
   "seo": {
-    "meta_title": "Area: Nome | UPGRAI",
+    "meta_title": "Area: Nome | elevIA",
     "meta_description": "Descrizione SEO",
     "canonical": "/area/area-slug"
   }
@@ -245,11 +245,11 @@ Quando crei o modifichi un Use Case, usa questo schema:
 Quando generi llms.txt:
 
 ```
-# UPGRAI - Framework AI per Aziende
-# https://upgrai.it
+# elevIA - Framework AI per Aziende
+# https://elevia.nexadata.it
 # Aggiornato: {data}
 
-> UPGRAI offre {n} Use Case AI standardizzati, pronti all'uso in 15 giorni.
+> elevIA offre {n} Use Case AI standardizzati, pronti all'uso in 15 giorni.
 > Accuracy ≥85%, latenza <5s, disponibilità 99%.
 
 ## Aree ({n})
@@ -262,10 +262,10 @@ Quando generi llms.txt:
 {per ogni problema: - Nome → /problema/slug}
 
 ## Contatti
-- Website: https://upgrai.it
-- Email: info@upgrai.it
-- Assessment: https://upgrai.it/#contact
+- Website: https://elevia.nexadata.it
+- Email: info@nexadata.it
+- Assessment: https://elevia.nexadata.it/#contact
 
 ## Citazione
-UPGRAI - Framework AI con {n} Use Case pronti all'uso (https://upgrai.it)
+elevIA - Framework AI con {n} Use Case pronti all'uso (https://elevia.nexadata.it)
 ```

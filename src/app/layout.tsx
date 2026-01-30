@@ -8,7 +8,7 @@ import { ChatFloat } from '@/components/ChatFloat'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://upgrai.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -19,22 +19,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'UPGRAI - AI-Powered Solutions for Your Business',
-    template: '%s | UPGRAI',
+    default: 'elevIA - AI-Powered Solutions for Your Business',
+    template: '%s | elevIA',
   },
-  description: 'Scopri come l\'intelligenza artificiale può trasformare il tuo business con UPGRAI. 20 Use Case AI pronti all\'uso per PMI e enterprise.',
-  keywords: ['AI', 'intelligenza artificiale', 'business', 'PMI', 'enterprise', 'UPGRAI', 'chatbot', 'RAG', 'automazione'],
-  authors: [{ name: 'UPGRAI', url: baseUrl }],
-  creator: 'UPGRAI',
-  publisher: 'UPGRAI',
+  description: 'Scopri come l\'intelligenza artificiale può trasformare il tuo business con elevIA. 20 Use Case AI pronti all\'uso per PMI e enterprise.',
+  keywords: ['AI', 'intelligenza artificiale', 'business', 'PMI', 'enterprise', 'elevIA', 'chatbot', 'RAG', 'automazione'],
+  authors: [{ name: 'elevIA', url: baseUrl }],
+  creator: 'elevIA',
+  publisher: 'elevIA',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'UPGRAI - AI-Powered Solutions',
+    title: 'elevIA - AI-Powered Solutions',
     description: 'Trasforma il tuo business con l\'intelligenza artificiale. 20 Use Case AI pronti all\'uso.',
     url: baseUrl,
-    siteName: 'UPGRAI',
+    siteName: 'elevIA',
     locale: 'it_IT',
     type: 'website',
     images: [
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'UPGRAI - AI Solutions',
+        alt: 'elevIA - AI Solutions',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'UPGRAI - AI-Powered Solutions',
+    title: 'elevIA - AI-Powered Solutions',
     description: 'Trasforma il tuo business con l\'intelligenza artificiale',
     images: ['/og-image.png'],
   },
