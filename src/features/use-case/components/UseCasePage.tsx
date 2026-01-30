@@ -99,8 +99,9 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
         <WaveBottom />
       </div>
 
-      {/* Content Blocks */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-16 space-y-16">
+      {/* Content Blocks - white bg sits above wave (z-20 > z-10) */}
+      <div className="relative z-20 bg-white mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 space-y-16">
         {/* Problem */}
         <section>
           <ProblemBlock
@@ -162,6 +163,7 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
             <RelatedBlock useCases={relatedUseCases} />
           </section>
         )}
+      </div>
       </div>
     </div>
   )
