@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useChatStream } from '@/features/chat/hooks/useChatStream'
 import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
+import { usePagePlanStore, type PagePlan } from '@/features/remodulation/stores/pagePlanStore'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
 
@@ -148,6 +149,7 @@ export function ChatFloat() {
   const router = useRouter()
   const setPlan = useSolutionPlanStore((s) => s.setPlan)
   const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
+  const setPagePlan = usePagePlanStore((s) => s.setPlan)
 
   // Keyboard-aware positioning for mobile (visualViewport API)
   useEffect(() => {
@@ -217,6 +219,9 @@ export function ChatFloat() {
       onSolutionPlan: (plan) => {
         setPlan(plan as SolutionPlan)
       },
+      onPagePlan: (plan) => {
+        setPagePlan(plan as PagePlan)
+      },
       onNextInput: (suggestion) => {
         if (suggestion) setPlaceholder(suggestion)
       },
@@ -227,7 +232,7 @@ export function ChatFloat() {
         // streaming done
       },
     })
-  }, [query, isStreaming, sendMessage, setPlan])
+  }, [query, isStreaming, sendMessage, setPlan, setPagePlan])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

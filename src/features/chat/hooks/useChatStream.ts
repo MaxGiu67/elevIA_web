@@ -41,11 +41,20 @@ export interface ChatSource {
 export interface PagePlanBlock {
   type: string
   priority: number
+  visibility: string     // 'visible' | 'highlighted' | 'minimized' | 'hidden'
+  content_ref?: string
+  props?: Record<string, unknown>
+  animation?: string
 }
 
 export interface PagePlan {
   variant_id: string
   blocks: PagePlanBlock[]
+  highlight_areas: string[]
+  highlight_use_cases: string[]
+  scroll_to?: string
+  animation_duration: number
+  metadata?: Record<string, unknown>
 }
 
 interface StreamCallbacks {

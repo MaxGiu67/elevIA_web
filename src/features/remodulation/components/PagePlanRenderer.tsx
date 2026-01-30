@@ -6,7 +6,7 @@
  * FR12: Il Frontend può riorganizzare i blocchi in base al Page Plan
  */
 
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
 import {
   usePagePlanStore,
@@ -93,6 +93,14 @@ export function PagePlanRenderer({ className = '' }: PagePlanRendererProps) {
   } = usePagePlanStore()
 
   const reducedMotion = useReducedMotion()
+  const hasReceivedPlan = useRef(false)
+
+  // Track when a non-default plan arrives (user interacted with chatbot)
+  useEffect(() => {
+    if (currentPlan && currentPlan.variant_id !== 'default') {
+      hasReceivedPlan.current = true
+    }
+  }, [currentPlan])
 
   // Set reduced motion preference
   useEffect(() => {
@@ -138,7 +146,7 @@ export function PagePlanRenderer({ className = '' }: PagePlanRendererProps) {
                 key={blockType}
                 layoutId={blockType}
                 id={config.id}
-                initial="hidden"
+                initial={hasReceivedPlan.current ? 'hidden' : false}
                 animate={visibility}
                 exit="exit"
                 variants={blockVariants}
