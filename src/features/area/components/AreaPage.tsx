@@ -96,7 +96,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
       </div>
 
       {/* Use Cases Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-16">
         <h2 className="text-2xl font-bold text-dark-900 mb-8">
           Use Case in questa area
         </h2>
