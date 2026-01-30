@@ -20,8 +20,8 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold">
-            <span className="text-dark-900">UP</span>
-            <span className="text-primary-500">GRAI</span>
+            <span className="text-dark-900">elev</span>
+            <span className="text-primary-500">IA</span>
           </span>
         </Link>
 

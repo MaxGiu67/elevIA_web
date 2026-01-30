@@ -48,8 +48,8 @@ export function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="inline-block mb-4">
               <span className="text-2xl font-bold">
-                <span className="text-white">UP</span>
-                <span className="text-primary-500">GRAI</span>
+                <span className="text-white">elev</span>
+                <span className="text-primary-500">IA</span>
               </span>
             </Link>
             <p className="text-gray-400 text-sm max-w-md">
