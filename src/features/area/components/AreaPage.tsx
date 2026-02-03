@@ -61,8 +61,8 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Dark style like landing */}
-      <div className="relative bg-dark-900 text-white pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <div className="relative bg-dark-900 text-white pb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           <div className="flex items-start gap-6">
             <div className="p-4 bg-dark-800 rounded-2xl">
               {iconMap[area.icon] || iconMap['book-open']}
@@ -81,7 +81,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
           </div>
 
           {/* Stats - Dynamic KPIs from area data */}
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             {statEntries.map(([key, value]) => (
               <div key={key} className="bg-dark-800 rounded-xl p-6">
                 <div className="text-2xl font-bold text-primary-500">{value}</div>
@@ -96,7 +96,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
       </div>
 
       {/* Content sections - white bg sits above wave (z-20 > z-10) */}
-      <div className="relative z-20 bg-white mt-20">
+      <div className="relative z-20 bg-white mt-[120px]">
         {/* Use Cases Grid */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
           <h2 className="text-2xl font-bold text-dark-900 mb-8">

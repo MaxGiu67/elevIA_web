@@ -57,7 +57,7 @@ export function Features() {
       <div className="container-main">
         <div className="text-center mb-12">
           <p className="text-gray-400 uppercase tracking-wider text-sm mb-2">PERCHÉ SCEGLIERE</p>
-          <h2 id="features-title" className="text-3xl md:text-4xl font-bold text-white">elevIA</h2>
+          <h2 id="features-title" className="text-3xl md:text-4xl font-bold text-white">elev<span className="text-secondary-500">IA</span></h2>
         </div>
 
         <div
@@ -82,7 +82,7 @@ export function Features() {
         </div>
 
         <p className="text-center text-gray-400 mt-12 max-w-2xl mx-auto">
-          elevIA è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete e misurabili.
+          elev<span className="text-secondary-500">IA</span> è il framework AI che trasforma i problemi aziendali più comuni in soluzioni concrete e misurabili.
         </p>
       </div>
       <WaveBottom />

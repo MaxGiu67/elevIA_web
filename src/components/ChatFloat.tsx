@@ -272,7 +272,7 @@ export function ChatFloat() {
     <div
       className="chat-wrapper fixed z-50
         bottom-4 left-4 right-4
-        md:bottom-[15%] md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[min(600px,90vw)]"
+        md:bottom-6 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[min(600px,90vw)]"
       role="search"
       aria-label="Chat con elevIA AI"
     >

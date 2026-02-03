@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Users, Cog, GitBranch, UserCheck } from 'lucide-react'
+import { ArrowRight, BookOpen, Users, Cog, GitBranch, UserCheck, MessageCircle, BarChart2 } from 'lucide-react'
 import { WaveTop, WaveBottom } from './Wave'
 import { areaList } from '@/content/areas'
 import { useCases, type UseCaseId } from '@/content/use-cases'
@@ -17,6 +17,8 @@ const iconMap: Record<string, React.ReactNode> = {
   'cog': <Cog className="w-8 h-8 text-primary-500" />,
   'git-branch': <GitBranch className="w-8 h-8 text-primary-500" />,
   'user-check': <UserCheck className="w-8 h-8 text-secondary-500" />,
+  'message-circle': <MessageCircle className="w-8 h-8 text-secondary-500" />,
+  'bar-chart-2': <BarChart2 className="w-8 h-8 text-primary-500" />,
 }
 
 export function UseCases() {
