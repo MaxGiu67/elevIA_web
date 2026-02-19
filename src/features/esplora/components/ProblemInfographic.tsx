@@ -30,7 +30,7 @@ export function ProblemInfographic() {
         {data.stat && (
           <div className="flex-1 min-w-0">
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="text-gray-700 leading-relaxed mb-4 line-clamp-4">
                 {data.stat.text}
               </p>
               <div className="flex items-center gap-2 text-sm text-gray-500">
