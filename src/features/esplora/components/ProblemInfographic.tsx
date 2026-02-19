@@ -6,18 +6,62 @@
  * in PersonalizedEsplora. Self-hides when data is null.
  *
  * Supports async loading: shows skeleton while imageUrl is null,
- * then fades in the image when it arrives.
+ * then fades in the image when it arrives via polling.
  */
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Loader2 } from 'lucide-react'
 import { useInfographicStore } from '../stores/infographicStore'
+import { API_URL } from '@/config/api'
+
+const POLL_INTERVAL_MS = 3000
+const POLL_TIMEOUT_MS = 90000
 
 export function ProblemInfographic() {
   const data = useInfographicStore((s) => s.data)
+  const setImageUrl = useInfographicStore((s) => s.setImageUrl)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const pollingRef = useRef(false)
 
-  if (!data || (!data.stat && !data.imageUrl)) return null
+  // Poll for image when sessionId is present but imageUrl is not
+  useEffect(() => {
+    if (!data?.sessionId || data.imageUrl || pollingRef.current) return
+
+    pollingRef.current = true
+    const startTime = Date.now()
+    let stopped = false
+
+    const poll = async () => {
+      while (!stopped && Date.now() - startTime < POLL_TIMEOUT_MS) {
+        try {
+          const res = await fetch(
+            `${API_URL}/api/infographic-image?session_id=${encodeURIComponent(data.sessionId!)}`,
+          )
+          if (res.ok) {
+            const json = await res.json()
+            if (json.status === 'ready' && json.imageUrl) {
+              setImageUrl(json.imageUrl)
+              break
+            }
+          }
+        } catch {
+          // network error — keep polling
+        }
+        // Wait before next poll
+        await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS))
+      }
+      pollingRef.current = false
+    }
+
+    poll()
+
+    return () => {
+      stopped = true
+      pollingRef.current = false
+    }
+  }, [data?.sessionId, data?.imageUrl, setImageUrl])
+
+  if (!data || (!data.stat && !data.imageUrl && !data.sessionId)) return null
 
   return (
     <section className="bg-gray-50 rounded-2xl p-6 md:p-10">
@@ -63,14 +107,14 @@ export function ProblemInfographic() {
               }`}
               onLoad={() => setImageLoaded(true)}
             />
-          ) : (
+          ) : data.sessionId ? (
             <div className="w-full aspect-[16/10] rounded-xl border border-gray-200 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 flex flex-col items-center justify-center gap-3 animate-pulse">
               <Loader2 className="h-8 w-8 text-primary-500/60 animate-spin" />
               <p className="text-sm text-gray-400 font-medium">
                 Generazione infografica AI in corso...
               </p>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </section>

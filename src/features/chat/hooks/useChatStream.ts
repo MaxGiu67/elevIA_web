@@ -41,6 +41,7 @@ export interface ChatSource {
 export interface ProblemInfographicData {
   stat: { text: string; source: string; url: string } | null
   imageUrl: string | null
+  sessionId: string | null
   problemSummary: string
 }
 
