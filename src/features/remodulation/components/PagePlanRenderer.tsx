@@ -14,15 +14,19 @@ import {
   BlockVisibility,
   useReducedMotion,
 } from '../stores/pagePlanStore'
+import { blockVariants } from '../animations/blockTransitions'
 
 // Import landing page components
 import { Hero } from '@/components/Hero'
 import {
   Problems,
   UseCases,
-  Features,
-  Stats,
+  WhyUs,
   CTASection,
+  Proposal,
+  HowItWorks,
+  BeforeAfter,
+  FAQ,
 } from '@/features/landing/components'
 
 interface BlockConfig {
@@ -40,44 +44,18 @@ interface BlockProps {
 // Map block types to components
 const BLOCK_COMPONENTS: Record<BlockType, BlockConfig> = {
   hero: { component: Hero as React.ComponentType<BlockProps>, id: 'hero' },
-  problems: { component: Problems as React.ComponentType<BlockProps>, id: 'problems' },
-  use_cases: { component: UseCases as React.ComponentType<BlockProps>, id: 'use-cases' },
-  features: { component: Features as React.ComponentType<BlockProps>, id: 'features' },
-  stats: { component: Stats as React.ComponentType<BlockProps>, id: 'stats' },
+  problem_story: { component: Problems as React.ComponentType<BlockProps>, id: 'problems' },
+  proposal: { component: Proposal as React.ComponentType<BlockProps>, id: 'proposal' },
+  use_cases: { component: UseCases as React.ComponentType<BlockProps>, id: 'services' },
+  how_it_works: { component: HowItWorks as React.ComponentType<BlockProps>, id: 'how-it-works' },
+  why_us: { component: WhyUs as React.ComponentType<BlockProps>, id: 'why-us' },
+  before_after: { component: BeforeAfter as React.ComponentType<BlockProps>, id: 'before-after' },
+  faq: { component: FAQ as React.ComponentType<BlockProps>, id: 'faq' },
   cta: { component: CTASection as React.ComponentType<BlockProps>, id: 'contact' },
   area_highlight: { component: AreaHighlight as React.ComponentType<BlockProps>, id: 'area-highlight' },
   use_case_detail: { component: UseCaseDetail as React.ComponentType<BlockProps>, id: 'use-case-detail' },
 }
 
-// Animation variants
-const blockVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-  },
-  highlighted: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.3)',
-  },
-  minimized: {
-    opacity: 0.7,
-    y: 0,
-    scale: 0.98,
-  },
-  exit: {
-    opacity: 0,
-    y: -20,
-    scale: 0.95,
-  },
-}
 
 interface PagePlanRendererProps {
   className?: string
@@ -115,6 +93,7 @@ export function PagePlanRenderer({ className = '' }: PagePlanRendererProps) {
   // Scroll to target block after remodulation
   useEffect(() => {
     if (currentPlan?.scroll_to && !isTransitioning) {
+      if (!(currentPlan.scroll_to in BLOCK_COMPONENTS)) return
       const config = BLOCK_COMPONENTS[currentPlan.scroll_to as BlockType]
       if (config) {
         const element = document.getElementById(config.id)

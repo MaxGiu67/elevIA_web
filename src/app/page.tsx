@@ -9,8 +9,9 @@ import { PagePlanRenderer } from '@/features/remodulation/components/PagePlanRen
  * - Footer (in root layout)
  * - ChatFloat (in root layout)
  *
- * Content blocks (Hero, UseCases, Stats, Problems, Features, CTA) are rendered
- * by PagePlanRenderer and can be reordered during Page Remodulation based on user intent.
+ * Content blocks (Hero, Problems, Proposal, UseCases, HowItWorks, WhyUs,
+ * BeforeAfter, FAQ, CTA) are rendered by PagePlanRenderer and can be
+ * reordered during Page Remodulation based on user intent.
  */
 export default function Home() {
   return <PagePlanRenderer />

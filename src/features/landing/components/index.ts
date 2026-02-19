@@ -6,7 +6,10 @@
 
 export { WaveTop, WaveBottom } from './Wave'
 export { UseCases } from './UseCases'
-export { Stats } from './Stats'
 export { Problems } from './Problems'
-export { Features } from './Features'
+export { WhyUs } from './WhyUs'
 export { CTASection } from './CTASection'
+export { Proposal } from './Proposal'
+export { HowItWorks } from './HowItWorks'
+export { BeforeAfter } from './BeforeAfter'
+export { FAQ } from './FAQ'

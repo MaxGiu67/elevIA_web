@@ -15,6 +15,7 @@ import {
 } from '@/features/blocks/components'
 import { WaveBottom } from '@/features/landing/components'
 import { WorkflowBlock } from './WorkflowBlock'
+import { ProblemInfographic } from './ProblemInfographic'
 import { useCases, type UseCaseId } from '@/content/use-cases'
 import type { SolutionPlan } from '../stores/solutionPlanStore'
 import {
@@ -114,6 +115,9 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
       {/* Content Blocks — white bg sits above wave (z-20 > z-10) */}
       <div className="relative z-20 bg-white mt-[90px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 space-y-16">
+        {/* Problem Infographic (AI-generated, self-hides if no data) */}
+        <ProblemInfographic />
+
         {/* Problem */}
         <section>
           <ProblemBlock

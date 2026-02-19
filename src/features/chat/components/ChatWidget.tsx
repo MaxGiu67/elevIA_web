@@ -12,7 +12,7 @@ import { ChatButton } from './ChatButton'
 import { ChatWindow } from './ChatWindow'
 import { useChatStore } from '../stores/chatStore'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
+import { API_URL } from '@/config/api'
 
 export function ChatWidget() {
   const {

@@ -7,10 +7,13 @@ import { create } from 'zustand'
 
 export type BlockType =
   | 'hero'
-  | 'problems'
+  | 'problem_story'
+  | 'proposal'
   | 'use_cases'
-  | 'features'
-  | 'stats'
+  | 'how_it_works'
+  | 'why_us'
+  | 'before_after'
+  | 'faq'
   | 'cta'
   | 'area_highlight'
   | 'use_case_detail'
@@ -62,16 +65,19 @@ interface PagePlanState {
   shouldShowBlock: (type: BlockType) => boolean
 }
 
-// Default page plan
+// Default page plan — 9 sezioni landing P2C
 const DEFAULT_PLAN: PagePlan = {
   variant_id: 'default',
   blocks: [
     { type: 'hero', priority: 1, visibility: 'visible' },
-    { type: 'use_cases', priority: 2, visibility: 'visible' },
-    { type: 'stats', priority: 3, visibility: 'visible' },
-    { type: 'problems', priority: 4, visibility: 'visible' },
-    { type: 'features', priority: 5, visibility: 'visible' },
-    { type: 'cta', priority: 6, visibility: 'visible' },
+    { type: 'problem_story', priority: 2, visibility: 'visible' },
+    { type: 'proposal', priority: 3, visibility: 'visible' },
+    { type: 'use_cases', priority: 4, visibility: 'visible' },
+    { type: 'how_it_works', priority: 5, visibility: 'visible' },
+    { type: 'why_us', priority: 6, visibility: 'visible' },
+    { type: 'before_after', priority: 7, visibility: 'visible' },
+    { type: 'faq', priority: 8, visibility: 'visible' },
+    { type: 'cta', priority: 9, visibility: 'visible' },
   ],
   highlight_areas: [],
   highlight_use_cases: [],

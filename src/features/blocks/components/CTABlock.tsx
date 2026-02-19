@@ -13,7 +13,7 @@ interface CTABlockProps {
 export function CTABlock({ text, urgency = 'medium', href = '#contact', className = '' }: CTABlockProps) {
   const urgencyStyles = {
     low: 'bg-gray-100 hover:bg-gray-200 text-gray-900',
-    medium: 'bg-primary-500 hover:bg-primary-600 text-white',
+    medium: 'bg-secondary-500 hover:bg-secondary-600 text-white',
     high: 'bg-secondary-500 hover:bg-secondary-600 text-white',
   }
 

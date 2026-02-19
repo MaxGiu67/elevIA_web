@@ -14,7 +14,7 @@ import { useState, useCallback, useId } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
+import { API_URL } from '@/config/api'
 
 interface LeadFormData {
   name: string

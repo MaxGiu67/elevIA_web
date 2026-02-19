@@ -42,7 +42,7 @@ export function SolutionBlock({ overview, steps, example, className = '' }: Solu
                 <p className="text-sm text-gray-600">{step.description}</p>
               </div>
               {index < steps.length - 1 && (
-                <ArrowRight className="w-5 h-5 text-gray-300 hidden md:block" />
+                <ArrowRight className="w-5 h-5 text-secondary-400 hidden md:block" />
               )}
             </div>
           ))}

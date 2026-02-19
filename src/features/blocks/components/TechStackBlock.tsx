@@ -35,7 +35,7 @@ export function TechStackBlock({ stack, integrations, className = '' }: TechStac
         {/* Integrations */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Link2 className="w-5 h-5 text-primary-400" />
+            <Link2 className="w-5 h-5 text-secondary-400" />
             <h4 className="text-sm font-medium text-gray-400 uppercase tracking-wide">Integrazioni</h4>
           </div>
           <div className="flex flex-wrap gap-2">

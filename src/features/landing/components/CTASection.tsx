@@ -1,45 +1,75 @@
 'use client'
 
 import Link from 'next/link'
+import { Mail, Phone, Linkedin } from 'lucide-react'
 
-/**
- * CTA (Call to Action) section for lead generation.
- * Provides contact options for potential customers.
- */
+interface CTASectionProps {
+  isHighlighted?: boolean
+  isMinimized?: boolean
+}
 
-export function CTASection() {
+export function CTASection({ isMinimized }: CTASectionProps) {
+  if (isMinimized) {
+    return (
+      <section id="contact" className="py-12 bg-primary-500 text-white">
+        <div className="container-main text-center">
+          <h2 className="text-2xl font-bold">Scopri cosa puo' fare l'AI per la tua azienda</h2>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section
       id="contact"
-      className="pt-40 pb-20 bg-white"
+      className="py-20 lg:py-28 bg-primary-500 text-white"
       aria-labelledby="cta-title"
     >
       <div className="container-main">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 id="cta-title" className="text-3xl md:text-4xl font-bold text-dark-900 mb-4">
-            Pronto a integrare l'AI nella tua azienda?
+          <h2 id="cta-title" className="text-3xl md:text-4xl font-bold mb-4">
+            Scopri cosa puo' fare l'AI per la tua azienda
           </h2>
-          <p className="text-gray-600 mb-8">
-            Contattaci per un assessment gratuito. Identificheremo insieme i problemi da risolvere e gli Use Case più adatti.
+          <p className="text-white/90 mb-8 text-lg">
+            Assessment gratuito: mappiamo i tuoi sistemi e ti mostriamo dove l'AI ha impatto
+            reale. Nessun impegno.
           </p>
-          <div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            role="group"
-            aria-label="Opzioni di contatto"
+
+          <Link
+            href="mailto:info@nexadata.it?subject=Assessment%20AI%20Gratuito"
+            className="inline-block bg-white text-primary-500 font-bold py-4 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors mb-4"
           >
-            <Link
-              href="mailto:info@nexadata.it"
-              className="btn-primary"
-              aria-label="Richiedi un assessment gratuito via email"
-            >
-              Richiedi Assessment
-            </Link>
+            PRENOTA L'ASSESSMENT GRATUITO
+          </Link>
+
+          <p className="text-white/70 text-sm mb-10">
+            Scegli la data che preferisci.
+          </p>
+
+          {/* Contact Alternatives */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 border-t border-white/20">
             <Link
               href="tel:+390212345678"
-              className="btn-secondary"
-              aria-label="Chiamaci per informazioni"
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
             >
-              Chiamaci
+              <Phone className="w-4 h-4" />
+              +39 02 1234567
+            </Link>
+            <Link
+              href="mailto:info@nexadata.it"
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
+            >
+              <Mail className="w-4 h-4" />
+              info@nexadata.it
+            </Link>
+            <Link
+              href="https://linkedin.com/company/nexadata"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
+            >
+              <Linkedin className="w-4 h-4" />
+              LinkedIn
             </Link>
           </div>
         </div>

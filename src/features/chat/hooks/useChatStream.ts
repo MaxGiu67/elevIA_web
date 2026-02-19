@@ -7,7 +7,7 @@
 
 import { useCallback, useRef, useState } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
+import { API_URL } from '@/config/api'
 
 const MAX_RETRIES = 2
 const RETRY_BASE_DELAY_MS = 1500
@@ -57,12 +57,19 @@ export interface PagePlan {
   metadata?: Record<string, unknown>
 }
 
+export interface ProblemInfographicData {
+  stat: { text: string; source: string; url: string } | null
+  imageUrl: string | null
+  problemSummary: string
+}
+
 interface StreamCallbacks {
   onChunk: (content: string) => void
   onSources?: (sources: ChatSource[]) => void
   onPagePlan?: (plan: PagePlan) => void
   onRecommendedUseCases?: (useCaseIds: string[]) => void
   onSolutionPlan?: (plan: unknown) => void
+  onProblemInfographic?: (data: ProblemInfographicData) => void
   onNextInput?: (suggestion: string) => void
   onError: (error: string) => void
   onComplete: () => void
@@ -202,6 +209,10 @@ export function useChatStream(): UseChatStreamReturn {
                   callbacks.onSolutionPlan?.(data.plan)
                   break
 
+                case 'problem_infographic':
+                  callbacks.onProblemInfographic?.(data.data)
+                  break
+
                 case 'next_input':
                   callbacks.onNextInput?.(data.suggestion || '')
                   break
@@ -231,6 +242,8 @@ export function useChatStream(): UseChatStreamReturn {
             callbacks.onRecommendedUseCases?.(data.use_cases || [])
           } else if (data.type === 'solution_plan') {
             callbacks.onSolutionPlan?.(data.plan)
+          } else if (data.type === 'problem_infographic') {
+            callbacks.onProblemInfographic?.(data.data)
           } else if (data.type === 'next_input') {
             callbacks.onNextInput?.(data.suggestion || '')
           }

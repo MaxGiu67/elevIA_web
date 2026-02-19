@@ -7,9 +7,11 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useChatStream } from '@/features/chat/hooks/useChatStream'
 import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
+import { useInfographicStore } from '@/features/esplora/stores/infographicStore'
 import { usePagePlanStore, type PagePlan } from '@/features/remodulation/stores/pagePlanStore'
+import type { ProblemInfographicData } from '@/features/chat/hooks/useChatStream'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://elevia-api-production.up.railway.app'
+import { API_URL } from '@/config/api'
 
 const suggestions = [
   'Ho un problema in azienda',
@@ -149,6 +151,8 @@ export function ChatFloat() {
   const router = useRouter()
   const setPlan = useSolutionPlanStore((s) => s.setPlan)
   const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
+  const setInfographic = useInfographicStore((s) => s.setData)
+  const clearInfographic = useInfographicStore((s) => s.clearData)
   const setPagePlan = usePagePlanStore((s) => s.setPlan)
 
   // Keyboard-aware positioning for mobile (visualViewport API)
@@ -188,9 +192,10 @@ export function ChatFloat() {
       setRecommendedUseCases([])
     }
     setPlaceholder(DEFAULT_PLACEHOLDER)
-    // Clear solution plan when navigating away from /esplora
+    // Clear solution plan and infographic when navigating away from /esplora
     if (pathname !== '/esplora') {
       clearPlan()
+      clearInfographic()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
@@ -219,6 +224,9 @@ export function ChatFloat() {
       onSolutionPlan: (plan) => {
         setPlan(plan as SolutionPlan)
       },
+      onProblemInfographic: (data) => {
+        setInfographic(data as ProblemInfographicData)
+      },
       onPagePlan: (plan) => {
         setPagePlan(plan as PagePlan)
       },
@@ -232,7 +240,7 @@ export function ChatFloat() {
         // streaming done
       },
     })
-  }, [query, isStreaming, sendMessage, setPlan, setPagePlan])
+  }, [query, isStreaming, sendMessage, setPlan, setInfographic, setPagePlan])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
