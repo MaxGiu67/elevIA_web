@@ -6,9 +6,9 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 
 const navigation = [
   { name: 'HOME', href: '/' },
-  { name: 'USE CASE', href: '#services' },
-  { name: 'PROBLEMI', href: '#problems' },
-  { name: 'PERCHÉ NOI', href: '#about' },
+  { name: 'SOLUZIONI', href: '/#services' },
+  { name: 'COME FUNZIONA', href: '/#how-it-works' },
+  { name: 'PERCHÉ NOI', href: '/#why-us' },
 ]
 
 export function Header() {
@@ -20,7 +20,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold">
-            <span className="text-dark-900">elev</span>
+            <span className="text-secondary-500">elev</span>
             <span className="text-primary-500">IA</span>
           </span>
         </Link>
@@ -31,13 +31,13 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-gray-700 hover:text-primary-500 text-sm font-medium transition-colors"
+              className="text-gray-700 hover:text-secondary-500 text-sm font-medium transition-colors"
             >
               {item.name}
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/#contact"
             className="btn-primary text-sm py-2 px-5 flex items-center gap-1"
           >
             ASSESSMENT
@@ -75,7 +75,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/#contact"
               className="btn-primary w-full text-center"
               onClick={() => setMobileMenuOpen(false)}
             >

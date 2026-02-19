@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import {
   ProblemBlock,
   SolutionBlock,
@@ -8,10 +9,10 @@ import {
   ComparisonBlock,
   RequirementsBlock,
   TechStackBlock,
-  CTABlock,
   RelatedBlock,
 } from '@/features/blocks/components'
 import { WaveBottom } from '@/features/landing/components'
+import { AREA_LABELS_DARK, UC_AREA_MAP } from '@/features/shared/constants/areaLabels'
 
 interface UseCase {
   id: string
@@ -78,16 +79,39 @@ interface UseCasePageProps {
 
 export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
   const { components } = useCase
+  const areaId = UC_AREA_MAP[useCase.id] || useCase.area
+  const areaInfo = AREA_LABELS_DARK[areaId]
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Dark style like landing with wave transition */}
-      <div className="relative bg-dark-900 text-white pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <div className="relative bg-dark-900 text-white pb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="max-w-3xl">
-            <span className="inline-block px-3 py-1 bg-dark-800 text-primary-500 rounded-full text-sm mb-4">
-              {useCase.effort}
-            </span>
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-1.5 text-sm text-gray-500 mb-6">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              {areaInfo && (
+                <>
+                  <Link href={`/area/${areaId}`} className="hover:text-white transition-colors">{areaInfo.label}</Link>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </>
+              )}
+              <span className="text-gray-400">{components.header.title}</span>
+            </nav>
+
+            <div className="flex items-center gap-3 mb-4">
+              {areaInfo && (
+                <span className={`px-3 py-1 rounded-full text-xs font-medium ${areaInfo.color}`}>
+                  {areaInfo.label}
+                </span>
+              )}
+              <span className="px-3 py-1 bg-dark-800 text-secondary-400 rounded-full text-xs font-medium">
+                {useCase.effort}
+              </span>
+            </div>
+
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">
               {components.header.title}
             </h1>
@@ -100,7 +124,7 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
       </div>
 
       {/* Content Blocks - white bg sits above wave (z-20 > z-10) */}
-      <div className="relative z-20 bg-white mt-20">
+      <div className="relative z-20 bg-white mt-[90px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 space-y-16">
         {/* Problem */}
         <section>
@@ -148,21 +172,31 @@ export function UseCasePage({ useCase, relatedUseCases }: UseCasePageProps) {
           />
         </section>
 
-        {/* CTA */}
-        <section>
-          <CTABlock
-            text={components.cta.text}
-            urgency={components.cta.urgency}
-            href="#contact"
-          />
-        </section>
-
         {/* Related Use Cases */}
         {relatedUseCases.length > 0 && (
           <section>
             <RelatedBlock useCases={relatedUseCases} />
           </section>
         )}
+      </div>
+
+      {/* CTA - Orange band before footer */}
+      <div className="bg-primary-500 py-16">
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            Vuoi saperne di più?
+          </h2>
+          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+            Scopri come possiamo aiutarti a trasformare la tua azienda con soluzioni AI su misura.
+          </p>
+          <Link
+            href="/#contact"
+            className="inline-flex items-center gap-2 bg-white text-primary-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Prenota l&apos;assessment gratuito
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
       </div>
       </div>
     </div>

@@ -12,110 +12,25 @@ import {
   KPIBlock,
   ComparisonBlock,
   TechStackBlock,
-  CTABlock,
 } from '@/features/blocks/components'
 import { WaveBottom } from '@/features/landing/components'
 import { WorkflowBlock } from './WorkflowBlock'
 import { useCases, type UseCaseId } from '@/content/use-cases'
 import type { SolutionPlan } from '../stores/solutionPlanStore'
-
-/** Area ID -> readable label + color */
-const AREA_LABELS: Record<string, { label: string; color: string }> = {
-  knowledge: { label: 'Knowledge', color: 'bg-blue-500/20 text-blue-300' },
-  cx: { label: 'Customer Experience', color: 'bg-orange-500/20 text-orange-300' },
-  'customer-experience': { label: 'Customer Experience', color: 'bg-orange-500/20 text-orange-300' },
-  operations: { label: 'Operations', color: 'bg-green-500/20 text-green-300' },
-  workflow: { label: 'Workflow', color: 'bg-purple-500/20 text-purple-300' },
-  hr: { label: 'HR', color: 'bg-pink-500/20 text-pink-300' },
-}
-
-/** Area card colors (light bg for content section) */
-const AREA_CARD_LABELS: Record<string, { label: string; color: string }> = {
-  knowledge: { label: 'Knowledge', color: 'bg-blue-100 text-blue-800' },
-  cx: { label: 'Customer Experience', color: 'bg-orange-100 text-orange-800' },
-  'customer-experience': { label: 'Customer Experience', color: 'bg-orange-100 text-orange-800' },
-  operations: { label: 'Operations', color: 'bg-green-100 text-green-800' },
-  workflow: { label: 'Workflow', color: 'bg-purple-100 text-purple-800' },
-  hr: { label: 'HR', color: 'bg-pink-100 text-pink-800' },
-}
-
-/** Map use case IDs to area */
-const UC_AREA_MAP: Record<string, string> = {
-  'rag-knowledge-base': 'knowledge',
-  'estrazione-dati': 'knowledge',
-  'sintesi-riunioni': 'knowledge',
-  'due-diligence': 'knowledge',
-  'chatbot-faq': 'customer-experience',
-  'classificazione-ticket': 'customer-experience',
-  'copilot-operatore': 'customer-experience',
-  'analisi-sentiment': 'customer-experience',
-  'report-automatici': 'operations',
-  'ricerca-semantica': 'operations',
-  'anomaly-detection': 'operations',
-  'predictive-maintenance': 'operations',
-  'workflow-approval': 'workflow',
-  'content-generation': 'workflow',
-  'lead-scoring': 'workflow',
-  'compliance-checker': 'workflow',
-  'screening-cv': 'hr',
-  'onboarding-assistant': 'hr',
-  'employee-self-service': 'hr',
-  'performance-review': 'hr',
-}
-
-/** Map use case IDs to display names */
-const UC_NAMES: Record<string, string> = {
-  'rag-knowledge-base': 'RAG Knowledge Base',
-  'estrazione-dati': 'Estrazione Dati',
-  'sintesi-riunioni': 'Sintesi Riunioni',
-  'due-diligence': 'Due Diligence',
-  'chatbot-faq': 'Chatbot FAQ',
-  'classificazione-ticket': 'Classificazione Ticket',
-  'copilot-operatore': 'Copilot Operatore',
-  'analisi-sentiment': 'Analisi Sentiment',
-  'report-automatici': 'Report Automatici',
-  'ricerca-semantica': 'Ricerca Semantica',
-  'anomaly-detection': 'Anomaly Detection',
-  'predictive-maintenance': 'Predictive Maintenance',
-  'workflow-approval': 'Workflow Approval',
-  'content-generation': 'Content Generation',
-  'lead-scoring': 'Lead Scoring',
-  'compliance-checker': 'Compliance Checker',
-  'screening-cv': 'Screening CV',
-  'onboarding-assistant': 'Onboarding Assistant',
-  'employee-self-service': 'Employee Self-Service',
-  'performance-review': 'Performance Review',
-}
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function getUseCaseKpis(uc: any): Array<{ value: string; label: string; icon: string }> {
-  if (uc.components?.kpi?.metrics) return uc.components.kpi.metrics
-  const kpiBlock = uc.mattoncini?.find((m: any) => m.type === 'kpi')
-  if (kpiBlock?.content?.metrics) return kpiBlock.content.metrics
-  return []
-}
-
-function getUseCaseTech(uc: any): string[] {
-  if (uc.components?.tech?.stack) return uc.components.tech.stack
-  const techBlock = uc.mattoncini?.find((m: any) => m.type === 'tech-stack')
-  if (techBlock?.content?.stack) return techBlock.content.stack
-  return []
-}
-
-function getUseCaseIntegrations(uc: any): string[] {
-  if (uc.components?.tech?.integrations) return uc.components.tech.integrations
-  const techBlock = uc.mattoncini?.find((m: any) => m.type === 'tech-stack')
-  if (techBlock?.content?.integrations) return techBlock.content.integrations
-  return []
-}
-
-function getUseCaseComparison(uc: any): { before: string[]; after: string[] } | null {
-  if (uc.components?.comparison) return uc.components.comparison
-  const block = uc.mattoncini?.find((m: any) => m.type === 'comparison')
-  if (block?.content) return block.content
-  return null
-}
-/* eslint-enable @typescript-eslint/no-explicit-any */
+import {
+  AREA_LABELS_DARK,
+  AREA_LABELS_LIGHT,
+  UC_AREA_MAP,
+  UC_NAMES,
+} from '@/features/shared/constants/areaLabels'
+import {
+  getUseCaseKpis,
+  getUseCaseTech,
+  getUseCaseIntegrations,
+  getUseCaseComparison,
+  getUseCaseEffort,
+  type UseCaseData,
+} from '@/features/shared/utils/useCaseExtractors'
 
 interface PersonalizedEsploraProps {
   plan: SolutionPlan
@@ -124,14 +39,14 @@ interface PersonalizedEsploraProps {
 export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
   // Collect unique areas from recommended use cases for hero badges
   const areas = Array.from(new Set(plan.useCases.map(uc => UC_AREA_MAP[uc.id]).filter(Boolean)))
-  const areaBadges = areas.map(a => AREA_LABELS[a] || { label: a, color: 'bg-gray-500/20 text-gray-300' })
+  const areaBadges = areas.map(a => AREA_LABELS_DARK[a] || { label: a, color: 'bg-gray-500/20 text-gray-300' })
 
   // Merge tech stack: plan's custom + catalog's for each use case
   const catalogTech = new Set<string>()
   const catalogIntegrations = new Set<string>()
   for (const planUc of plan.useCases) {
     if (planUc.id in useCases) {
-      const uc = useCases[planUc.id as UseCaseId]
+      const uc = useCases[planUc.id as UseCaseId] as UseCaseData
       getUseCaseTech(uc).forEach(t => catalogTech.add(t))
       getUseCaseIntegrations(uc).forEach(t => catalogIntegrations.add(t))
     }
@@ -149,7 +64,7 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
     ? plan.kpis
     : plan.useCases.flatMap(planUc => {
         if (planUc.id in useCases) {
-          return getUseCaseKpis(useCases[planUc.id as UseCaseId])
+          return getUseCaseKpis(useCases[planUc.id as UseCaseId] as UseCaseData)
         }
         return []
       }).slice(0, 4)
@@ -159,7 +74,7 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
   if (!mergedComparison || mergedComparison.before.length === 0) {
     for (const planUc of plan.useCases) {
       if (planUc.id in useCases) {
-        const comp = getUseCaseComparison(useCases[planUc.id as UseCaseId])
+        const comp = getUseCaseComparison(useCases[planUc.id as UseCaseId] as UseCaseData)
         if (comp && comp.before.length > 0) {
           mergedComparison = comp
           break
@@ -197,7 +112,7 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
       </div>
 
       {/* Content Blocks — white bg sits above wave (z-20 > z-10) */}
-      <div className="relative z-20 bg-white mt-20">
+      <div className="relative z-20 bg-white mt-[90px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 space-y-16">
         {/* Problem */}
         <section>
@@ -223,10 +138,10 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
           <div className="grid gap-6 md:grid-cols-2">
             {plan.useCases.map((planUc) => {
               const areaId = UC_AREA_MAP[planUc.id] || ''
-              const areaInfo = AREA_CARD_LABELS[areaId] || { label: '', color: 'bg-gray-100 text-gray-800' }
+              const areaInfo = AREA_LABELS_LIGHT[areaId] || { label: '', color: 'bg-gray-100 text-gray-800' }
               const displayName = UC_NAMES[planUc.id] || planUc.id
               const catalogUc = planUc.id in useCases ? useCases[planUc.id as UseCaseId] : null
-              const effort = catalogUc ? ((catalogUc as any).effort || '15 giorni') : '15 giorni'
+              const effort = catalogUc ? getUseCaseEffort(catalogUc as UseCaseData) : '15 giorni'
 
               return (
                 <div
@@ -254,7 +169,7 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
                   <div className="px-6 pb-5">
                     <Link
                       href={`/use-case/${planUc.id}`}
-                      className="btn-primary w-full text-center text-sm"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-secondary-500 text-white font-medium rounded-md hover:bg-secondary-600 transition-colors w-full text-center text-sm"
                     >
                       Approfondisci
                     </Link>
@@ -292,14 +207,24 @@ export function PersonalizedEsplora({ plan }: PersonalizedEsploraProps) {
           </section>
         )}
 
-        {/* CTA */}
-        <section>
-          <CTABlock
-            text="Richiedi Assessment Gratuito"
-            urgency="medium"
+      </div>
+
+      {/* CTA - Orange band before footer */}
+      <div className="bg-primary-500 py-16">
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            Vuoi saperne di più?
+          </h2>
+          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+            Scopri come possiamo aiutarti a trasformare la tua azienda con soluzioni AI su misura.
+          </p>
+          <Link
             href="/#contact"
-          />
-        </section>
+            className="inline-flex items-center gap-2 bg-white text-primary-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Richiedi Assessment Gratuito
+          </Link>
+        </div>
       </div>
       </div>
     </div>

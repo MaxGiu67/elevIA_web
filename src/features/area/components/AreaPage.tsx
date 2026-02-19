@@ -29,11 +29,11 @@ interface AreaPageProps {
 const iconMap: Record<string, React.ReactNode> = {
   'book-open': <BookOpen className="w-8 h-8 text-secondary-500" />,
   'users': <Users className="w-8 h-8 text-secondary-500" />,
-  'cog': <Cog className="w-8 h-8 text-primary-500" />,
-  'git-branch': <GitBranch className="w-8 h-8 text-primary-500" />,
+  'cog': <Cog className="w-8 h-8 text-secondary-500" />,
+  'git-branch': <GitBranch className="w-8 h-8 text-secondary-500" />,
   'user-check': <UserCheck className="w-8 h-8 text-secondary-500" />,
   'message-circle': <MessageCircle className="w-8 h-8 text-secondary-500" />,
-  'bar-chart-2': <BarChart2 className="w-8 h-8 text-primary-500" />,
+  'bar-chart-2': <BarChart2 className="w-8 h-8 text-secondary-500" />,
 }
 
 /** Human-readable labels for stat keys */
@@ -62,7 +62,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
     <div className="min-h-screen bg-white">
       {/* Hero Section - Dark style like landing */}
       <div className="relative bg-dark-900 text-white pb-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="flex items-start gap-6">
             <div className="p-4 bg-dark-800 rounded-2xl">
               {iconMap[area.icon] || iconMap['book-open']}
@@ -83,8 +83,8 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
           {/* Stats - Dynamic KPIs from area data */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             {statEntries.map(([key, value]) => (
-              <div key={key} className="bg-dark-800 rounded-xl p-6">
-                <div className="text-2xl font-bold text-primary-500">{value}</div>
+              <div key={key} className="bg-dark-800 rounded-xl p-6 border-t-2 border-t-secondary-500">
+                <div className="text-2xl font-bold text-secondary-500">{value}</div>
                 <div className="text-gray-500 text-sm mt-1">
                   {statLabels[key] || key}
                 </div>
@@ -96,7 +96,7 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
       </div>
 
       {/* Content sections - white bg sits above wave (z-20 > z-10) */}
-      <div className="relative z-20 bg-white mt-[120px]">
+      <div className="relative z-20 bg-white mt-[90px]">
         {/* Use Cases Grid */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
           <h2 className="text-2xl font-bold text-dark-900 mb-8">
@@ -131,19 +131,19 @@ export function AreaPage({ area, useCases }: AreaPageProps) {
         </div>
 
         {/* CTA */}
-        <div className="bg-gray-50 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold text-dark-900 mb-4">
+        <div className="bg-primary-500 py-16 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Vuoi saperne di più?
             </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-white/80 mb-8 max-w-2xl mx-auto">
               Scopri come possiamo aiutarti a trasformare la tua azienda con soluzioni AI su misura.
             </p>
             <Link
               href="/#contact"
-              className="btn-primary inline-flex items-center gap-2"
+              className="inline-flex items-center gap-2 bg-white text-primary-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
             >
-              Contattaci
+              Prenota l'assessment gratuito
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
