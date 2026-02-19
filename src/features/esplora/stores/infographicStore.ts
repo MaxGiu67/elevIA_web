@@ -15,6 +15,7 @@ export interface ProblemInfographicData {
 interface InfographicState {
   data: ProblemInfographicData | null
   setData: (data: ProblemInfographicData) => void
+  setImageUrl: (url: string) => void
   clearData: () => void
 }
 
@@ -23,6 +24,13 @@ export const useInfographicStore = create<InfographicState>((set) => ({
 
   setData: (data: ProblemInfographicData) => {
     set({ data })
+  },
+
+  setImageUrl: (url: string) => {
+    set((state) => {
+      if (!state.data) return state
+      return { data: { ...state.data, imageUrl: url } }
+    })
   },
 
   clearData: () => {

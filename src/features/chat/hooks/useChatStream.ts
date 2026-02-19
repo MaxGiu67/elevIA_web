@@ -50,6 +50,7 @@ interface StreamCallbacks {
   onRecommendedUseCases?: (useCaseIds: string[]) => void
   onSolutionPlan?: (plan: unknown) => void
   onProblemInfographic?: (data: ProblemInfographicData) => void
+  onProblemInfographicImage?: (imageUrl: string) => void
   onNextInput?: (suggestion: string) => void
   onError: (error: string) => void
   onComplete: () => void
@@ -189,6 +190,10 @@ export function useChatStream(): UseChatStreamReturn {
                   callbacks.onProblemInfographic?.(data.data)
                   break
 
+                case 'problem_infographic_image':
+                  callbacks.onProblemInfographicImage?.(data.imageUrl)
+                  break
+
                 case 'next_input':
                   callbacks.onNextInput?.(data.suggestion || '')
                   break
@@ -218,6 +223,8 @@ export function useChatStream(): UseChatStreamReturn {
             callbacks.onSolutionPlan?.(data.plan)
           } else if (data.type === 'problem_infographic') {
             callbacks.onProblemInfographic?.(data.data)
+          } else if (data.type === 'problem_infographic_image') {
+            callbacks.onProblemInfographicImage?.(data.imageUrl)
           } else if (data.type === 'next_input') {
             callbacks.onNextInput?.(data.suggestion || '')
           }

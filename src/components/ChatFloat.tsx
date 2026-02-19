@@ -151,6 +151,7 @@ export function ChatFloat() {
   const setPlan = useSolutionPlanStore((s) => s.setPlan)
   const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
   const setInfographic = useInfographicStore((s) => s.setData)
+  const setInfographicImage = useInfographicStore((s) => s.setImageUrl)
   const clearInfographic = useInfographicStore((s) => s.clearData)
 
   // Keyboard-aware positioning for mobile (visualViewport API)
@@ -225,6 +226,9 @@ export function ChatFloat() {
       onProblemInfographic: (data) => {
         setInfographic(data as ProblemInfographicData)
       },
+      onProblemInfographicImage: (imageUrl) => {
+        setInfographicImage(imageUrl)
+      },
       onNextInput: (suggestion) => {
         if (suggestion) setPlaceholder(suggestion)
       },
@@ -235,7 +239,7 @@ export function ChatFloat() {
         // streaming done
       },
     })
-  }, [query, isStreaming, sendMessage, setPlan, setInfographic])
+  }, [query, isStreaming, sendMessage, setPlan, setInfographic, setInfographicImage])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
