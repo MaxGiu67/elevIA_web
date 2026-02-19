@@ -8,7 +8,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useChatStream } from '@/features/chat/hooks/useChatStream'
 import { useSolutionPlanStore, type SolutionPlan } from '@/features/esplora/stores/solutionPlanStore'
 import { useInfographicStore } from '@/features/esplora/stores/infographicStore'
-import { usePagePlanStore, type PagePlan } from '@/features/remodulation/stores/pagePlanStore'
 import type { ProblemInfographicData } from '@/features/chat/hooks/useChatStream'
 
 import { API_URL } from '@/config/api'
@@ -153,7 +152,6 @@ export function ChatFloat() {
   const clearPlan = useSolutionPlanStore((s) => s.clearPlan)
   const setInfographic = useInfographicStore((s) => s.setData)
   const clearInfographic = useInfographicStore((s) => s.clearData)
-  const setPagePlan = usePagePlanStore((s) => s.setPlan)
 
   // Keyboard-aware positioning for mobile (visualViewport API)
   useEffect(() => {
@@ -227,9 +225,6 @@ export function ChatFloat() {
       onProblemInfographic: (data) => {
         setInfographic(data as ProblemInfographicData)
       },
-      onPagePlan: (plan) => {
-        setPagePlan(plan as PagePlan)
-      },
       onNextInput: (suggestion) => {
         if (suggestion) setPlaceholder(suggestion)
       },
@@ -240,7 +235,7 @@ export function ChatFloat() {
         // streaming done
       },
     })
-  }, [query, isStreaming, sendMessage, setPlan, setInfographic, setPagePlan])
+  }, [query, isStreaming, sendMessage, setPlan, setInfographic])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {

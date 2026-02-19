@@ -38,25 +38,6 @@ export interface ChatSource {
   source: string
 }
 
-export interface PagePlanBlock {
-  type: string
-  priority: number
-  visibility: string     // 'visible' | 'highlighted' | 'minimized' | 'hidden'
-  content_ref?: string
-  props?: Record<string, unknown>
-  animation?: string
-}
-
-export interface PagePlan {
-  variant_id: string
-  blocks: PagePlanBlock[]
-  highlight_areas: string[]
-  highlight_use_cases: string[]
-  scroll_to?: string
-  animation_duration: number
-  metadata?: Record<string, unknown>
-}
-
 export interface ProblemInfographicData {
   stat: { text: string; source: string; url: string } | null
   imageUrl: string | null
@@ -66,7 +47,6 @@ export interface ProblemInfographicData {
 interface StreamCallbacks {
   onChunk: (content: string) => void
   onSources?: (sources: ChatSource[]) => void
-  onPagePlan?: (plan: PagePlan) => void
   onRecommendedUseCases?: (useCaseIds: string[]) => void
   onSolutionPlan?: (plan: unknown) => void
   onProblemInfographic?: (data: ProblemInfographicData) => void
@@ -197,10 +177,6 @@ export function useChatStream(): UseChatStreamReturn {
                   callbacks.onSources?.(data.sources || [])
                   break
 
-                case 'page_plan':
-                  callbacks.onPagePlan?.(data.plan)
-                  break
-
                 case 'recommended_use_cases':
                   callbacks.onRecommendedUseCases?.(data.use_cases || [])
                   break
@@ -236,8 +212,6 @@ export function useChatStream(): UseChatStreamReturn {
             callbacks.onChunk(data.content || '')
           } else if (data.type === 'sources') {
             callbacks.onSources?.(data.sources || [])
-          } else if (data.type === 'page_plan') {
-            callbacks.onPagePlan?.(data.plan)
           } else if (data.type === 'recommended_use_cases') {
             callbacks.onRecommendedUseCases?.(data.use_cases || [])
           } else if (data.type === 'solution_plan') {
