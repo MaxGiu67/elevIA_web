@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ProjectModel } from './ProjectModel'
 import { ProjectPhases } from './ProjectPhases'
 import { Configurations } from './Configurations'
@@ -8,6 +10,7 @@ import { Testimonials } from './Testimonials'
 import { UseCases } from '@/features/landing/components/UseCases'
 import { WhyUs } from '@/features/landing/components/WhyUs'
 import { FAQ } from '@/features/landing/components/FAQ'
+import { AssessmentForm } from '@/features/lead/components'
 import { Mail, Linkedin } from 'lucide-react'
 
 const progettoFaqItems = [
@@ -76,6 +79,8 @@ const progettoWhyUsRows = [
 ]
 
 export function ProgettoPage() {
+  const [showForm, setShowForm] = useState(false)
+
   return (
     <div>
       {/* Sez.1 — Hero */}
@@ -136,18 +141,39 @@ export function ProgettoPage() {
               soluzioni, ti presentiamo un piano concreto. Nessun impegno.
             </p>
 
-            <Link
-              href="mailto:elevia@nexadata.it?subject=Assessment%20AI%20Gratuito"
-              className="inline-block bg-white text-primary-600 font-bold py-4 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors mb-4"
-            >
-              PRENOTA L'ASSESSMENT GRATUITO
-            </Link>
+            {!showForm && (
+              <button
+                onClick={() => setShowForm(true)}
+                className="inline-block bg-white text-primary-600 font-bold py-4 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors mb-4"
+              >
+                PRENOTA L'ASSESSMENT GRATUITO
+              </button>
+            )}
 
-            <p className="text-white/70 text-sm mb-10">
-              Scrivici per prenotare.
-            </p>
+            <AnimatePresence>
+              {showForm && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="overflow-hidden"
+                >
+                  <p className="text-white/80 text-sm mb-6">
+                    Per preparare al meglio la call, ti chiediamo alcune informazioni rapide
+                  </p>
+                  <AssessmentForm className="text-left max-w-xl mx-auto" />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 border-t border-white/20">
+            {!showForm && (
+              <p className="text-white/70 text-sm mb-10">
+                Scrivici per prenotare.
+              </p>
+            )}
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 border-t border-white/20 mt-8">
               <Link
                 href="mailto:elevia@nexadata.it"
                 className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
