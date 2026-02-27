@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "elevIA",
+  "name_for_model": "elevia",
+  "description_for_human": "20 Use Case AI pronti all'uso per PMI e enterprise italiane.",
+  "description_for_model": "elevIA provides 20 ready-to-use AI solutions for Italian businesses, organized in 5 areas: Knowledge, Customer Experience, Operations, Workflow, HR. Each use case is delivered in 15 days with 85%+ accuracy and 99% availability. Solutions include RAG Knowledge Base, Chatbot FAQ, Report Automatici, Lead Scoring, Screening CV, and more.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://elevia.nexadata.it/llms.txt"
+  },
+  "logo_url": "https://elevia.nexadata.it/logo.png",
+  "contact_email": "elevia@nexadata.it",
+  "legal_info_url": "https://elevia.nexadata.it/progetto"
+}

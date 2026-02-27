@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation'
 import { AreaPage } from '@/features/area/components/AreaPage'
 import { areas, areaList, type AreaId } from '@/content/areas'
 import { useCases, type UseCaseId } from '@/content/use-cases'
+import { BreadcrumbJsonLd } from '@/components/JsonLd'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
 interface PageProps {
   params: { id: string }
@@ -25,19 +28,25 @@ export function generateMetadata({ params }: PageProps): Metadata {
     }
   }
 
+  const description = `${area.tagline}. ${area.description}`
+
   return {
-    title: `${area.name} - ${area.tagline} | elevIA`,
-    description: area.description,
+    title: `${area.name} AI | elevIA`,
+    description,
+    keywords: ['AI', 'intelligenza artificiale', area.name, 'elevIA', 'PMI', 'enterprise'],
+    alternates: {
+      canonical: `/area/${area.id}`,
+    },
     openGraph: {
-      title: `${area.name} | elevIA`,
-      description: area.description,
+      title: `${area.name} AI | elevIA`,
+      description,
       type: 'website',
-      url: `https://elevia.nexadata.it/area/${area.id}`,
+      url: `${baseUrl}/area/${area.id}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${area.name} | elevIA`,
-      description: area.description,
+      title: `${area.name} AI | elevIA`,
+      description,
     },
   }
 }
@@ -63,5 +72,15 @@ export default function Page({ params }: PageProps) {
     })
     .filter(Boolean) as Array<{ id: string; name: string; tagline: string; effort: string }>
 
-  return <AreaPage area={area as any} useCases={areaUseCases} />
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: baseUrl },
+          { name: area.name, url: `${baseUrl}/area/${area.id}` },
+        ]}
+      />
+      <AreaPage area={area as any} useCases={areaUseCases} />
+    </>
+  )
 }

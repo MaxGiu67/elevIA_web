@@ -1,11 +1,23 @@
 import { MetadataRoute } from 'next'
+import { areaList } from '@/content/areas'
+import { useCaseList } from '@/content/use-cases'
 
-/**
- * Sitemap configuration for elevIA.
- * Lists all public pages for search engine indexing.
- */
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
+  const areas: MetadataRoute.Sitemap = areaList.map((area) => ({
+    url: `${baseUrl}/area/${area.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const useCases: MetadataRoute.Sitemap = useCaseList.map((uc) => ({
+    url: `${baseUrl}/use-case/${uc.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }))
 
   return [
     {
@@ -15,28 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/#services`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#problems`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#about`,
+      url: `${baseUrl}/progetto`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
+    ...areas,
+    ...useCases,
   ]
 }

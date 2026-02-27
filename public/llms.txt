@@ -1,0 +1,53 @@
+# elevIA
+
+> 20 Use Case AI pronti all'uso per PMI e enterprise italiane. Delivery in 15 giorni, accuracy 85%+, disponibilità 99%.
+
+elevIA è un framework AI di Nexa Data che offre soluzioni AI standardizzate organizzate in 5 aree.
+
+## Aree e Use Case
+
+### Knowledge
+Gestione intelligente della conoscenza aziendale.
+- RAG Knowledge Base
+- Estrazione Dati
+- Sintesi Riunioni
+- Due Diligence
+
+### Customer Experience
+Migliora l'esperienza dei tuoi clienti.
+- Chatbot FAQ
+- Classificazione Ticket
+- Copilot Operatore
+- Analisi Sentiment
+
+### Operations
+Ottimizza le operazioni aziendali.
+- Report Automatici
+- Ricerca Semantica
+- Anomaly Detection
+- Predictive Maintenance
+
+### Workflow
+Automatizza i flussi di lavoro.
+- Workflow Approval
+- Content Generation
+- Lead Scoring
+- Compliance Checker
+
+### HR
+Supporto intelligente alle risorse umane.
+- Screening CV
+- Onboarding Assistant
+- Employee Self-Service
+- Performance Review
+
+## Metriche chiave
+- 20 Use Case AI pronti
+- 15 giorni tempo medio di delivery
+- 85%+ accuracy garantita
+- 99% disponibilità
+
+## Link
+- Home: https://elevia.nexadata.it
+- Progetto: https://elevia.nexadata.it/progetto
+- Dettaglio completo: https://elevia.nexadata.it/llms-full.txt

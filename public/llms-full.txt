@@ -1,0 +1,226 @@
+# elevIA — Dettaglio completo
+
+> 20 Use Case AI pronti all'uso per PMI e enterprise italiane.
+> Delivery in 15 giorni, accuracy 85%+, disponibilità 99%.
+
+---
+
+## Area: Knowledge
+
+Gestione intelligente della conoscenza aziendale. Trasforma la conoscenza dispersa in un asset strategico.
+
+### RAG Knowledge Base
+- Area: Knowledge
+- Effort: 15 giorni
+- Tagline: Base di conoscenza aziendale interrogabile via AI
+- KPI: 30s risposta, ≥85% accuracy, 99% disponibilità
+- Tech Stack: Azure OpenAI, Azure AI Search, RAG Pattern
+- Integrazioni: SharePoint, File Server, Confluence, Azure AD
+- URL: https://elevia.nexadata.it/use-case/rag-knowledge-base
+
+### Estrazione Dati
+- Area: Knowledge
+- Effort: 15 giorni
+- Tagline: Estrai dati strutturati da documenti non strutturati
+- KPI: 10s per documento, ≥95% precisione, scalabilità illimitata
+- Tech Stack: Azure Document Intelligence, Azure OpenAI, Custom Models
+- Integrazioni: ERP, Gestionale, Email
+- URL: https://elevia.nexadata.it/use-case/estrazione-dati
+
+### Sintesi Riunioni
+- Area: Knowledge
+- Effort: 15 giorni
+- Tagline: Verbali automatici con action item e decisioni
+- KPI: 5min per verbale, 100% riunioni documentate, 0 decisioni perse
+- Tech Stack: Azure Speech, Azure OpenAI, Teams Integration
+- Integrazioni: Microsoft Teams, Zoom, Calendar
+- URL: https://elevia.nexadata.it/use-case/sintesi-riunioni
+
+### Due Diligence
+- Area: Knowledge
+- Effort: 15 giorni
+- Tagline: Analisi automatica di documenti per due diligence
+- KPI: 4h per 3.500 documenti, 100% copertura, 24h per 10.000 documenti
+- Tech Stack: Azure OpenAI, Azure AI Search, Document Intelligence
+- Integrazioni: Data Room, SharePoint, Box
+- URL: https://elevia.nexadata.it/use-case/due-diligence
+
+---
+
+## Area: Customer Experience
+
+Migliora l'esperienza dei tuoi clienti. Automatizza il supporto clienti e ascolta la voce dei clienti in tempo reale.
+
+### Chatbot FAQ
+- Area: Customer Experience
+- Effort: 15 giorni
+- Tagline: Chatbot intelligente per rispondere alle domande frequenti
+- KPI: <30s risposta, 24/7 disponibilità, ≥85% accuracy
+- Tech Stack: Azure OpenAI, Azure AI Search, RAG Pattern
+- Integrazioni: Web Widget, WhatsApp, Messenger
+- URL: https://elevia.nexadata.it/use-case/chatbot-faq
+
+### Classificazione Ticket
+- Area: Customer Experience
+- Effort: 15 giorni
+- Tagline: Classifica e instrada automaticamente i ticket di supporto
+- KPI: <2s classificazione, >90% accuracy, scalabilità illimitata
+- Tech Stack: Azure OpenAI, Classification Models, API Integration
+- Integrazioni: Zendesk, ServiceNow, Freshdesk, Jira
+- URL: https://elevia.nexadata.it/use-case/classificazione-ticket
+
+### Copilot Operatore
+- Area: Customer Experience
+- Effort: 15 giorni
+- Tagline: Assistente AI per gli operatori del customer service
+- KPI: -50% tempo gestione, 100% consistenza, 1 giorno formazione nuovi
+- Tech Stack: Azure OpenAI, RAG Pattern, Real-time Integration
+- Integrazioni: CRM, Ticketing, Knowledge Base
+- URL: https://elevia.nexadata.it/use-case/copilot-operatore
+
+### Analisi Sentiment
+- Area: Customer Experience
+- Effort: 15 giorni
+- Tagline: Analizza il sentiment dei clienti in tempo reale
+- KPI: 100% copertura, aggiornamento real-time, alert immediato
+- Tech Stack: Azure OpenAI, Sentiment Analysis, Real-time Processing
+- Integrazioni: Survey Tools, CRM, Review Platforms
+- URL: https://elevia.nexadata.it/use-case/analisi-sentiment
+
+---
+
+## Area: Operations
+
+Ottimizza le operazioni aziendali. Automatizza report, rileva anomalie e prevedi guasti.
+
+### Report Automatici
+- Area: Operations
+- Effort: 15 giorni
+- Tagline: Report periodici generati automaticamente dall'AI
+- KPI: 0h sforzo manuale, 100% puntualità, 0 errori
+- Tech Stack: Azure OpenAI, Data Integration, Scheduled Jobs
+- Integrazioni: ERP, CRM, Database, Excel, Email
+- URL: https://elevia.nexadata.it/use-case/report-automatici
+
+### Ricerca Semantica
+- Area: Operations
+- Effort: 15 giorni
+- Tagline: Trova prodotti e documenti con ricerca in linguaggio naturale
+- KPI: 5s ricerca, 100% copertura catalogo, ≥90% risultati pertinenti
+- Tech Stack: Azure AI Search, Azure OpenAI, Semantic Search
+- Integrazioni: E-commerce, PIM, ERP
+- URL: https://elevia.nexadata.it/use-case/ricerca-semantica
+
+### Anomaly Detection
+- Area: Operations
+- Effort: 15 giorni
+- Tagline: Rileva anomalie nei dati aziendali in tempo reale
+- KPI: monitoraggio real-time, giorni di anticipo, vigilanza 24/7
+- Tech Stack: Azure Machine Learning, Time Series Analysis, Alerting
+- Integrazioni: Database, ERP, BI Tools
+- URL: https://elevia.nexadata.it/use-case/anomaly-detection
+
+### Predictive Maintenance
+- Area: Operations
+- Effort: 15 giorni
+- Tagline: Prevedi i guasti prima che accadano
+- KPI: 5 giorni anticipo medio, 85% accuracy, -70% downtime imprevisto
+- Tech Stack: Azure Machine Learning, IoT Hub, Predictive Models
+- Integrazioni: PLC, SCADA, MES, CMMS
+- URL: https://elevia.nexadata.it/use-case/predictive-maintenance
+
+---
+
+## Area: Workflow
+
+Automatizza i flussi di lavoro. Velocizza approvazioni, genera contenuti e verifica compliance.
+
+### Workflow Approval
+- Area: Workflow
+- Effort: 15 giorni
+- Tagline: Approvazioni intelligenti con analisi AI del contesto
+- KPI: 10s per approvazione, 100% verifica policy, audit trail completo
+- Tech Stack: Azure OpenAI, Rules Engine, Workflow Integration
+- Integrazioni: SAP, ServiceNow, Power Automate
+- URL: https://elevia.nexadata.it/use-case/workflow-approval
+
+### Content Generation
+- Area: Workflow
+- Effort: 15 giorni
+- Tagline: Genera contenuti marketing allineati al brand
+- KPI: 5min per contenuto, 100% on-brand, 10x produttività
+- Tech Stack: Azure OpenAI, GPT-4, Brand Training
+- Integrazioni: CMS, Social Media, Email Marketing
+- URL: https://elevia.nexadata.it/use-case/content-generation
+
+### Lead Scoring
+- Area: Workflow
+- Effort: 15 giorni
+- Tagline: Qualifica automaticamente i lead con AI predittiva
+- KPI: +30% conversion rate, -50% tempo su lead freddi, scoring real-time
+- Tech Stack: Azure Machine Learning, CRM Integration, Scoring Models
+- Integrazioni: Salesforce, HubSpot, Dynamics, Pipedrive
+- URL: https://elevia.nexadata.it/use-case/lead-scoring
+
+### Compliance Checker
+- Area: Workflow
+- Effort: 15 giorni
+- Tagline: Verifica automatica della conformità documentale
+- KPI: 30s per documento, 100% copertura regole, 0 errori post-firma
+- Tech Stack: Azure OpenAI, Document Intelligence, Rules Engine
+- Integrazioni: DMS, SharePoint, Contract Management
+- URL: https://elevia.nexadata.it/use-case/compliance-checker
+
+---
+
+## Area: HR
+
+Supporto intelligente alle risorse umane. Screening automatico, onboarding guidato, self-service dipendenti.
+
+### Screening CV
+- Area: HR
+- Effort: 15 giorni
+- Tagline: Screening automatico dei CV con matching intelligente
+- KPI: minuti per 200 CV, 100% CV analizzati, scoring oggettivo
+- Tech Stack: Azure OpenAI, Document Intelligence, Matching Algorithms
+- Integrazioni: ATS, LinkedIn, Email
+- URL: https://elevia.nexadata.it/use-case/screening-cv
+
+### Onboarding Assistant
+- Area: HR
+- Effort: 15 giorni
+- Tagline: Assistente AI per l'onboarding dei nuovi dipendenti
+- KPI: giorni per produttività, -80% domande HR, 24/7 disponibilità
+- Tech Stack: Azure OpenAI, RAG Pattern, Chat Interface
+- Integrazioni: HR Portal, Teams, Intranet
+- URL: https://elevia.nexadata.it/use-case/onboarding-assistant
+
+### Employee Self-Service
+- Area: HR
+- Effort: 15 giorni
+- Tagline: Portale self-service intelligente per i dipendenti
+- KPI: secondi per risposta, -70% ticket HR, 24/7 disponibilità
+- Tech Stack: Azure OpenAI, RAG Pattern, HR Integration
+- Integrazioni: Workday, SAP SuccessFactors, Zucchetti
+- URL: https://elevia.nexadata.it/use-case/employee-self-service
+
+### Performance Review
+- Area: HR
+- Effort: 15 giorni
+- Tagline: Preparazione automatica delle performance review
+- KPI: minuti per review, 100% dati raccolti, standard uniforme
+- Tech Stack: Azure OpenAI, HR Integration, Analytics
+- Integrazioni: HRIS, Project Management, Feedback Tools
+- URL: https://elevia.nexadata.it/use-case/performance-review
+
+---
+
+## Metriche chiave
+- 20 Use Case AI pronti
+- 15 giorni tempo medio di delivery
+- 85%+ accuracy garantita
+- 99% disponibilità
+
+## Contatti
+- Sito: https://elevia.nexadata.it
+- Email: elevia@nexadata.it
