@@ -263,7 +263,7 @@ Quando generi llms.txt:
 
 ## Contatti
 - Website: https://elevia.nexadata.it
-- Email: info@nexadata.it
+- Email: elevia@nexadata.it
 - Assessment: https://elevia.nexadata.it/#contact
 
 ## Citazione

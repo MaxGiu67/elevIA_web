@@ -8,7 +8,7 @@ import { Testimonials } from './Testimonials'
 import { UseCases } from '@/features/landing/components/UseCases'
 import { WhyUs } from '@/features/landing/components/WhyUs'
 import { FAQ } from '@/features/landing/components/FAQ'
-import { Mail, Phone, Linkedin } from 'lucide-react'
+import { Mail, Linkedin } from 'lucide-react'
 
 const progettoFaqItems = [
   {
@@ -137,30 +137,23 @@ export function ProgettoPage() {
             </p>
 
             <Link
-              href="mailto:info@nexadata.it?subject=Assessment%20AI%20Gratuito"
+              href="mailto:elevia@nexadata.it?subject=Assessment%20AI%20Gratuito"
               className="inline-block bg-white text-primary-600 font-bold py-4 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors mb-4"
             >
               PRENOTA L'ASSESSMENT GRATUITO
             </Link>
 
             <p className="text-white/70 text-sm mb-10">
-              Oppure chiamaci: +39 02 1234567
+              Scrivici per prenotare.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 border-t border-white/20">
               <Link
-                href="tel:+390212345678"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
-              >
-                <Phone className="w-4 h-4" />
-                +39 02 1234567
-              </Link>
-              <Link
-                href="mailto:info@nexadata.it"
+                href="mailto:elevia@nexadata.it"
                 className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm"
               >
                 <Mail className="w-4 h-4" />
-                info@nexadata.it
+                elevia@nexadata.it
               </Link>
               <Link
                 href="https://linkedin.com/company/nexadata"

@@ -63,13 +63,8 @@ export function Footer() {
             <h3 className="font-semibold text-white uppercase text-sm mb-3">Contatti</h3>
             <ul className="text-gray-400 text-sm space-y-2">
               <li>
-                <Link href="mailto:info@nexadata.it" className="hover:text-secondary-500 transition-colors">
-                  info@nexadata.it
-                </Link>
-              </li>
-              <li>
-                <Link href="tel:+390212345678" className="hover:text-secondary-500 transition-colors">
-                  +39 02 1234567
+                <Link href="mailto:elevia@nexadata.it" className="hover:text-secondary-500 transition-colors">
+                  elevia@nexadata.it
                 </Link>
               </li>
             </ul>
