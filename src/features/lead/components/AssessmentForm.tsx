@@ -31,7 +31,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 const CALENDLY_URL =
   process.env.NEXT_PUBLIC_CALENDLY_URL ||
-  'https://calendly.com/pietro-landri/primo-incontro'
+  'https://calendly.com/pietro-landri/elevia-nexadata-intro-ai'
 
 const ROLE_OPTIONS = ['CEO', 'CTO', 'COO', 'HR', 'Altro']
 const SIZE_OPTIONS = ['10-49', '50-200', '200-1000', '1000+']
