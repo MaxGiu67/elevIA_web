@@ -482,27 +482,6 @@ function TableRow({
               )}
               {detail && (
                 <>
-                  {detail.solution_plan && (
-                    <div className="mb-4 rounded-lg border border-green-500/20 bg-green-500/5 p-4">
-                      <p className="text-xs font-semibold text-green-400 mb-2">Pagina Esplora generata</p>
-                      <p className="text-sm font-medium text-white/90 mb-1">{detail.solution_plan.title}</p>
-                      <p className="text-xs text-white/50 mb-2">
-                        {typeof detail.solution_plan.problem === 'string'
-                          ? detail.solution_plan.problem
-                          : detail.solution_plan.problem?.statement}
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {detail.solution_plan.useCases.map((uc, i) => (
-                          <span
-                            key={i}
-                            className="inline-block bg-primary-500/20 text-primary-300 text-xs px-2 py-0.5 rounded"
-                          >
-                            {uc.customDescription || uc.name || uc.id}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {detail.messages.map((msg) => (
                       <div
@@ -555,6 +534,27 @@ function TableRow({
                       </div>
                     ))}
                   </div>
+                  {detail.solution_plan && (
+                    <div className="mt-4 rounded-lg border border-green-500/20 bg-green-500/5 p-4">
+                      <p className="text-xs font-semibold text-green-400 mb-2">Pagina Esplora generata</p>
+                      <p className="text-sm font-medium text-white/90 mb-1">{detail.solution_plan.title}</p>
+                      <p className="text-xs text-white/50 mb-2">
+                        {typeof detail.solution_plan.problem === 'string'
+                          ? detail.solution_plan.problem
+                          : detail.solution_plan.problem?.statement}
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {detail.solution_plan.useCases.map((uc, i) => (
+                          <span
+                            key={i}
+                            className="inline-block bg-primary-500/20 text-primary-300 text-xs px-2 py-0.5 rounded"
+                          >
+                            {uc.customDescription || uc.name || uc.id}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </div>
