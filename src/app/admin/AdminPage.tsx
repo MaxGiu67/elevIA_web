@@ -116,27 +116,15 @@ export function AdminPage() {
     fetchLeads()
   }
 
-  // --- CSV export ---
+  // --- JSON export ---
   const handleExport = () => {
     if (!data?.items.length) return
-    const headers = ['Data', 'Nome', 'Email', 'Azienda', 'Ruolo', 'Dimensione', 'Interessi', 'Sistemi', 'Pagina']
-    const rows = data.items.map((a) => [
-      new Date(a.created_at).toLocaleString('it-IT'),
-      a.name,
-      a.email,
-      a.company,
-      a.role,
-      a.company_size,
-      a.interests.join('; '),
-      a.systems || '',
-      a.source_page,
-    ])
-    const csv = [headers, ...rows].map((r) => r.map((c) => `"${c}"`).join(',')).join('\n')
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const jsonStr = JSON.stringify(data.items, null, 2)
+    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `assessment-leads-${new Date().toISOString().slice(0, 10)}.csv`
+    a.download = `assessment-leads-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -219,7 +207,7 @@ export function AdminPage() {
                 className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/20 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors disabled:opacity-30"
               >
                 <Download className="w-4 h-4" />
-                Esporta CSV
+                Esporta JSON
               </button>
             )}
             <button

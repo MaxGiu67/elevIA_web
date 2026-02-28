@@ -9,6 +9,7 @@ import {
   MessageSquare,
   ChevronDown,
   ChevronUp,
+  Download,
 } from 'lucide-react'
 import { API_URL } from '@/config/api'
 
@@ -159,6 +160,19 @@ export function ChatLogPanel({ authHeader }: { authHeader: string }) {
     fetchSessions()
   }
 
+  // --- JSON export ---
+  const handleExport = () => {
+    if (!data?.items.length) return
+    const jsonStr = JSON.stringify(data.items, null, 2)
+    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `chat-log-${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 0
 
   return (
@@ -184,6 +198,19 @@ export function ChatLogPanel({ authHeader }: { authHeader: string }) {
           />
         </div>
       )}
+
+      {/* Header with export */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold">Chat Log</h2>
+        <button
+          onClick={handleExport}
+          disabled={!data?.items.length}
+          className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/20 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors disabled:opacity-30"
+        >
+          <Download className="w-4 h-4" />
+          Esporta JSON
+        </button>
+      </div>
 
       {/* Search + filter */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
