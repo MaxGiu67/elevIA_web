@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { AdminPage } from './AdminPage'
 
 export const metadata: Metadata = {
-  title: 'Admin — Assessment Lead',
+  title: 'Admin — elevIA',
   robots: { index: false, follow: false },
 }
 
