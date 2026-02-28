@@ -160,17 +160,32 @@ export function ChatLogPanel({ authHeader }: { authHeader: string }) {
     fetchSessions()
   }
 
-  // --- JSON export ---
-  const handleExport = () => {
-    if (!data?.items.length) return
-    const jsonStr = JSON.stringify(data.items, null, 2)
-    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `chat-log-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+  // --- JSON export (full conversations) ---
+  const [exporting, setExporting] = useState(false)
+  const handleExport = async () => {
+    setExporting(true)
+    try {
+      const params = new URLSearchParams()
+      if (days) params.set('days', days)
+      const res = await fetch(
+        `${API_URL}/api/chat-log/admin/export${params.toString() ? '?' + params : ''}`,
+        { headers: { Authorization: authHeader } }
+      )
+      if (!res.ok) throw new Error('Errore export')
+      const sessions = await res.json()
+      const jsonStr = JSON.stringify(sessions, null, 2)
+      const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `chat-log-${new Date().toISOString().slice(0, 10)}.json`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      // silent
+    } finally {
+      setExporting(false)
+    }
   }
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 0
@@ -204,11 +219,11 @@ export function ChatLogPanel({ authHeader }: { authHeader: string }) {
         <h2 className="text-xl font-bold">Chat Log</h2>
         <button
           onClick={handleExport}
-          disabled={!data?.items.length}
+          disabled={!data?.items.length || exporting}
           className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/20 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors disabled:opacity-30"
         >
-          <Download className="w-4 h-4" />
-          Esporta JSON
+          {exporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+          {exporting ? 'Esportazione...' : 'Esporta JSON'}
         </button>
       </div>
 

@@ -116,17 +116,29 @@ export function AdminPage() {
     fetchLeads()
   }
 
-  // --- JSON export ---
-  const handleExport = () => {
-    if (!data?.items.length) return
-    const jsonStr = JSON.stringify(data.items, null, 2)
-    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `assessment-leads-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+  // --- JSON export (all records) ---
+  const [exporting, setExporting] = useState(false)
+  const handleExport = async () => {
+    setExporting(true)
+    try {
+      const res = await fetch(`${API_URL}/api/lead/admin/export`, {
+        headers: { Authorization: authHeader() },
+      })
+      if (!res.ok) throw new Error('Errore export')
+      const items = await res.json()
+      const jsonStr = JSON.stringify(items, null, 2)
+      const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `assessment-leads-${new Date().toISOString().slice(0, 10)}.json`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      // silent
+    } finally {
+      setExporting(false)
+    }
   }
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 0
@@ -203,11 +215,11 @@ export function AdminPage() {
             {activeTab === 'assessments' && (
               <button
                 onClick={handleExport}
-                disabled={!data?.items.length}
+                disabled={!data?.items.length || exporting}
                 className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/20 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors disabled:opacity-30"
               >
-                <Download className="w-4 h-4" />
-                Esporta JSON
+                {exporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                {exporting ? 'Esportazione...' : 'Esporta JSON'}
               </button>
             )}
             <button
