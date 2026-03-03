@@ -29,7 +29,8 @@ function wait(ms: number): Promise<void> {
 }
 
 function generateSessionId(): string {
-  return `s_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
+  // SEC-014: use cryptographic random instead of Math.random
+  return `s_${crypto.randomUUID()}`
 }
 
 export interface ChatSource {

@@ -44,7 +44,8 @@ export interface ChatState {
   clearError: () => void
 }
 
-const generateId = () => `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+// SEC-014: use cryptographic random instead of Math.random
+const generateId = () => `msg_${crypto.randomUUID()}`
 
 export const useChatStore = create<ChatState>((set, get) => ({
   // Initial state
