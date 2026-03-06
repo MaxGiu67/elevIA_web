@@ -12,10 +12,12 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-white text-gray-900 antialiased;
+    overflow-x: hidden;
   }
 
   /* Focus visible for accessibility */

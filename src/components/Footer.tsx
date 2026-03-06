@@ -1,5 +1,5 @@
 /**
- * Site footer with CTA banner, use case links, and contact information.
+ * Site footer with use case links, area links, and contact information.
  * Includes a decorative wave transition from the white content area.
  */
 
@@ -31,7 +31,7 @@ export function Footer() {
 
       <div className="container-main">
         {/* Footer Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="inline-block mb-4">
@@ -50,21 +50,38 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-white uppercase text-sm mb-3">Use Case</h3>
             <ul className="text-gray-400 text-sm space-y-2">
-              <li><Link href="#services" className="hover:text-secondary-500 transition-colors">RAG Knowledge Base</Link></li>
-              <li><Link href="#services" className="hover:text-secondary-500 transition-colors">Chatbot FAQ</Link></li>
-              <li><Link href="#services" className="hover:text-secondary-500 transition-colors">Report Automatici</Link></li>
-              <li><Link href="#services" className="hover:text-secondary-500 transition-colors">Lead Scoring</Link></li>
-              <li><Link href="#services" className="hover:text-secondary-500 transition-colors">Screening CV</Link></li>
+              <li><Link href="/use-case/rag-knowledge-base" className="hover:text-secondary-500 transition-colors">RAG Knowledge Base</Link></li>
+              <li><Link href="/use-case/chatbot-faq" className="hover:text-secondary-500 transition-colors">Chatbot FAQ</Link></li>
+              <li><Link href="/use-case/report-automatici" className="hover:text-secondary-500 transition-colors">Report Automatici</Link></li>
+              <li><Link href="/use-case/lead-scoring" className="hover:text-secondary-500 transition-colors">Lead Scoring</Link></li>
+              <li><Link href="/use-case/screening-cv" className="hover:text-secondary-500 transition-colors">Screening CV</Link></li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Areas */}
+          <div>
+            <h3 className="font-semibold text-white uppercase text-sm mb-3">Aree AI</h3>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li><Link href="/area/knowledge" className="hover:text-secondary-500 transition-colors">Knowledge</Link></li>
+              <li><Link href="/area/customer-experience" className="hover:text-secondary-500 transition-colors">Customer Experience</Link></li>
+              <li><Link href="/area/operations" className="hover:text-secondary-500 transition-colors">Operations</Link></li>
+              <li><Link href="/area/workflow" className="hover:text-secondary-500 transition-colors">Workflow</Link></li>
+              <li><Link href="/area/hr" className="hover:text-secondary-500 transition-colors">HR</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact & Links */}
           <div>
             <h3 className="font-semibold text-white uppercase text-sm mb-3">Contatti</h3>
             <ul className="text-gray-400 text-sm space-y-2">
               <li>
                 <Link href="mailto:elevia@nexadata.it" className="hover:text-secondary-500 transition-colors">
                   elevia@nexadata.it
+                </Link>
+              </li>
+              <li>
+                <Link href="/progetto" className="hover:text-secondary-500 transition-colors">
+                  Il Progetto
                 </Link>
               </li>
             </ul>

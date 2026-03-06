@@ -1,4 +1,7 @@
 import { PagePlanRenderer } from '@/features/remodulation/components/PagePlanRenderer'
+import { WebPageJsonLd } from '@/components/JsonLd'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
 /**
  * elevIA Landing Page
@@ -14,5 +17,14 @@ import { PagePlanRenderer } from '@/features/remodulation/components/PagePlanRen
  * reordered during Page Remodulation based on user intent.
  */
 export default function Home() {
-  return <PagePlanRenderer />
+  return (
+    <>
+      <WebPageJsonLd
+        name="elevIA - Soluzioni AI per la Tua Azienda"
+        description="Framework AI con 20 soluzioni pronte per PMI e enterprise italiane. Knowledge, Customer Experience, Operations, Workflow e HR."
+        url={baseUrl}
+      />
+      <PagePlanRenderer />
+    </>
+  )
 }

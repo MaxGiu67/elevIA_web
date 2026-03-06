@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { AreaPage } from '@/features/area/components/AreaPage'
 import { areas, areaList, type AreaId } from '@/content/areas'
 import { useCases, type UseCaseId } from '@/content/use-cases'
-import { BreadcrumbJsonLd } from '@/components/JsonLd'
+import { BreadcrumbJsonLd, WebPageJsonLd, CollectionPageJsonLd } from '@/components/JsonLd'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
@@ -31,21 +31,21 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const description = `${area.tagline}. ${area.description}`
 
   return {
-    title: `${area.name} AI | elevIA`,
+    title: { absolute: `${area.name} - Soluzioni AI | elevIA` },
     description,
     keywords: ['AI', 'intelligenza artificiale', area.name, 'elevIA', 'PMI', 'enterprise'],
     alternates: {
       canonical: `/area/${area.id}`,
     },
     openGraph: {
-      title: `${area.name} AI | elevIA`,
+      title: `${area.name} - Soluzioni AI | elevIA`,
       description,
       type: 'website',
       url: `${baseUrl}/area/${area.id}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${area.name} AI | elevIA`,
+      title: `${area.name} - Soluzioni AI | elevIA`,
       description,
     },
   }
@@ -72,13 +72,29 @@ export default function Page({ params }: PageProps) {
     })
     .filter(Boolean) as Array<{ id: string; name: string; tagline: string; effort: string }>
 
+  const pageUrl = `${baseUrl}/area/${area.id}`
+
   return (
     <>
+      <WebPageJsonLd
+        name={`${area.name} - Soluzioni AI | elevIA`}
+        description={`${area.tagline}. ${area.description}`}
+        url={pageUrl}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: baseUrl },
-          { name: area.name, url: `${baseUrl}/area/${area.id}` },
+          { name: area.name, url: pageUrl },
         ]}
+      />
+      <CollectionPageJsonLd
+        name={`${area.name} AI`}
+        description={`${area.tagline}. ${area.description}`}
+        url={pageUrl}
+        items={areaUseCases.map((uc) => ({
+          name: uc.name,
+          url: `${baseUrl}/use-case/${uc.id}`,
+        }))}
       />
       <AreaPage area={area as any} useCases={areaUseCases} />
     </>

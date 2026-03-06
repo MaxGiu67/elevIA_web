@@ -176,9 +176,13 @@ export function ChatFloat() {
     }
   }, [])
 
-  // Warm-up ping: wake the backend on mount so it's ready when the user types
-  useEffect(() => {
-    fetch(`${API_URL}/api/health`, { method: 'GET' }).catch(() => {})
+  // Warm-up ping: wake the backend when the user first focuses the input
+  const healthPinged = useRef(false)
+  const handleHealthPing = useCallback(() => {
+    if (!healthPinged.current) {
+      healthPinged.current = true
+      fetch(`${API_URL}/api/health`, { method: 'GET' }).catch(() => {})
+    }
   }, [])
 
   // Close response panel when the user navigates to a different page
@@ -374,7 +378,7 @@ export function ChatFloat() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              onFocus={() => setIsFocused(true)}
+              onFocus={() => { setIsFocused(true); handleHealthPing() }}
               onBlur={() => setTimeout(() => setIsFocused(false), 200)}
               placeholder={placeholder}
               aria-label="Scrivi la tua domanda"

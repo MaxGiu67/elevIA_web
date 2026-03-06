@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { LandingPageJsonLd } from '@/components/JsonLd'
+import { GlobalJsonLd } from '@/components/JsonLd'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ChatFloat } from '@/components/ChatFloat'
+
+const ChatFloat = dynamic(
+  () => import('@/components/ChatFloat').then((m) => m.ChatFloat),
+  { ssr: false }
+)
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'elevIA - AI-Powered Solutions for Your Business',
+    default: 'elevIA - Soluzioni AI per la Tua Azienda',
     template: '%s | elevIA',
   },
   description: 'Scopri come l\'intelligenza artificiale può trasformare il tuo business con elevIA. 20 Use Case AI pronti all\'uso per PMI e enterprise.',
@@ -29,9 +34,13 @@ export const metadata: Metadata = {
   publisher: 'elevIA',
   alternates: {
     canonical: '/',
+    languages: {
+      'it': '/',
+      'x-default': '/',
+    },
   },
   openGraph: {
-    title: 'elevIA - AI-Powered Solutions',
+    title: 'elevIA - Soluzioni AI per PMI e Enterprise',
     description: 'Trasforma il tuo business con l\'intelligenza artificiale. 20 Use Case AI pronti all\'uso.',
     url: baseUrl,
     siteName: 'elevIA',
@@ -42,13 +51,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'elevIA - AI Solutions',
+        alt: 'elevIA - Soluzioni AI per Aziende',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'elevIA - AI-Powered Solutions',
+    title: 'elevIA - Soluzioni AI per PMI e Enterprise',
     description: 'Trasforma il tuo business con l\'intelligenza artificiale',
     images: ['/og-image.png'],
   },
@@ -78,7 +87,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <head>
-        <LandingPageJsonLd />
+        <GlobalJsonLd />
       </head>
       <body className={inter.className}>
         <Header />

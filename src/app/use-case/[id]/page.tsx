@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { UseCasePage } from '@/features/use-case/components/UseCasePage'
 import { useCases, useCaseList, type UseCaseId } from '@/content/use-cases'
 import { areas, type AreaId } from '@/content/areas'
-import { BreadcrumbJsonLd, ServiceJsonLd } from '@/components/JsonLd'
+import { BreadcrumbJsonLd, ServiceJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://elevia.nexadata.it'
 
@@ -31,7 +31,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const description = `${useCase.components.header.tagline}. Delivery in ${useCase.effort}.`
 
   return {
-    title: `${useCase.components.header.title} | elevIA`,
+    title: { absolute: `${useCase.components.header.title} | elevIA` },
     description,
     keywords: ['AI', useCase.name, useCase.area, 'elevIA', 'automazione', 'PMI'],
     alternates: {
@@ -83,6 +83,11 @@ export default function Page({ params }: PageProps) {
             : []),
           { name: useCase.name, url: `${baseUrl}/use-case/${useCase.id}` },
         ]}
+      />
+      <WebPageJsonLd
+        name={`${useCase.components.header.title} | elevIA`}
+        description={`${useCase.components.header.tagline}. Delivery in ${useCase.effort}.`}
+        url={`${baseUrl}/use-case/${useCase.id}`}
       />
       <ServiceJsonLd
         name={useCase.name}
